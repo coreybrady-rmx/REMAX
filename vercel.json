@@ -1,7 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/cron/market",
+      "path": "/your-next-move/api/cron/market",
       "schedule": "0 12 * * *"
     }
   ]

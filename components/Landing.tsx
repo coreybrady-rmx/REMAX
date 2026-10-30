@@ -7,6 +7,7 @@ import {
   paymentEstimate,
   type Assumptions,
 } from "@/lib/estimates";
+import { BASE_PATH } from "@/lib/base-path";
 import type { MarketSnapshot, PriceSegment } from "@/lib/market";
 import { HomeSearch } from "@/components/HomeSearch";
 
@@ -38,7 +39,7 @@ export function Landing({ market, headline }: { market: MarketSnapshot; headline
   return (
     <>
       <header className="header">
-        <img className="logo" src="/brand/logo-on-light.png" alt="RE/MAX Peaks" />
+        <img className="logo" src={`${BASE_PATH}/brand/logo-on-light.png`} alt="RE/MAX Peaks" />
         <a className="call" href={PHONE_HREF}>
           <span>Call</span>
           <span>{OFFICE_PHONE}</span>
@@ -301,7 +302,7 @@ function Trust() {
   return (
     <section className="trust">
       <div className="trust-row">
-        <img className="navy-logo" src="/brand/logo-on-navy.png" alt="" />
+        <img className="navy-logo" src={`${BASE_PATH}/brand/logo-on-navy.png`} alt="" />
         <div>
           <h2>Local agents, not a call center.</h2>
           <p>255 S Main St. #120, Logan, UT 84321</p>
@@ -368,7 +369,7 @@ function numberValue(value: string): number {
 
 async function postLead(body: Record<string, unknown>): Promise<{ ok: true } | { ok: false; error: string }> {
   try {
-    const response = await fetch("/api/leads", {
+    const response = await fetch(`${BASE_PATH}/api/leads`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

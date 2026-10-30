@@ -9,9 +9,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.remaxpeaks.com"),
   title: "Free Cache Valley home value | RE/MAX Peaks",
   description:
-    "Get a free CMA from the RE/MAX Peaks office on Main Street in Logan, or see what monthly payment a home would take.",
+    "Get a free CMA from the RE/MAX Peaks Logan office, or see what monthly payment a home would take.",
+  alternates: { canonical: "/your-next-move" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

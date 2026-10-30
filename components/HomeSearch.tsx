@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { BASE_PATH } from "@/lib/base-path";
 import { classifySubtype } from "@/lib/market";
 import { formatMoney } from "@/lib/estimates";
 import type { HomeHit } from "@/lib/search";
@@ -29,7 +30,7 @@ export function HomeSearch() {
     setPending(true);
     setError("");
     try {
-      const response = await fetch(`/api/search?q=${encodeURIComponent(next)}`);
+      const response = await fetch(`${BASE_PATH}/api/search?q=${encodeURIComponent(next)}`);
       const payload = (await response.json()) as SearchPayload | { ok: false; error?: string };
       if (!response.ok || !payload.ok) {
         setHomes(null);

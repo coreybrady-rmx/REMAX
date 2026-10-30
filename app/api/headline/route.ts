@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { BASE_PATH } from "@/lib/base-path";
 import { HEADLINE_COOKIE } from "@/lib/headlines";
 import { nextHeadlineIndex } from "@/lib/headline-store";
 
@@ -10,8 +11,8 @@ function homeUrl(request: Request): URL {
   const forwardedProto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
   const proto =
     forwardedProto || (host && (host.startsWith("localhost") || host.startsWith("127.")) ? "http" : "https");
-  if (host) return new URL("/", `${proto}://${host}`);
-  return new URL("/", request.url);
+  if (host) return new URL(BASE_PATH, `${proto}://${host}`);
+  return new URL(BASE_PATH, request.url);
 }
 
 export async function GET(request: Request) {
@@ -26,7 +27,7 @@ export async function GET(request: Request) {
   response.cookies.set(HEADLINE_COOKIE, String(index), {
     httpOnly: true,
     sameSite: "lax",
-    path: "/",
+    path: BASE_PATH,
     maxAge: 60 * 60 * 24 * 400,
     secure: home.protocol === "https:",
   });

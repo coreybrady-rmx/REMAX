@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | RE/MAX Peaks",
   },
   description:
-    "High-converting individual agent microsites for RE/MAX Peaks — Cache Valley, Bear Lake, and Southern Idaho.",
+    "High-converting individual agent microsites for RE/MAX Peaks. Cache Valley, Bear Lake, and Southern Idaho.",
   metadataBase: new URL("https://www.remaxpeaks.com"),
 };
 

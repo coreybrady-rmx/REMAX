@@ -51,7 +51,7 @@ export function FeaturedListings({ city = "Logan" }: { city?: string }) {
       <div className="section-head">
         <p className="eyebrow">Live market</p>
         <h2>Homes in {city}</h2>
-        <p>Browse active MLS listings — then reach out when you want a showing.</p>
+        <p>Browse active MLS listings, then reach out when you want a showing.</p>
       </div>
       {error ? <p className="muted">{error}</p> : null}
       <div className="listing-grid">

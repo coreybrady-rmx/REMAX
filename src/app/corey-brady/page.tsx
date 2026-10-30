@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Corey Brady | RE/MAX Peaks",
     description:
-      "Cache Valley real estate with clear next steps — search homes or get your home value.",
+      "Cache Valley real estate with clear next steps. Search homes or get your home value.",
     images: [
       {
         url: coreyBrady.photo,

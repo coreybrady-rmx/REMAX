@@ -9,7 +9,7 @@ import { coreyBrady } from "@/data/agents/corey-brady";
 export const metadata: Metadata = {
   title: "Get Your Home Value | Corey Brady",
   description:
-    "Request a Cache Valley home value from Corey Brady at RE/MAX Peaks. Fast, local, and no-pressure.",
+    "Request a Cache Valley CMA from Corey Brady at RE/MAX Peaks. Share your address and contact info and he will follow up.",
 };
 
 export default function HomeValuePage() {
@@ -18,12 +18,11 @@ export default function HomeValuePage() {
     <div className="agent-page">
       <SiteHeader agentName={agent.name} />
       <main className="page-shell">
-        <p className="eyebrow">Seller lead offer</p>
-        <h1>What&apos;s your home worth?</h1>
+        <p className="eyebrow">Home value</p>
+        <h1>Get My Home Value</h1>
         <p>
-          Share a few details and {agent.firstName} will follow up with a
-          Cache Valley market read and recommended next steps — priced for
-          today&apos;s buyers.
+          Share your address and contact info. {agent.firstName} will get back
+          to you with a CMA.
         </p>
         <div style={{ marginTop: 28 }}>
           <LeadForm
@@ -33,8 +32,12 @@ export default function HomeValuePage() {
             intent="home-value"
           />
         </div>
-        <p style={{ marginTop: 24 }}>
-          <Link href={`/${agent.slug}/`}>← Back to {agent.firstName}&apos;s page</Link>
+        <p style={{ marginTop: 24, color: "var(--muted)", fontSize: 14 }}>
+          Or email{" "}
+          <a href={`mailto:${agent.email}`}>{agent.email}</a>
+        </p>
+        <p style={{ marginTop: 16 }}>
+          <Link href={`/${agent.slug}/`}>Back to {agent.firstName}&apos;s page</Link>
         </p>
       </main>
       <SiteFooter />

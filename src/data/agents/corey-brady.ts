@@ -12,8 +12,7 @@ export const coreyBrady: AgentProfile = {
   title: "Owner",
   phone: "435-799-7000",
   email: "coreybrady@gmail.com",
-  photo:
-    "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/690e0dac43570073eea0756f.jpg",
+  photo: "/agents/corey-brady.jpg",
   heroImage:
     "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/68e69db27374243bbb6a8088.jpeg",
   marketLine: "Cache Valley · Bear Lake · Southern Idaho",

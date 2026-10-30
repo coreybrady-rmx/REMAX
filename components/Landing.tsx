@@ -79,7 +79,7 @@ export function Landing({ market, headline }: { market: MarketSnapshot; headline
             thanks ? (
               <ThanksPanel address={thanks.address} onReset={() => setThanks(null)} />
             ) : (
-              <CmaForm onDone={setThanks} />
+              <CmaForm headline={headline} onDone={setThanks} />
             )
           ) : null}
           {path === "afford" ? <AffordTool /> : null}
@@ -101,7 +101,7 @@ export function Landing({ market, headline }: { market: MarketSnapshot; headline
   );
 }
 
-function CmaForm({ onDone }: { onDone: (thanks: Thanks) => void }) {
+function CmaForm({ headline, onDone }: { headline: string; onDone: (thanks: Thanks) => void }) {
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
@@ -126,6 +126,7 @@ function CmaForm({ onDone }: { onDone: (thanks: Thanks) => void }) {
       textConsent: false,
       details: `Free CMA request for ${address}.`,
       company: String(data.get("company") ?? ""),
+      headline,
     });
     setPending(false);
     if (!result.ok) {

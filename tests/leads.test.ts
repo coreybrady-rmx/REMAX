@@ -50,7 +50,8 @@ test("builds a Follow Up Boss event tagged Logan Main QR", () => {
   assert.equal(event.source, LEAD_SOURCE);
   assert.equal(event.person.firstName, "Ada");
   assert.equal(event.person.lastName, "Lovelace");
-  assert.deepEqual(event.person.tags, [LEAD_SOURCE, "cma"]);
+  assert.deepEqual(event.person.tags, [LEAD_SOURCE, "cma", "unknown"]);
+  assert.match(event.message, /Headline: unknown/);
   assert.match(event.message, /Text consent: no/);
   assert.equal(event.person.phones[0]?.value, "(435) 555-0100");
 });
@@ -60,7 +61,7 @@ test("adds an SMS consent tag only when the box is checked", () => {
   assert.equal(parsed.ok, true);
   if (!parsed.ok) return;
   const event = buildFollowUpBossEvent(parsed.value);
-  assert.deepEqual(event.person.tags, [LEAD_SOURCE, "affordability", "SMS consent"]);
+  assert.deepEqual(event.person.tags, [LEAD_SOURCE, "affordability", "unknown", "SMS consent"]);
   assert.match(event.message, /Text consent: yes/);
   assert.equal(event.person.assignedTo, undefined);
   assert.equal(event.person.assignedUserId, undefined);

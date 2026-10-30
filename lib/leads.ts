@@ -1,3 +1,5 @@
+import { canonicalHeadline } from "./headline-attribution.ts";
+
 export const LEAD_SOURCE = "Logan Main QR";
 export const CMA_ASSIGNEE_NAME = "Eli Hopkins";
 
@@ -12,6 +14,7 @@ export type LeadInput = {
   email: string;
   textConsent: boolean;
   details: string;
+  headline?: string;
 };
 
 export type FollowUpBossAssignee = {
@@ -85,7 +88,8 @@ export function buildFollowUpBossEvent(
   const parts = input.name.trim().split(/\s+/);
   const firstName = parts[0];
   const lastName = parts.slice(1).join(" ");
-  const tags = [LEAD_SOURCE, input.tool];
+  const headline = canonicalHeadline(input.headline);
+  const tags = [LEAD_SOURCE, input.tool, headline];
   if (input.textConsent) tags.push("SMS consent");
   const consentLine = input.textConsent
     ? "Text consent: yes. The person asked to be texted about this request."
@@ -94,7 +98,7 @@ export function buildFollowUpBossEvent(
     source: LEAD_SOURCE,
     system: "REMAX Peaks QR",
     type: "General Inquiry",
-    message: `${input.details}\n\n${consentLine}`,
+    message: `${input.details}\n\nHeadline: ${headline}\n\n${consentLine}`,
     person: {
       firstName,
       ...(lastName ? { lastName } : {}),

@@ -3,5 +3,6 @@ node_modules
 .env
 .env.local
 data/headline-cursor.json
+data/headline-tally.json
 *.log
 .DS_Store

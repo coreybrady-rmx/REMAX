@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.remaxpeaks.com"),
-  title: "Free Cache Valley home value | RE/MAX Peaks",
+  title: "Your next move starts here",
   description:
     "Get a free CMA from the RE/MAX Peaks Logan office, or see what monthly payment a home would take.",
   alternates: { canonical: "/your-next-move" },

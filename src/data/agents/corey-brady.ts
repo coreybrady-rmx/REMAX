@@ -15,7 +15,7 @@ export const coreyBrady: AgentProfile = {
   heroImage:
     "https://remax-peaks-agent-microsites.vercel.app/agents/corey-brady/hero.jpg",
   teamCardPhoto:
-    "https://remax-peaks-agent-microsites.vercel.app/agents/corey-brady/hero.jpg",
+    "https://remax-peaks-agent-microsites.vercel.app/agents/corey-brady/connect.jpg",
   marketLine: "Cache Valley, Bear Lake, Southern Idaho",
   headline: "Elevating life's milestones in Cache Valley",
   shortPitch:

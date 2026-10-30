@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { BlobNotFoundError, BlobPreconditionFailedError, get, put } from "@vercel/blob";
+import { BlobNotFoundError, BlobPreconditionFailedError, head, put } from "@vercel/blob";
 import { claimHeadlineIndex, type HeadlineCursor, type HeadlineStore } from "./headlines.ts";
 
 const FILE = path.join(process.cwd(), "data", "headline-cursor.json");
@@ -38,10 +38,10 @@ export function blobStore(token: string): HeadlineStore {
   return {
     async read() {
       try {
-        const result = await get(BLOB_PATH, { access: "public", token, useCache: false });
-        if (!result || result.statusCode !== 200) return { value: 0, etag: null };
-        const text = await new Response(result.stream).text();
-        return cursorFromText(text, result.blob.etag);
+        // The blob body sits on a CDN for at least a minute. The metadata from
+        // head() does not, so the byte size is the counter.
+        const meta = await head(BLOB_PATH, { token });
+        return { value: meta.size, etag: meta.etag };
       } catch (error) {
         if (error instanceof BlobNotFoundError) return { value: 0, etag: null };
         throw error;
@@ -49,13 +49,13 @@ export function blobStore(token: string): HeadlineStore {
     },
     async compareAndSwap(next, etag) {
       try {
-        await put(BLOB_PATH, JSON.stringify({ next }), {
+        await put(BLOB_PATH, "x".repeat(next), {
           access: "public",
           token,
           addRandomSuffix: false,
           allowOverwrite: etag !== null,
           ifMatch: etag ?? undefined,
-          contentType: "application/json",
+          contentType: "text/plain",
           cacheControlMaxAge: 60,
         });
         return true;

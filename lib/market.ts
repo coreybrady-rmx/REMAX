@@ -34,8 +34,9 @@ const PAGE_CAP = 40;
 export function classifySubtype(value: string | null | undefined): SegmentKey | null {
   if (!value) return null;
   const normalized = value.toLowerCase().replace(/[^a-z]/g, "");
-  if (normalized.includes("town") || normalized.includes("twin")) return "townhome";
-  if (normalized.includes("singlefamily")) return "singleFamily";
+  // Exact MLS subtypes only. Twin, condo, duplex, and mobile are separate products.
+  if (normalized === "townhouse" || normalized === "townhome") return "townhome";
+  if (normalized === "singlefamilyresidence" || normalized === "singlefamily") return "singleFamily";
   return null;
 }
 

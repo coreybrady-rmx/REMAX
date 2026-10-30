@@ -13,7 +13,7 @@ test("classifies single-family and townhome subtype labels", () => {
   assert.equal(classifySubtype("Single Family Residence"), "singleFamily");
   assert.equal(classifySubtype("SingleFamilyResidence"), "singleFamily");
   assert.equal(classifySubtype("Townhouse"), "townhome");
-  assert.equal(classifySubtype("Twin Home"), "townhome");
+  assert.equal(classifySubtype("Twin Home"), null);
   assert.equal(classifySubtype("Condominium"), null);
   assert.equal(classifySubtype(""), null);
 });

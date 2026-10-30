@@ -456,8 +456,11 @@ function ThanksPanel({
 function MarketStrip({ market }: { market: MarketSnapshot }) {
   const updated = market.updatedAt
     ? new Intl.DateTimeFormat("en-US", {
-        dateStyle: "medium",
-        timeStyle: "short",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
         timeZone: "America/Denver",
         timeZoneName: "short",
       }).format(new Date(market.updatedAt))
@@ -468,8 +471,9 @@ function MarketStrip({ market }: { market: MarketSnapshot }) {
       <p className="eyebrow">ON THE MARKET NOW</p>
       <h2 id="market-title">Cache Valley asking prices</h2>
       <p>
-        Single-family homes and townhomes listed for sale. Not sold prices, and not a value for your
-        home.
+        Every active single-family home and townhome in Cache County. Homes under contract, condos,
+        twin homes, and land are not in these counts. These are asking prices, not sold prices, and
+        not a value for your home.
       </p>
       {ready ? (
         <div className="stats">

@@ -179,18 +179,17 @@ p {
 .agent-hero {
   min-height: min(88vh, 820px);
   display: flex;
-  align-items: flex-end;
-  background-size: cover;
-  background-position: center;
+  align-items: center;
   position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 70% at 75% 40%, rgba(224, 28, 47, 0.18), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(0, 61, 165, 0.12), transparent 50%),
+    linear-gradient(145deg, #0f0f10 0%, #151516 45%, #1a1a1d 100%);
 }
 
-.agent-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(21, 21, 22, 0.35), rgba(21, 21, 22, 0.15) 35%, rgba(21, 21, 22, 0.92));
+.agent-hero--portrait {
+  align-items: center;
 }
 
 .agent-hero-inner {
@@ -199,11 +198,44 @@ p {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 80px 20px 64px;
+  padding: 72px 20px 64px;
+}
+
+.agent-hero-split {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.agent-hero-portrait {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 460px);
+}
+
+.agent-hero-portrait::before {
+  content: "";
+  position: absolute;
+  inset: 18px -14px -18px 14px;
+  border: 1px solid rgba(224, 28, 47, 0.45);
+  border-radius: 18px;
+  z-index: 0;
+}
+
+.agent-hero-portrait img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
 }
 
 .agent-hero h1 {
-  font-size: clamp(44px, 8vw, 84px);
+  font-size: clamp(44px, 7vw, 76px);
   line-height: 0.98;
   margin-bottom: 10px;
 }
@@ -658,6 +690,35 @@ p {
 
   .header-nav-right {
     grid-column: 2;
+  }
+
+  .agent-hero-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .agent-hero-portrait {
+    justify-self: center;
+    width: min(100%, 360px);
+    order: -1;
+  }
+
+  .agent-hero-copy {
+    text-align: center;
+  }
+
+  .agent-hero-copy .eyebrow {
+    justify-content: center;
+  }
+
+  .agent-hero-copy .hero-lede,
+  .agent-hero-copy .hero-support {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .agent-hero-copy .hero-ctas {
+    justify-content: center;
   }
 
   .proof-strip,

@@ -17,25 +17,32 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
     <div className="agent-page">
       <SiteHeader agentName={agent.name} />
 
-      <section
-        className="agent-hero"
-        style={{ backgroundImage: `url('${agent.heroImage}')` }}
-      >
-        <div className="agent-hero-inner">
-          <p className="eyebrow eyebrow-light">{agent.marketLine}</p>
-          <h1>{agent.name}</h1>
-          <p className="hero-title">
-            {agent.title} · RE/MAX Peaks
-          </p>
-          <p className="hero-lede">{agent.headline}</p>
-          <p className="hero-support">{agent.shortPitch}</p>
-          <div className="hero-ctas">
-            <a className="btn btn-red" href="#property-search">
-              Search Homes
-            </a>
-            <Link className="btn btn-ghost" href={homeValueHref}>
-              Get My Home Value
-            </Link>
+      <section className="agent-hero agent-hero--portrait">
+        <div className="agent-hero-inner agent-hero-split">
+          <div className="agent-hero-copy">
+            <p className="eyebrow eyebrow-light">{agent.marketLine}</p>
+            <h1>{agent.name}</h1>
+            <p className="hero-title">
+              {agent.title} · RE/MAX Peaks
+            </p>
+            <p className="hero-lede">{agent.headline}</p>
+            <p className="hero-support">{agent.shortPitch}</p>
+            <div className="hero-ctas">
+              <a className="btn btn-red" href="#property-search">
+                Search Homes
+              </a>
+              <Link className="btn btn-ghost" href={homeValueHref}>
+                Get My Home Value
+              </Link>
+            </div>
+          </div>
+          <div className="agent-hero-portrait">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={agent.photo}
+              alt={`${agent.name}, ${agent.title} at RE/MAX Peaks`}
+              fetchPriority="high"
+            />
           </div>
         </div>
       </section>

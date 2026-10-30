@@ -25,6 +25,26 @@ export const metadata: Metadata = {
   description:
     "High-converting individual agent microsites for RE/MAX Peaks. Cache Valley, Bear Lake, and Southern Idaho.",
   metadataBase: new URL("https://www.remaxpeaks.com"),
+  icons: {
+    icon: [
+      {
+        url: "https://remax-peaks-agent-microsites.vercel.app/favicon.ico",
+        sizes: "32x32",
+      },
+      {
+        url: "https://remax-peaks-agent-microsites.vercel.app/favicon.png",
+        type: "image/png",
+        sizes: "375x375",
+      },
+    ],
+    apple: [
+      {
+        url: "https://remax-peaks-agent-microsites.vercel.app/apple-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

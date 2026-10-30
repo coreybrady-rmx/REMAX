@@ -131,57 +131,50 @@ test("a failed lead does not increment the tally", async () => {
   assert.deepEqual(saved.tally.byHeadline, {});
 });
 
-test("results route rejects a missing or wrong key and returns counts for the right key", async () => {
+test("results page lists every headline without a key", async () => {
   const store = memoryTallyStore();
+
+  const empty = await handleHeadlineResults({ store });
+  assert.equal(empty.status, 200);
+  const emptyHtml = await empty.text();
+  for (const headline of HEADLINES) {
+    assert.equal(emptyHtml.includes(headline), true);
+    assert.match(emptyHtml, new RegExp(`data-headline="${headline.replaceAll("?", "\\?")}" data-count="0"`));
+  }
+  assert.match(emptyHtml, /No forms have been submitted yet/);
+  assert.equal(emptyHtml.includes('data-headline="unknown"'), false);
+  assert.equal(emptyHtml.includes("ada@"), false);
+  assert.equal(emptyHtml.includes("555-0100"), false);
+
   await recordHeadlineSubmission(store, HEADLINES[2], "cma");
   await recordHeadlineSubmission(store, HEADLINES[2], "affordability");
-  const secret = "results-test-key";
-  const options = { secret, store };
+  await recordHeadlineSubmission(store, HEADLINES[0], "payment");
 
-  const missing = await handleHeadlineResults(new Request("https://www.remaxpeaks.com/your-next-move/results"), options);
-  assert.equal(missing.status, 404);
-
-  const wrong = await handleHeadlineResults(
-    new Request("https://www.remaxpeaks.com/your-next-move/results?key=nope"),
-    options,
-  );
-  assert.equal(wrong.status, 404);
-
-  const unset = await handleHeadlineResults(
-    new Request("https://www.remaxpeaks.com/your-next-move/results?key=results-test-key"),
-    { secret: undefined, store },
-  );
-  assert.equal(unset.status, 404);
-  const blank = await handleHeadlineResults(
-    new Request("https://www.remaxpeaks.com/your-next-move/results?key=results-test-key"),
-    { secret: "  ", store },
-  );
-  assert.equal(blank.status, 404);
-
-  const ok = await handleHeadlineResults(
-    new Request("https://www.remaxpeaks.com/your-next-move/results?key=results-test-key"),
-    options,
-  );
-  assert.equal(ok.status, 200);
-  const html = await ok.text();
+  const open = await handleHeadlineResults({ store });
+  assert.equal(open.status, 200);
+  const html = await open.text();
+  for (const headline of HEADLINES) assert.equal(html.includes(headline), true);
+  assert.match(html, /data-total="3"/);
   assert.match(html, /data-headline="Know your numbers, know your options\." data-count="2"/);
   assert.match(html, /data-form="cma" data-form-count="1"/);
   assert.match(html, /data-form="affordability" data-form-count="1"/);
+  assert.match(html, /CMA: 1/);
   assert.match(html, /Buyer: 1/);
-  assert.match(html, /data-headline="unknown" data-count="0"/);
-  assert.equal(html.includes("results-test-key"), false);
+  assert.match(html, /data-headline="Your next move starts here\." data-count="1"/);
+  assert.match(html, /data-form="payment" data-form-count="1"/);
+  assert.match(html, /Payment: 1/);
+  assert.equal(html.includes('data-headline="unknown"'), false);
+  assert.equal(html.includes("No forms have been submitted yet"), false);
   assert.equal(html.includes("ada@"), false);
   assert.equal(html.includes("555-0100"), false);
 
-  const headerOk = await handleHeadlineResults(
-    new Request("https://www.remaxpeaks.com/your-next-move/results", {
-      headers: { "x-results-key": secret },
-    }),
-    options,
-  );
-  assert.equal(headerOk.status, 200);
-  const headerHtml = await headerOk.text();
-  assert.match(headerHtml, /data-count="2"/);
+  await recordHeadlineSubmission(store, "unknown", "cma");
+  const withUnknown = await handleHeadlineResults({ store });
+  assert.equal(withUnknown.status, 200);
+  const unknownHtml = await withUnknown.text();
+  assert.match(unknownHtml, /data-headline="unknown" data-count="1"/);
+  assert.match(unknownHtml, /CMA: 1/);
+  for (const headline of HEADLINES) assert.equal(unknownHtml.includes(headline), true);
 });
 
 function leadRequest(cookie: string | null, body: Record<string, unknown>): Request {

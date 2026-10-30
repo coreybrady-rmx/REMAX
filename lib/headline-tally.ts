@@ -1,4 +1,3 @@
-import { timingSafeEqual } from "node:crypto";
 import { HEADLINES } from "./headlines.ts";
 import { UNKNOWN_HEADLINE } from "./headline-attribution.ts";
 
@@ -81,15 +80,20 @@ export function headlineCountRows(tally: HeadlineTally): HeadlineCountRow[] {
   const extras = Object.keys(tally.byHeadline)
     .filter((key) => !known.has(key))
     .sort();
-  return [...HEADLINES, UNKNOWN_HEADLINE, ...extras].map((headline) => {
-    const counts = tally.byHeadline[headline] ?? {};
-    const forms = Object.keys(counts).sort((a, b) => formRank(a) - formRank(b) || a.localeCompare(b));
-    const byForm = forms
-      .filter((form) => (counts[form] ?? 0) > 0)
-      .map((form) => ({ form, label: FORM_LABELS[form] ?? form, count: counts[form] ?? 0 }));
-    const total = byForm.reduce((sum, row) => sum + row.count, 0);
-    return { headline, total, byForm };
+  return [...HEADLINES, UNKNOWN_HEADLINE, ...extras].map((headline) => rowFor(tally, headline)).filter((row) => {
+    if ((HEADLINES as readonly string[]).includes(row.headline)) return true;
+    return row.total > 0;
   });
+}
+
+function rowFor(tally: HeadlineTally, headline: string): HeadlineCountRow {
+  const counts = tally.byHeadline[headline] ?? {};
+  const forms = Object.keys(counts).sort((a, b) => formRank(a) - formRank(b) || a.localeCompare(b));
+  const byForm = forms
+    .filter((form) => (counts[form] ?? 0) > 0)
+    .map((form) => ({ form, label: FORM_LABELS[form] ?? form, count: counts[form] ?? 0 }));
+  const total = byForm.reduce((sum, row) => sum + row.count, 0);
+  return { headline, total, byForm };
 }
 
 export function renderHeadlineResults(tally: HeadlineTally): string {
@@ -98,7 +102,7 @@ export function renderHeadlineResults(tally: HeadlineTally): string {
   const cards = rows
     .map((row) => {
       const breakdown =
-        row.byForm.length === 0
+        row.total === 0
           ? ""
           : `<ul>${row.byForm
               .map(
@@ -106,9 +110,14 @@ export function renderHeadlineResults(tally: HeadlineTally): string {
                   `<li data-form="${escapeHtml(form.form)}" data-form-count="${form.count}">${escapeHtml(form.label)}: ${form.count}</li>`,
               )
               .join("")}</ul>`;
-      return `<article data-headline="${escapeHtml(row.headline)}" data-count="${row.total}"><h2>${escapeHtml(row.headline)}</h2><p><strong>${row.total}</strong> ${row.total === 1 ? "submission" : "submissions"}</p>${breakdown}</article>`;
+      const countLabel = row.total === 1 ? "form submitted" : "forms submitted";
+      return `<article data-headline="${escapeHtml(row.headline)}" data-count="${row.total}"><h2>${escapeHtml(row.headline)}</h2><p class="count"><strong>${row.total}</strong> ${countLabel}</p>${breakdown}</article>`;
     })
     .join("");
+  const status =
+    total === 0
+      ? `<p class="empty" data-empty="true" data-total="0">No forms have been submitted yet.</p>`
+      : `<p class="total" data-total="${total}"><strong>${total}</strong> ${total === 1 ? "form" : "forms"} submitted.</p>`;
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -119,39 +128,30 @@ export function renderHeadlineResults(tally: HeadlineTally): string {
 <title>Headline results</title>
 <style>
   body { margin: 0; font-family: Inter, "Segoe UI", sans-serif; color: #2c3138; background: #fff; }
+  .bar { height: 4px; background: #ec2325; }
   main { max-width: 720px; margin: 0 auto; padding: 28px 20px 48px; }
-  h1 { margin: 0 0 8px; color: #0e1a33; font-size: 32px; letter-spacing: -0.03em; }
-  h2 { margin: 0; color: #0e1a33; font-size: 20px; }
-  p { margin: 8px 0 0; }
-  .intro { color: #5c6570; }
+  h1 { margin: 0 0 8px; color: #0e1a33; font-size: 32px; line-height: 1.1; letter-spacing: -0.03em; }
+  h2 { margin: 0; color: #0e1a33; font-size: 20px; line-height: 1.25; }
+  p { margin: 0; }
+  .intro { margin-top: 8px; color: #5c6570; font-size: 16px; line-height: 1.45; }
+  .empty, .total { margin-top: 16px; padding: 14px 16px; background: #f3f5f8; border-radius: 16px; color: #0e1a33; font-size: 16px; line-height: 1.4; }
   article { margin-top: 16px; padding: 16px; border: 1px solid #e3e7ee; border-radius: 16px; }
-  ul { margin: 8px 0 0; padding-left: 18px; }
+  .count { margin-top: 8px; font-size: 16px; }
+  .count strong, .total strong { color: #0e1a33; }
+  ul { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  li { background: #f3f5f8; border-radius: 999px; padding: 6px 10px; font-size: 14px; }
 </style>
 </head>
 <body>
+<div class="bar"></div>
 <main>
 <h1>Headline results</h1>
-<p class="intro" data-total="${total}">${total} ${total === 1 ? "submission" : "submissions"} across these headlines. Counts only.</p>
+<p class="intro">How many forms were submitted under each headline. Counts only.</p>
+${status}
 ${cards}
 </main>
 </body>
 </html>`;
-}
-
-export function resultsKeyMatches(secret: string | undefined, provided: string | null): boolean {
-  const expected = secret?.trim() ?? "";
-  const actual = provided?.trim() ?? "";
-  if (!expected || !actual) return false;
-  const left = Buffer.from(expected);
-  const right = Buffer.from(actual);
-  if (left.length !== right.length) return false;
-  return timingSafeEqual(left, right);
-}
-
-export function providedResultsKey(request: Request): string | null {
-  const query = new URL(request.url).searchParams.get("key");
-  if (query !== null) return query;
-  return request.headers.get("x-results-key");
 }
 
 const PRIVATE_HEADERS = {
@@ -160,13 +160,7 @@ const PRIVATE_HEADERS = {
   "referrer-policy": "no-referrer",
 };
 
-export async function handleHeadlineResults(
-  request: Request,
-  options: { secret: string | undefined; store: HeadlineTallyStore },
-): Promise<Response> {
-  if (!resultsKeyMatches(options.secret, providedResultsKey(request))) {
-    return new Response("Not found", { status: 404, headers: PRIVATE_HEADERS });
-  }
+export async function handleHeadlineResults(options: { store: HeadlineTallyStore }): Promise<Response> {
   try {
     const current = await options.store.read();
     return new Response(renderHeadlineResults(current.tally), {

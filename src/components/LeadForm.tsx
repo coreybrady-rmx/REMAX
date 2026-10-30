@@ -1,0 +1,119 @@
+"use client";
+
+import { FormEvent, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
+
+type Props = {
+  agentSlug: string;
+  agentName: string;
+  ghlAssignee: string;
+  intent: "contact" | "home-value";
+  className?: string;
+};
+
+export function LeadForm({
+  agentSlug,
+  agentName,
+  ghlAssignee,
+  intent,
+  className,
+}: Props) {
+  const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
+    "idle",
+  );
+  const [message, setMessage] = useState("");
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+          intent,
+          agentSlug,
+          agentName,
+          ghlAssignee,
+          source: `agent-microsite:${agentSlug}:${intent}`,
+          pageUrl:
+            typeof window !== "undefined" ? window.location.href : undefined,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
+      trackEvent(
+        intent === "home-value" ? "home_value_submit" : "contact_submit",
+        {
+          agent_slug: agentSlug,
+          agent_name: agentName,
+        },
+      );
+
+      setStatus("ok");
+      setMessage(
+        intent === "home-value"
+          ? `Thanks — ${agentName.split(" ")[0]} will follow up with your home value shortly.`
+          : `Thanks — ${agentName.split(" ")[0]} will be in touch soon.`,
+      );
+      form.reset();
+    } catch {
+      setStatus("error");
+      setMessage("Something went wrong. Please call or text instead.");
+    }
+  }
+
+  return (
+    <form className={className ?? "lead-form"} onSubmit={onSubmit}>
+      {intent === "home-value" ? (
+        <input
+          type="text"
+          name="propertyAddress"
+          placeholder="Property address*"
+          required
+        />
+      ) : null}
+      <input type="text" name="full_name" placeholder="Full name*" required />
+      <input type="email" name="email" placeholder="Email*" required />
+      <input type="tel" name="phone" placeholder="Phone*" required />
+      {intent === "contact" ? (
+        <textarea
+          name="message"
+          placeholder="How can I help?"
+          rows={4}
+        />
+      ) : (
+        <textarea
+          name="notes"
+          placeholder="Anything we should know? (optional)"
+          rows={3}
+        />
+      )}
+      <button
+        type="submit"
+        className="btn btn-red"
+        disabled={status === "loading"}
+      >
+        {status === "loading"
+          ? "Sending…"
+          : intent === "home-value"
+            ? "Get My Home Value"
+            : `Message ${agentName.split(" ")[0]}`}
+      </button>
+      {message ? (
+        <p
+          className={`form-status ${status === "error" ? "is-error" : "is-ok"}`}
+          role="status"
+        >
+          {message}
+        </p>
+      ) : null}
+    </form>
+  );
+}

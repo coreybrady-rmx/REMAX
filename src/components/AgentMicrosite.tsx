@@ -31,14 +31,14 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
             <p className="eyebrow eyebrow-light">{agent.marketLine}</p>
             <h1>{agent.name}</h1>
             <p className="hero-title">
-              {agent.title} · RE/MAX Peaks
+              {agent.title}, RE/MAX Peaks
             </p>
             <p className="hero-lede">{agent.headline}</p>
             <p className="hero-support">{agent.shortPitch}</p>
             <div className="hero-ctas">
-              <a className="btn btn-red" href="#property-search">
-                Search Homes
-              </a>
+              <Link className="btn btn-red" href={homeValueHref}>
+                Start Searching
+              </Link>
               <Link className="btn btn-ghost" href={homeValueHref}>
                 Get My Home Value
               </Link>
@@ -54,8 +54,8 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
           <p className="eyebrow">Property search</p>
           <h2>Find your next home</h2>
           <p>
-            Search live Utah MLS listings. Save what you like and{" "}
-            {first} will help you tour with confidence.
+            Search live Utah MLS listings. Save what you like and {first} will
+            help you tour with confidence.
           </p>
         </div>
         <SearchWidget agentSlug={agent.slug} agentName={agent.name} />
@@ -73,7 +73,7 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
           <div className="connect-copy">
             <p className="eyebrow">Connect with {first}</p>
             <h2>Your neighbor in Cache Valley real estate</h2>
-            <p>{agent.shortPitch}</p>
+            <p>{agent.bio}</p>
             <ul className="specialty-list">
               {agent.specialties.map((item) => (
                 <li key={item}>{item}</li>
@@ -112,15 +112,15 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
               Search live listings, get local insight on neighborhoods, and move
               with a strategy for tours, offers, and closing.
             </p>
-            <a className="btn btn-red" href="#property-search">
+            <Link className="btn btn-red" href={homeValueHref}>
               Start Searching
-            </a>
+            </Link>
           </article>
           <article className="path-card">
             <h3>Selling your home</h3>
             <p>
               Get a clear market value and a marketing plan built for Cache
-              Valley buyers — priced and positioned to perform.
+              Valley buyers, priced and positioned to perform.
             </p>
             <Link className="btn btn-red" href={homeValueHref}>
               Get My Home Value
@@ -185,7 +185,7 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
             <h3>RE/MAX Peaks</h3>
             <p>
               Serving Logan, Preston, and Bear Lake. Connected to the full Peaks
-              team when you need more capacity — always with {first} as your
+              team when you need more capacity, always with {first} as your
               point person.
             </p>
             <a className="btn btn-ghost" href="https://www.remaxpeaks.com/">
@@ -202,7 +202,7 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
             <h2>Get in touch with {first}</h2>
             <p>
               Ready to buy, sell, or explore the market? Call, text, or send the
-              form — {first} responds fast with options and a clear plan.
+              form. {first} responds fast with options and a clear plan.
             </p>
             <div className="connect-actions">
               <a className="btn btn-ghost" href={telHref(agent.phone)}>
@@ -226,7 +226,7 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
       <section className="final-cta">
         <h2>Ready when you are</h2>
         <p>
-          Call, text, or request a home value — {first} will take it from there.
+          Request a home value and {first} will get back to you with a CMA.
         </p>
         <div className="hero-ctas">
           <Link className="btn btn-white" href={homeValueHref}>

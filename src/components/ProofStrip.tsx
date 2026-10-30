@@ -5,12 +5,6 @@ export function ProofStrip({ agent }: { agent: AgentProfile }) {
     <section className="proof-strip" aria-label="Results">
       <div className="proof-label">
         <p className="eyebrow">{agent.statsLabel}</p>
-        <p className="proof-period">{agent.statsPeriod}</p>
-        {agent.statsMode === "office" ? (
-          <p className="proof-note">
-            Office production — building credibility through RE/MAX Peaks.
-          </p>
-        ) : null}
       </div>
       <div className="proof-stats">
         {agent.stats.map((stat) => (

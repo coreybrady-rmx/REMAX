@@ -35,7 +35,8 @@ export type AgentProfile = {
   bio: string;
   statsMode: StatsMode;
   statsLabel: string;
-  statsPeriod: string;
+  /** Optional period label under the stats eyebrow; omit to show numbers only */
+  statsPeriod?: string;
   stats: StatItem[];
   specialties: string[];
   testimonials: Testimonial[];

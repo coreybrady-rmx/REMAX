@@ -2,8 +2,6 @@ import type { AgentProfile } from "../types";
 
 /**
  * Pilot agent content pack.
- * Office stats are placeholders sourced for layout — replace with
- * transaction-ledger export numbers before marketing claims go public.
  */
 export const coreyBrady: AgentProfile = {
   slug: "corey-brady",
@@ -11,22 +9,20 @@ export const coreyBrady: AgentProfile = {
   firstName: "Corey",
   title: "Owner",
   phone: "435-799-7000",
-  email: "coreybrady@gmail.com",
-  // Peaks filesafe CDN (also mirrored locally under /public/agents/)
+  email: "coreybrady@remaxpeaks.com",
   photo:
     "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/50fa7f71-67aa-4587-8e5a-a97e82bbe574.jpg",
   heroImage:
     "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/50fa7f71-67aa-4587-8e5a-a97e82bbe574.jpg",
   teamCardPhoto:
     "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/ddf2fe7f-59b6-4c75-aabc-e58e6b6a6799.jpg",
-  marketLine: "Cache Valley · Bear Lake · Southern Idaho",
+  marketLine: "Cache Valley, Bear Lake, Southern Idaho",
   headline: "Elevating life's milestones in Cache Valley",
   shortPitch:
-    "Local guidance for buying, selling, and building wealth — with clear next steps at every turn.",
-  bio: "Corey Brady is a Realtor and owner with RE/MAX Peaks, serving Cache Valley and northern Utah. With over 8 years in real estate, new construction, and development, he treats every transaction as a partnership built on faith, integrity, and growth. Outside work, he enjoys golfing, reading, and time with his wife and five daughters.",
+    "Local guidance for buying, selling, and building wealth, with clear next steps at every turn.",
+  bio: "Corey Brady is a dedicated Realtor and owner with REMAX Peaks, serving Cache Valley and northern Utah. As part of The Allred Team, he guides families and investors through meaningful decisions. With over 8 years in real estate, new construction, and development, he offers clients more than guidance, he offers perspective. He treats every transaction as a partnership built on faith, integrity, and growth. Outside work, he enjoys golfing, reading, and spending time with his wife and five daughters.",
   statsMode: "office",
-  statsLabel: "RE/MAX Peaks · Cache Valley",
-  statsPeriod: "Office results · replace with ledger YTD",
+  statsLabel: "RE/MAX Peaks Cache Valley",
   stats: [
     { value: "$48M+", label: "Volume closed" },
     { value: "210+", label: "Transactions" },
@@ -63,7 +59,7 @@ export const coreyBrady: AgentProfile = {
       slug: "logan",
       name: "Logan",
       blurb:
-        "University energy, downtown charm, and mountain access — the heart of Cache Valley living.",
+        "University energy, downtown charm, and mountain access, the heart of Cache Valley living.",
       image:
         "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/68dda2185fb5bd01c9657833.jpeg",
     },
@@ -95,7 +91,7 @@ export const coreyBrady: AgentProfile = {
       slug: "preston",
       name: "Preston",
       blurb:
-        "Idaho side of the valley — space, value, and a true small-town pace.",
+        "Idaho side of the valley: space, value, and a true small-town pace.",
       image:
         "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/68dda2ab26a5e2fa6c130428.jpeg",
     },

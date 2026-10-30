@@ -22,6 +22,7 @@ export function LeadForm({
     "idle",
   );
   const [message, setMessage] = useState("");
+  const first = agentName.split(" ")[0];
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -59,8 +60,8 @@ export function LeadForm({
       setStatus("ok");
       setMessage(
         intent === "home-value"
-          ? `Thanks — ${agentName.split(" ")[0]} will follow up with your home value shortly.`
-          : `Thanks — ${agentName.split(" ")[0]} will be in touch soon.`,
+          ? `Thanks! ${first} will get back to you with a CMA.`
+          : `Thanks! ${first} will be in touch soon.`,
       );
       form.reset();
     } catch {
@@ -69,42 +70,68 @@ export function LeadForm({
     }
   }
 
-  return (
-    <form className={className ?? "lead-form"} onSubmit={onSubmit}>
-      {intent === "home-value" ? (
+  if (intent === "home-value") {
+    return (
+      <form className={className ?? "lead-form"} onSubmit={onSubmit}>
         <input
           type="text"
           name="propertyAddress"
-          placeholder="Property address*"
+          placeholder="Address*"
           required
+          autoComplete="street-address"
         />
-      ) : null}
-      <input type="text" name="full_name" placeholder="Full name*" required />
+        <input
+          type="text"
+          name="full_name"
+          placeholder="Name*"
+          required
+          autoComplete="name"
+        />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone*"
+          required
+          autoComplete="tel"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email*"
+          required
+          autoComplete="email"
+        />
+        <button
+          type="submit"
+          className="btn btn-red"
+          disabled={status === "loading"}
+        >
+          {status === "loading" ? "Sending…" : "Get My Home Value"}
+        </button>
+        {message ? (
+          <p
+            className={`form-status ${status === "error" ? "is-error" : "is-ok"}`}
+            role="status"
+          >
+            {message}
+          </p>
+        ) : null}
+      </form>
+    );
+  }
+
+  return (
+    <form className={className ?? "lead-form"} onSubmit={onSubmit}>
+      <input type="text" name="full_name" placeholder="Name*" required />
       <input type="email" name="email" placeholder="Email*" required />
       <input type="tel" name="phone" placeholder="Phone*" required />
-      {intent === "contact" ? (
-        <textarea
-          name="message"
-          placeholder="How can I help?"
-          rows={4}
-        />
-      ) : (
-        <textarea
-          name="notes"
-          placeholder="Anything we should know? (optional)"
-          rows={3}
-        />
-      )}
+      <textarea name="message" placeholder="How can I help?" rows={4} />
       <button
         type="submit"
         className="btn btn-red"
         disabled={status === "loading"}
       >
-        {status === "loading"
-          ? "Sending…"
-          : intent === "home-value"
-            ? "Get My Home Value"
-            : `Message ${agentName.split(" ")[0]}`}
+        {status === "loading" ? "Sending…" : `Message ${first}`}
       </button>
       {message ? (
         <p

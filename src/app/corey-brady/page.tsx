@@ -10,7 +10,14 @@ export const metadata: Metadata = {
     title: "Corey Brady | RE/MAX Peaks",
     description:
       "Cache Valley real estate with clear next steps — search homes or get your home value.",
-    images: [coreyBrady.photo],
+    images: [
+      {
+        url: coreyBrady.photo,
+        width: 960,
+        height: 1200,
+        alt: "Corey Brady, Owner at RE/MAX Peaks",
+      },
+    ],
     url: "https://www.remaxpeaks.com/corey-brady/",
   },
   alternates: {

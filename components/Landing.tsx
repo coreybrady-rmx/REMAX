@@ -53,7 +53,7 @@ export function Landing({ market, headline }: { market: MarketSnapshot; headline
 
           <div className="choices" role="group" aria-label="Choose a starting point">
             <button
-              className="choice"
+              className="choice choice-worth"
               type="button"
               aria-pressed={path === "cma"}
               onClick={() => choose("cma")}
@@ -63,7 +63,7 @@ export function Landing({ market, headline }: { market: MarketSnapshot; headline
               <span>Free CMA from this office.</span>
             </button>
             <button
-              className="choice"
+              className="choice choice-buy"
               type="button"
               aria-pressed={path === "afford"}
               onClick={() => choose("afford")}

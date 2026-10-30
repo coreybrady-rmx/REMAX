@@ -133,13 +133,33 @@ h1 {
   font-size: 15px;
   line-height: 1.4;
 }
-.choice[aria-pressed="true"] {
-  border-color: var(--navy);
-  background: var(--navy);
+.choice-worth,
+.choice-buy {
+  color: var(--white);
 }
-.choice[aria-pressed="true"] .kicker { color: #f7b4b4; }
-.choice[aria-pressed="true"] strong,
-.choice[aria-pressed="true"] span:last-child { color: var(--white); }
+.choice-worth {
+  background: #e01c2f;
+  border-color: #e01c2f;
+}
+.choice-buy {
+  background: #003da5;
+  border-color: #003da5;
+}
+.choice-worth .kicker,
+.choice-buy .kicker {
+  color: rgba(255, 255, 255, 0.86);
+}
+.choice-worth strong,
+.choice-buy strong,
+.choice-worth span:last-child,
+.choice-buy span:last-child {
+  color: var(--white);
+}
+.choice-worth[aria-pressed="true"],
+.choice-buy[aria-pressed="true"] {
+  outline: 3px solid var(--navy);
+  outline-offset: 2px;
+}
 
 .panel-copy {
   margin-top: 6px;

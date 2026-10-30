@@ -1,6 +1,8 @@
 import { pullActiveCacheListings, summarizeListings } from "@/lib/market";
 import { readSnapshot, saveSnapshot } from "@/lib/snapshot";
 
+// Vercel runs this cron in UTC. 12:00 UTC is 6:00 AM Mountain Daylight Time.
+// After November 1, 2026, the same schedule is 5:00 AM Mountain Standard Time.
 export const maxDuration = 60;
 export const dynamic = "force-dynamic";
 

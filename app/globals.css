@@ -13,7 +13,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 148px; }
 body {
   margin: 0;
   color: var(--charcoal);
@@ -52,7 +52,10 @@ button { cursor: pointer; }
   padding: 28px 20px;
 }
 .hero { padding-bottom: 36px; }
-.stage { max-width: 720px; margin: 0 auto; }
+.stage { max-width: 720px; margin: 0 auto; text-align: center; }
+.stage .choices,
+.stage .card,
+.stage .choice { text-align: left; }
 .eyebrow {
   margin: 0 0 12px;
   color: var(--red);
@@ -66,6 +69,7 @@ h1 {
   font-size: 34px;
   line-height: 1.08;
   letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 .support {
   margin-top: 14px;
@@ -222,6 +226,34 @@ input, select {
 .navy-logo { width: 180px; height: auto; margin-bottom: 12px; }
 .trust-actions { display: grid; gap: 6px; margin-top: 12px; }
 
+.home-search { margin-top: 22px; }
+.home-search form { display: grid; gap: 8px; }
+.search-row { display: flex; gap: 8px; }
+.search-row input { flex: 1; min-width: 0; }
+.search-button {
+  padding: 12px 18px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.search-button:disabled { opacity: 0.65; }
+.hits { display: grid; gap: 10px; margin-top: 14px; }
+.hit {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: var(--white);
+  color: inherit;
+  text-decoration: none;
+}
+.hit-address { font-weight: 600; color: var(--navy); }
+.hit strong { color: var(--navy); font-size: 22px; letter-spacing: -0.02em; }
+.hit span:last-child { color: var(--muted); font-size: 14px; }
+
 .disclosures { background: var(--mist); display: grid; gap: 8px; }
 .result {
   padding: 14px;
@@ -240,6 +272,7 @@ input, select {
 .thanks p { margin-top: 10px; line-height: 1.45; }
 
 @media (min-width: 960px) {
+  html { scroll-padding-top: 176px; }
   .header, .hero, .market, .trust, .disclosures { padding-left: 64px; padding-right: 64px; }
   .header { padding-top: 20px; padding-bottom: 20px; }
   .logo { width: 200px; }

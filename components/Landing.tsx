@@ -8,6 +8,7 @@ import {
   type Assumptions,
 } from "@/lib/estimates";
 import type { MarketSnapshot, PriceSegment } from "@/lib/market";
+import { HomeSearch } from "@/components/HomeSearch";
 
 type Path = "cma" | "afford";
 
@@ -46,9 +47,8 @@ export function Landing({ market }: { market: MarketSnapshot }) {
 
       <section className="hero">
         <div className="stage">
-          <p className="eyebrow">LOGAN MAIN STREET</p>
-          <h1>What do you need?</h1>
-          <p className="support">From the RE/MAX Peaks office on Main Street in Logan.</p>
+          <p className="eyebrow">RE/MAX Peaks Logan Office</p>
+          <h1>Your next move starts here.</h1>
 
           <div className="choices" role="group" aria-label="Choose a starting point">
             <button
@@ -251,11 +251,10 @@ function MarketStrip({ market }: { market: MarketSnapshot }) {
   return (
     <section className="market" aria-labelledby="market-title">
       <p className="eyebrow">ON THE MARKET NOW</p>
-      <h2 id="market-title">Cache Valley asking prices</h2>
+      <h2 id="market-title">Cache Valley current inventory</h2>
       <p>
-        Every active single-family home and townhome in Cache County. Homes under contract, condos,
-        twin homes, and land are not in these counts. These are asking prices, not sold prices, and
-        not a value for your home.
+        Active single-family homes and townhomes in Cache County. These are asking prices, not sold
+        prices, and not a value for your home. Refreshed every morning at 6:00 AM Mountain time.
       </p>
       {ready ? (
         <div className="stats">
@@ -273,6 +272,7 @@ function MarketStrip({ market }: { market: MarketSnapshot }) {
           Updated {updated}.
         </p>
       ) : null}
+      <HomeSearch />
     </section>
   );
 }

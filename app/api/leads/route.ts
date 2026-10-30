@@ -1,4 +1,4 @@
-import { buildFollowUpBossEvent, sendFollowUpBossEvent, validateLead } from "@/lib/leads";
+import { prepareFollowUpBossEvent, sendFollowUpBossEvent, validateLead } from "@/lib/leads";
 
 export const dynamic = "force-dynamic";
 
@@ -26,8 +26,18 @@ export async function POST(request: Request) {
     );
   }
 
-  const event = buildFollowUpBossEvent(parsed.value);
-  const result = await sendFollowUpBossEvent(event, apiKey);
+  const prepared = await prepareFollowUpBossEvent(parsed.value, apiKey);
+  if (!prepared.ok) {
+    return Response.json(
+      {
+        ok: false,
+        error: "We couldn't send this just now. Call or text 435-278-1619 and we'll take it from here.",
+      },
+      { status: 502 },
+    );
+  }
+
+  const result = await sendFollowUpBossEvent(prepared.event, apiKey);
   if (!result.ok) {
     return Response.json(
       {

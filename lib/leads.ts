@@ -1,4 +1,7 @@
 export const LEAD_SOURCE = "Logan Main QR";
+export const CMA_ASSIGNEE_NAME = "Eli Hopkins";
+
+const USERS_URL = "https://api.followupboss.com/v1/users";
 
 export type LeadTool = "cma" | "affordability" | "payment";
 
@@ -9,6 +12,11 @@ export type LeadInput = {
   email: string;
   textConsent: boolean;
   details: string;
+};
+
+export type FollowUpBossAssignee = {
+  id: number;
+  name: string;
 };
 
 export type FollowUpBossEvent = {
@@ -22,6 +30,8 @@ export type FollowUpBossEvent = {
     emails: Array<{ value: string; type: "home" }>;
     phones: Array<{ value: string; type: "mobile" }>;
     tags: string[];
+    assignedTo?: string;
+    assignedUserId?: number;
   };
 };
 
@@ -58,7 +68,10 @@ export function validateLead(body: unknown): { ok: true; value: LeadInput } | { 
   };
 }
 
-export function buildFollowUpBossEvent(input: LeadInput): FollowUpBossEvent {
+export function buildFollowUpBossEvent(
+  input: LeadInput,
+  assignee?: FollowUpBossAssignee,
+): FollowUpBossEvent {
   const parts = input.name.trim().split(/\s+/);
   const firstName = parts[0];
   const lastName = parts.slice(1).join(" ");
@@ -78,8 +91,61 @@ export function buildFollowUpBossEvent(input: LeadInput): FollowUpBossEvent {
       emails: [{ value: input.email, type: "home" }],
       phones: [{ value: input.phone, type: "mobile" }],
       tags,
+      ...(assignee ? { assignedTo: assignee.name, assignedUserId: assignee.id } : {}),
     },
   };
+}
+
+export async function prepareFollowUpBossEvent(
+  input: LeadInput,
+  apiKey: string,
+  fetchImpl: typeof fetch = fetch,
+): Promise<{ ok: true; event: FollowUpBossEvent } | { ok: false; status: number; detail: string }> {
+  if (input.tool !== "cma") {
+    return { ok: true, event: buildFollowUpBossEvent(input) };
+  }
+  const assignee = await findFollowUpBossUserByName(CMA_ASSIGNEE_NAME, apiKey, fetchImpl);
+  if (!assignee.ok) return assignee;
+  return { ok: true, event: buildFollowUpBossEvent(input, assignee.user) };
+}
+
+export async function findFollowUpBossUserByName(
+  name: string,
+  apiKey: string,
+  fetchImpl: typeof fetch = fetch,
+): Promise<{ ok: true; user: FollowUpBossAssignee } | { ok: false; status: number; detail: string }> {
+  const url = new URL(USERS_URL);
+  url.searchParams.set("name", name);
+  url.searchParams.set("limit", "10");
+  url.searchParams.set("fields", "id,name");
+  const response = await fetchImpl(url, {
+    method: "GET",
+    headers: {
+      Authorization: authorizationHeader(apiKey),
+      Accept: "application/json",
+    },
+  });
+  if (!response.ok) {
+    return { ok: false, status: response.status, detail: (await response.text()).slice(0, 300) };
+  }
+  const payload = (await response.json().catch(() => null)) as { users?: unknown } | null;
+  const users = Array.isArray(payload?.users) ? payload.users : [];
+  const matches = users.flatMap((user) => {
+    if (!user || typeof user !== "object") return [];
+    const record = user as Record<string, unknown>;
+    if (record.name !== name) return [];
+    const id = record.id;
+    if (typeof id !== "number" || !Number.isSafeInteger(id) || id <= 0) return [];
+    return [{ id, name }];
+  });
+  if (matches.length !== 1) {
+    return { ok: false, status: 404, detail: "Assignee not found." };
+  }
+  return { ok: true, user: matches[0] };
+}
+
+function authorizationHeader(apiKey: string): string {
+  return `Basic ${Buffer.from(`${apiKey}:`).toString("base64")}`;
 }
 
 export async function sendFollowUpBossEvent(
@@ -90,7 +156,7 @@ export async function sendFollowUpBossEvent(
   const response = await fetchImpl("https://api.followupboss.com/v1/events", {
     method: "POST",
     headers: {
-      Authorization: `Basic ${Buffer.from(`${apiKey}:`).toString("base64")}`,
+      Authorization: authorizationHeader(apiKey),
       "Content-Type": "application/json",
       Accept: "application/json",
     },

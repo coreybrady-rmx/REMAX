@@ -104,6 +104,13 @@ h1 {
 }
 
 .choices { display: grid; gap: 12px; margin-top: 22px; }
+.choice-or {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
 .choice {
   display: grid;
   gap: 4px;
@@ -300,6 +307,7 @@ input, select {
   .hero { padding-top: 56px; padding-bottom: 64px; }
   h1 { font-size: 52px; }
   .choices { grid-template-columns: 1fr 1fr; }
+  .choice-or { display: none; }
   .stats { grid-template-columns: 1fr 1fr; }
   .market h2 { font-size: 36px; }
   .trust-row {

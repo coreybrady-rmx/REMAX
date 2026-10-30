@@ -62,6 +62,7 @@ export function Landing({ market, headline }: { market: MarketSnapshot; headline
               <strong>What’s my home worth?</strong>
               <span>Free CMA from this office.</span>
             </button>
+            <p className="choice-or">or</p>
             <button
               className="choice choice-buy"
               type="button"

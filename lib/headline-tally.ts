@@ -96,8 +96,8 @@ function rowFor(tally: HeadlineTally, headline: string): HeadlineCountRow {
   return { headline, total, byForm };
 }
 
-export function renderHeadlineResults(tally: HeadlineTally): string {
-  const rows = headlineCountRows(tally);
+export function renderHeadlineResults(tally: HeadlineTally, options?: { unavailable?: boolean }): string {
+  const rows = headlineCountRows(options?.unavailable ? emptyTally() : tally);
   const total = rows.reduce((sum, row) => sum + row.total, 0);
   const cards = rows
     .map((row) => {
@@ -114,8 +114,9 @@ export function renderHeadlineResults(tally: HeadlineTally): string {
       return `<article data-headline="${escapeHtml(row.headline)}" data-count="${row.total}"><h2>${escapeHtml(row.headline)}</h2><p class="count"><strong>${row.total}</strong> ${countLabel}</p>${breakdown}</article>`;
     })
     .join("");
-  const status =
-    total === 0
+  const status = options?.unavailable
+    ? `<p class="empty" data-unavailable="true">Headline counts could not be loaded.</p>`
+    : total === 0
       ? `<p class="empty" data-empty="true" data-total="0">No forms have been submitted yet.</p>`
       : `<p class="total" data-total="${total}"><strong>${total}</strong> ${total === 1 ? "form" : "forms"} submitted.</p>`;
   return `<!doctype html>
@@ -163,19 +164,21 @@ const PRIVATE_HEADERS = {
 export async function handleHeadlineResults(options: { store: HeadlineTallyStore }): Promise<Response> {
   try {
     const current = await options.store.read();
-    return new Response(renderHeadlineResults(current.tally), {
-      status: 200,
-      headers: {
-        ...PRIVATE_HEADERS,
-        "content-type": "text/html; charset=utf-8",
-      },
-    });
+    return htmlResponse(renderHeadlineResults(current.tally));
   } catch {
-    return new Response("Headline counts are unavailable.", {
-      status: 500,
-      headers: PRIVATE_HEADERS,
-    });
+    console.error("Headline tally could not be read.");
+    return htmlResponse(renderHeadlineResults(emptyTally(), { unavailable: true }));
   }
+}
+
+function htmlResponse(body: string): Response {
+  return new Response(body, {
+    status: 200,
+    headers: {
+      ...PRIVATE_HEADERS,
+      "content-type": "text/html; charset=utf-8",
+    },
+  });
 }
 
 function formRank(form: string): number {

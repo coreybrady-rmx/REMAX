@@ -175,6 +175,22 @@ test("results page lists every headline without a key", async () => {
   assert.match(unknownHtml, /data-headline="unknown" data-count="1"/);
   assert.match(unknownHtml, /CMA: 1/);
   for (const headline of HEADLINES) assert.equal(unknownHtml.includes(headline), true);
+
+  const broken = await handleHeadlineResults({
+    store: {
+      async read() {
+        throw new Error("blob read failed");
+      },
+      async compareAndSwap() {
+        return false;
+      },
+    },
+  });
+  assert.equal(broken.status, 200);
+  const brokenHtml = await broken.text();
+  assert.match(brokenHtml, /Headline counts could not be loaded/);
+  for (const headline of HEADLINES) assert.equal(brokenHtml.includes(headline), true);
+  assert.equal(brokenHtml.includes("blob read failed"), false);
 });
 
 function leadRequest(cookie: string | null, body: Record<string, unknown>): Request {

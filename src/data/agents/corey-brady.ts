@@ -11,11 +11,11 @@ export const coreyBrady: AgentProfile = {
   phone: "435-799-7000",
   email: "coreybrady@remaxpeaks.com",
   photo:
-    "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/50fa7f71-67aa-4587-8e5a-a97e82bbe574.jpg",
+    "https://remax-peaks-agent-microsites.vercel.app/agents/corey-brady/hero.jpg",
   heroImage:
-    "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/50fa7f71-67aa-4587-8e5a-a97e82bbe574.jpg",
+    "https://remax-peaks-agent-microsites.vercel.app/agents/corey-brady/hero.jpg",
   teamCardPhoto:
-    "https://assets.cdn.filesafe.space/gcRbh1s2WROIdnUcZoEy/media/ddf2fe7f-59b6-4c75-aabc-e58e6b6a6799.jpg",
+    "https://remax-peaks-agent-microsites.vercel.app/agents/corey-brady/connect.jpg",
   marketLine: "Cache Valley, Bear Lake, Southern Idaho",
   headline: "Elevating life's milestones in Cache Valley",
   shortPitch:

@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: coreyBrady.photo,
-        width: 960,
-        height: 1200,
+        width: 576,
+        height: 1024,
         alt: "Corey Brady, Owner at RE/MAX Peaks",
       },
     ],

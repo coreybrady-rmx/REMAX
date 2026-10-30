@@ -1,0 +1,26 @@
+export const CACHE_VALLEY_CITIES = [
+  "Logan",
+  "North Logan",
+  "Hyde Park",
+  "Smithfield",
+  "Providence",
+  "Millville",
+  "Nibley",
+  "Hyrum",
+  "Wellsville",
+  "Richmond",
+  "Lewiston",
+  "River Heights",
+  "Mendon",
+  "Paradise",
+  "Benson",
+  "Amalga",
+  "Clarkston",
+  "Cornish",
+  "Newton",
+  "Trenton",
+  "Cache Junction",
+  "Cove",
+] as const;
+
+export type PropertyKind = "singleFamily" | "townhome";

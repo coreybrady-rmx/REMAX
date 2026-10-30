@@ -1,0 +1,219 @@
+{
+  "status": "live",
+  "updatedAt": "2026-10-30T15:27:12.583Z",
+  "county": "Cache",
+  "source": "UtahRealEstate",
+  "singleFamily": {
+    "count": 441,
+    "medianListPrice": 574900,
+    "averageListPrice": 705785
+  },
+  "townhome": {
+    "count": 103,
+    "medianListPrice": 334900,
+    "averageListPrice": 336207
+  },
+  "cities": {
+    "Lewiston": {
+      "singleFamily": {
+        "count": 11,
+        "medianListPrice": 469900,
+        "averageListPrice": 532227
+      },
+      "townhome": null
+    },
+    "Logan": {
+      "singleFamily": {
+        "count": 107,
+        "medianListPrice": 489900,
+        "averageListPrice": 630025
+      },
+      "townhome": {
+        "count": 33,
+        "medianListPrice": 309900,
+        "averageListPrice": 302700
+      }
+    },
+    "Nibley": {
+      "singleFamily": {
+        "count": 51,
+        "medianListPrice": 519990,
+        "averageListPrice": 588377
+      },
+      "townhome": {
+        "count": 10,
+        "medianListPrice": 329900,
+        "averageListPrice": 331930
+      }
+    },
+    "Hyrum": {
+      "singleFamily": {
+        "count": 26,
+        "medianListPrice": 548680,
+        "averageListPrice": 715058
+      },
+      "townhome": {
+        "count": 11,
+        "medianListPrice": 309900,
+        "averageListPrice": 324998
+      }
+    },
+    "Hyde Park": {
+      "singleFamily": {
+        "count": 42,
+        "medianListPrice": 699950,
+        "averageListPrice": 768555
+      },
+      "townhome": {
+        "count": 8,
+        "medianListPrice": 387490,
+        "averageListPrice": 390615
+      }
+    },
+    "Mendon": {
+      "singleFamily": {
+        "count": 6,
+        "medianListPrice": 969500,
+        "averageListPrice": 1308983
+      },
+      "townhome": null
+    },
+    "Providence": {
+      "singleFamily": {
+        "count": 43,
+        "medianListPrice": 619900,
+        "averageListPrice": 796162
+      },
+      "townhome": {
+        "count": 5,
+        "medianListPrice": 349000,
+        "averageListPrice": 347580
+      }
+    },
+    "Smithfield": {
+      "singleFamily": {
+        "count": 61,
+        "medianListPrice": 539900,
+        "averageListPrice": 624441
+      },
+      "townhome": {
+        "count": 34,
+        "medianListPrice": 357450,
+        "averageListPrice": 354359
+      }
+    },
+    "Wellsville": {
+      "singleFamily": {
+        "count": 14,
+        "medianListPrice": 807500,
+        "averageListPrice": 846350
+      },
+      "townhome": null
+    },
+    "Richmond": {
+      "singleFamily": {
+        "count": 11,
+        "medianListPrice": 529900,
+        "averageListPrice": 721591
+      },
+      "townhome": null
+    },
+    "Newton": {
+      "singleFamily": {
+        "count": 1,
+        "medianListPrice": 659900,
+        "averageListPrice": 659900
+      },
+      "townhome": null
+    },
+    "Paradise": {
+      "singleFamily": {
+        "count": 8,
+        "medianListPrice": 800000,
+        "averageListPrice": 897461
+      },
+      "townhome": null
+    },
+    "North Logan": {
+      "singleFamily": {
+        "count": 37,
+        "medianListPrice": 590190,
+        "averageListPrice": 639849
+      },
+      "townhome": {
+        "count": 2,
+        "medianListPrice": 417450,
+        "averageListPrice": 417450
+      }
+    },
+    "Cove": {
+      "singleFamily": {
+        "count": 5,
+        "medianListPrice": 1100000,
+        "averageListPrice": 1289800
+      },
+      "townhome": null
+    },
+    "Millville": {
+      "singleFamily": {
+        "count": 4,
+        "medianListPrice": 854700,
+        "averageListPrice": 862350
+      },
+      "townhome": null
+    },
+    "River Heights": {
+      "singleFamily": {
+        "count": 9,
+        "medianListPrice": 476900,
+        "averageListPrice": 507008
+      },
+      "townhome": null
+    },
+    "Benson": {
+      "singleFamily": {
+        "count": 1,
+        "medianListPrice": 490000,
+        "averageListPrice": 490000
+      },
+      "townhome": null
+    },
+    "Petersboro": {
+      "singleFamily": {
+        "count": 1,
+        "medianListPrice": 999500,
+        "averageListPrice": 999500
+      },
+      "townhome": null
+    },
+    "Cornish": {
+      "singleFamily": {
+        "count": 2,
+        "medianListPrice": 1087500,
+        "averageListPrice": 1087500
+      },
+      "townhome": null
+    },
+    "Amalga": {
+      "singleFamily": {
+        "count": 1,
+        "medianListPrice": 7500000,
+        "averageListPrice": 7500000
+      },
+      "townhome": null
+    }
+  },
+  "subtypes": [
+    "> 4 Units",
+    "Condominium",
+    "Duplex",
+    "Mobile Home",
+    "Quadruplex",
+    "Recreational",
+    "Single Family Residence",
+    "Townhouse",
+    "Triplex",
+    "Twin"
+  ],
+  "scope": "Active StandardStatus in CountyOrParish Cache. Single Family Residence and Townhouse only."
+}

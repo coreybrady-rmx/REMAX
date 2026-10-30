@@ -27,6 +27,8 @@ export type AgentProfile = {
   email: string;
   photo: string;
   heroImage: string;
+  /** Optional square crop for roster / team cards */
+  teamCardPhoto?: string;
   marketLine: string;
   headline: string;
   shortPitch: string;

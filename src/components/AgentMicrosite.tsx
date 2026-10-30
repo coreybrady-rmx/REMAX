@@ -19,6 +19,14 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
 
       <section className="agent-hero agent-hero--portrait">
         <div className="agent-hero-inner agent-hero-split">
+          <div className="agent-hero-portrait">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={agent.photo}
+              alt={`${agent.name}, ${agent.title} at RE/MAX Peaks`}
+              fetchPriority="high"
+            />
+          </div>
           <div className="agent-hero-copy">
             <p className="eyebrow eyebrow-light">{agent.marketLine}</p>
             <h1>{agent.name}</h1>
@@ -35,14 +43,6 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
                 Get My Home Value
               </Link>
             </div>
-          </div>
-          <div className="agent-hero-portrait">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={agent.photo}
-              alt={`${agent.name}, ${agent.title} at RE/MAX Peaks`}
-              fetchPriority="high"
-            />
           </div>
         </div>
       </section>
@@ -65,7 +65,10 @@ export function AgentMicrosite({ agent }: { agent: AgentProfile }) {
         <div className="connect-grid">
           <div className="connect-photo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={agent.photo} alt={agent.name} />
+            <img
+              src={agent.teamCardPhoto || agent.photo}
+              alt={agent.name}
+            />
           </div>
           <div className="connect-copy">
             <p className="eyebrow">Connect with {first}</p>

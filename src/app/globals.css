@@ -177,15 +177,15 @@ p {
 }
 
 .agent-hero {
-  min-height: min(88vh, 820px);
+  min-height: min(88vh, 860px);
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 80% 70% at 75% 40%, rgba(224, 28, 47, 0.18), transparent 55%),
-    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(0, 61, 165, 0.12), transparent 50%),
-    linear-gradient(145deg, #0f0f10 0%, #151516 45%, #1a1a1d 100%);
+    radial-gradient(ellipse 70% 65% at 18% 35%, rgba(224, 28, 47, 0.2), transparent 58%),
+    radial-gradient(ellipse 55% 45% at 88% 75%, rgba(0, 61, 165, 0.14), transparent 52%),
+    linear-gradient(155deg, #0c0c0d 0%, #151516 48%, #1b1b1e 100%);
 }
 
 .agent-hero--portrait {
@@ -198,29 +198,42 @@ p {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 72px 20px 64px;
+  padding: 56px 20px 64px;
 }
 
 .agent-hero-split {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: clamp(28px, 5vw, 64px);
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: clamp(28px, 5vw, 72px);
   align-items: center;
 }
 
 .agent-hero-portrait {
   position: relative;
-  justify-self: end;
-  width: min(100%, 460px);
+  justify-self: start;
+  width: min(100%, 520px);
+  animation: hero-rise 0.9s var(--ease) both;
 }
 
 .agent-hero-portrait::before {
   content: "";
   position: absolute;
-  inset: 18px -14px -18px 14px;
-  border: 1px solid rgba(224, 28, 47, 0.45);
-  border-radius: 18px;
+  inset: -14px 18px 18px -14px;
+  border: 1px solid rgba(224, 28, 47, 0.42);
   z-index: 0;
+}
+
+.agent-hero-portrait::after {
+  content: "";
+  position: absolute;
+  right: -10%;
+  bottom: 8%;
+  width: 42%;
+  height: 28%;
+  background: radial-gradient(circle, rgba(224, 28, 47, 0.35), transparent 70%);
+  filter: blur(28px);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .agent-hero-portrait img {
@@ -230,14 +243,39 @@ p {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center top;
-  border-radius: 16px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
+}
+
+.agent-hero-copy {
+  animation: hero-fade 1s var(--ease) 0.12s both;
 }
 
 .agent-hero h1 {
-  font-size: clamp(44px, 7vw, 76px);
-  line-height: 0.98;
+  font-size: clamp(48px, 7.2vw, 84px);
+  line-height: 0.96;
   margin-bottom: 10px;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-title {
@@ -694,13 +732,20 @@ p {
 
   .agent-hero-split {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
+  }
+
+  .agent-hero-inner {
+    padding-top: 36px;
   }
 
   .agent-hero-portrait {
     justify-self: center;
-    width: min(100%, 360px);
-    order: -1;
+    width: min(100%, 340px);
+  }
+
+  .agent-hero-portrait::before {
+    inset: -10px 12px 12px -10px;
   }
 
   .agent-hero-copy {
@@ -773,5 +818,10 @@ p {
   .listing-card,
   .neighborhood-card img {
     transition: none;
+  }
+
+  .agent-hero-portrait,
+  .agent-hero-copy {
+    animation: none;
   }
 }

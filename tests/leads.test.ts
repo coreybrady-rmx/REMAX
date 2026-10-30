@@ -5,6 +5,7 @@ import {
   LEAD_SOURCE,
   buildFollowUpBossEvent,
   prepareFollowUpBossEvent,
+  selectFollowUpBossApiKey,
   sendFollowUpBossEvent,
   validateLead,
 } from "../lib/leads.ts";
@@ -17,6 +18,22 @@ const valid = {
   textConsent: false,
   details: "CMA for 123 W Center St, Logan. Single-family.",
 };
+
+test("prefers FOLLOW_UP_BOSS_API_KEY and falls back to the saved FollowUpBoss name", () => {
+  assert.equal(
+    selectFollowUpBossApiKey({
+      FOLLOW_UP_BOSS_API_KEY: "preferred-key",
+      FollowUpBoss: "saved-name-key",
+    }),
+    "preferred-key",
+  );
+  assert.equal(selectFollowUpBossApiKey({ FollowUpBoss: "saved-name-key" }), "saved-name-key");
+  assert.equal(
+    selectFollowUpBossApiKey({ FOLLOW_UP_BOSS_API_KEY: "  ", FollowUpBoss: " saved-name-key " }),
+    "saved-name-key",
+  );
+  assert.equal(selectFollowUpBossApiKey({}), undefined);
+});
 
 test("rejects incomplete leads and honeypot fills", () => {
   assert.equal(validateLead({ ...valid, email: "not-an-email" }).ok, false);

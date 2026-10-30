@@ -1,4 +1,9 @@
-import { prepareFollowUpBossEvent, sendFollowUpBossEvent, validateLead } from "@/lib/leads";
+import {
+  prepareFollowUpBossEvent,
+  selectFollowUpBossApiKey,
+  sendFollowUpBossEvent,
+  validateLead,
+} from "@/lib/leads";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +20,10 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, error: parsed.error }, { status: 400 });
   }
 
-  const apiKey = process.env.FOLLOW_UP_BOSS_API_KEY;
+  const apiKey = selectFollowUpBossApiKey({
+    FOLLOW_UP_BOSS_API_KEY: process.env.FOLLOW_UP_BOSS_API_KEY,
+    FollowUpBoss: process.env.FollowUpBoss,
+  });
   if (!apiKey) {
     return Response.json(
       {

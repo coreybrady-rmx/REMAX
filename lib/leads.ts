@@ -37,6 +37,16 @@ export type FollowUpBossEvent = {
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+export function selectFollowUpBossApiKey(env: {
+  FOLLOW_UP_BOSS_API_KEY?: string;
+  FollowUpBoss?: string;
+}): string | undefined {
+  const preferred = env.FOLLOW_UP_BOSS_API_KEY?.trim();
+  if (preferred) return preferred;
+  const saved = env.FollowUpBoss?.trim();
+  return saved || undefined;
+}
+
 export function validateLead(body: unknown): { ok: true; value: LeadInput } | { ok: false; error: string } {
   if (!body || typeof body !== "object") return { ok: false, error: "Missing details." };
   const record = body as Record<string, unknown>;

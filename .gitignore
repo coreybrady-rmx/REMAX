@@ -2,5 +2,6 @@ node_modules
 .next
 .env
 .env.local
+data/headline-cursor.json
 *.log
 .DS_Store

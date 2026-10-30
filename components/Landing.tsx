@@ -23,7 +23,7 @@ const LOAN_DISCLAIMER =
 const OFFICE_PHONE = "435-278-1619";
 const PHONE_HREF = "tel:+14352781619";
 
-export function Landing({ market }: { market: MarketSnapshot }) {
+export function Landing({ market, headline }: { market: MarketSnapshot; headline: string }) {
   const [path, setPath] = useState<Path | null>(null);
   const [thanks, setThanks] = useState<Thanks | null>(null);
 
@@ -48,7 +48,7 @@ export function Landing({ market }: { market: MarketSnapshot }) {
       <section className="hero">
         <div className="stage">
           <p className="eyebrow">RE/MAX Peaks Logan Office</p>
-          <h1>Your next move starts here.</h1>
+          <h1>{headline}</h1>
 
           <div className="choices" role="group" aria-label="Choose a starting point">
             <button

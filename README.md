@@ -1,6 +1,6 @@
 # RE/MAX Peaks — Cache Valley QR page
 
-Mobile-first landing page for the Logan Main Street QR code. Visitors can request a free CMA, estimate what they can afford, or estimate a monthly payment. Cache County asking prices for single-family homes and townhomes refresh from the UtahRealEstate API.
+Mobile-first landing page for the Logan Main Street QR code. Visitors choose a free CMA or a buyer payment tool. Cache County asking prices for single-family homes and townhomes refresh from the UtahRealEstate API.
 
 Design: [Figma file](https://www.figma.com/design/oSYnpLYpXNMqbIMmsutnzX)
 

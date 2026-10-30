@@ -48,10 +48,11 @@ button { cursor: pointer; }
   line-height: 1.3;
 }
 
-.hero, .tools, .market, .trust, .disclosures {
+.hero, .market, .trust, .disclosures {
   padding: 28px 20px;
 }
-.hero { padding-bottom: 8px; }
+.hero { padding-bottom: 36px; }
+.stage { max-width: 720px; margin: 0 auto; }
 .eyebrow {
   margin: 0 0 12px;
   color: var(--red);
@@ -71,14 +72,14 @@ h1 {
   font-size: 16px;
   line-height: 1.45;
 }
-.button, .text-link, .pill, .chip {
+.button, .text-link {
   border-radius: var(--radius-sm);
 }
 .button {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 16px;
+  margin-top: 4px;
   padding: 14px 16px;
   border: 0;
   background: var(--red);
@@ -98,20 +99,53 @@ h1 {
   font-size: 15px;
 }
 
-.hero .tools { padding: 20px 0 0; }
-.chooser { display: grid; gap: 8px; }
-.pill {
-  padding: 12px 14px;
+.choices { display: grid; gap: 12px; margin-top: 22px; }
+.choice {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 18px;
   border: 1px solid var(--line);
+  border-radius: var(--radius);
   background: var(--white);
-  color: var(--navy);
-  font-weight: 600;
+  color: var(--charcoal);
   text-align: left;
+  box-shadow: var(--shadow);
 }
-.pill[aria-selected="true"] {
+.choice .kicker {
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.choice strong {
+  color: var(--navy);
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+.choice span:last-child {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+}
+.choice[aria-pressed="true"] {
   border-color: var(--navy);
   background: var(--navy);
-  color: var(--white);
+}
+.choice[aria-pressed="true"] .kicker { color: #f7b4b4; }
+.choice[aria-pressed="true"] strong,
+.choice[aria-pressed="true"] span:last-child { color: var(--white); }
+
+.panel-copy {
+  margin-top: 6px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.card h2 {
+  color: var(--navy);
+  font-size: 26px;
+  letter-spacing: -0.02em;
 }
 .card {
   margin-top: 12px;
@@ -137,22 +171,6 @@ input, select {
   color: var(--charcoal);
   background: var(--white);
 }
-.chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.chip {
-  padding: 10px 8px;
-  border: 0;
-  background: var(--mist);
-  color: var(--navy);
-  font-weight: 600;
-}
-.chip[aria-pressed="true"] { background: var(--blue); color: var(--white); }
-.consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 13px;
-}
-.consent input { width: 18px; height: 18px; margin-top: 1px; }
 .fine, .error {
   font-size: 12px;
   line-height: 1.45;
@@ -210,33 +228,25 @@ input, select {
   border-radius: var(--radius-sm);
   background: var(--mist);
 }
-.result strong { color: var(--navy); font-size: 28px; letter-spacing: -0.03em; }
+.result strong {
+  display: block;
+  margin: 2px 0 6px;
+  color: var(--navy);
+  font-size: 40px;
+  letter-spacing: -0.03em;
+}
 .result p + p { margin-top: 6px; }
-details summary { cursor: pointer; color: var(--navy); font-weight: 600; font-size: 14px; }
-.assumption-grid { display: grid; gap: 12px; margin-top: 12px; }
 .thanks h2 { font-size: 28px; color: var(--navy); letter-spacing: -0.03em; }
 .thanks p { margin-top: 10px; line-height: 1.45; }
 
 @media (min-width: 960px) {
-  .header, .hero, .tools, .market, .trust, .disclosures { padding-left: 64px; padding-right: 64px; }
+  .header, .hero, .market, .trust, .disclosures { padding-left: 64px; padding-right: 64px; }
   .header { padding-top: 20px; padding-bottom: 20px; }
   .logo { width: 200px; }
   .call { flex-direction: row; gap: 8px; font-size: 16px; }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(320px, 560px) minmax(420px, 1fr);
-    gap: 48px;
-    align-items: start;
-    padding-top: 48px;
-    padding-bottom: 36px;
-  }
-  .hero-grid .tools { padding: 0; }
-  h1 { font-size: 56px; }
-  .chooser { grid-template-columns: repeat(3, 1fr); }
-  .pill { text-align: center; }
-  .pair, .triple { display: grid; gap: 12px; }
-  .pair { grid-template-columns: 1fr 1.4fr; }
-  .triple { grid-template-columns: repeat(3, 1fr); }
+  .hero { padding-top: 56px; padding-bottom: 64px; }
+  h1 { font-size: 52px; }
+  .choices { grid-template-columns: 1fr 1fr; }
   .stats { grid-template-columns: 1fr 1fr; }
   .market h2 { font-size: 36px; }
   .trust-row {

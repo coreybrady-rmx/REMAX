@@ -1,23 +1,18 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CACHE_VALLEY_CITIES, type PropertyKind } from "@/lib/cities";
 import {
   DEFAULT_ASSUMPTIONS,
-  affordabilityEstimate,
   formatMoney,
   paymentEstimate,
   type Assumptions,
 } from "@/lib/estimates";
 import type { MarketSnapshot, PriceSegment } from "@/lib/market";
 
-type Tool = "cma" | "affordability" | "payment";
+type Path = "cma" | "afford";
 
 type Thanks = {
-  tool: Tool;
-  city?: string;
-  kind?: PropertyKind;
-  summary: string;
+  address: string;
 };
 
 const CMA_DISCLAIMER =
@@ -28,13 +23,15 @@ const OFFICE_PHONE = "435-278-1619";
 const PHONE_HREF = "tel:+14352781619";
 
 export function Landing({ market }: { market: MarketSnapshot }) {
-  const [tool, setTool] = useState<Tool>("cma");
+  const [path, setPath] = useState<Path | null>(null);
   const [thanks, setThanks] = useState<Thanks | null>(null);
 
-  function choose(next: Tool) {
+  function choose(next: Path) {
     setThanks(null);
-    setTool(next);
-    document.getElementById("tools")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setPath(next);
+    requestAnimationFrame(() => {
+      document.getElementById("next")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   return (
@@ -47,42 +44,43 @@ export function Landing({ market }: { market: MarketSnapshot }) {
         </a>
       </header>
 
-      <section className="hero hero-grid">
-        <div>
+      <section className="hero">
+        <div className="stage">
           <p className="eyebrow">LOGAN MAIN STREET</p>
-          <h1>What is your Cache Valley home worth?</h1>
-          <p className="support">
-            Free CMA from the RE/MAX Peaks office on Main Street. No listing appointment.
-          </p>
-          <button className="button" type="button" onClick={() => choose("cma")}>
-            Get my free CMA
-          </button>
-          <button className="text-link" type="button" onClick={() => choose("affordability")}>
-            I don’t own yet — see what you can afford.
-          </button>
-        </div>
+          <h1>What do you need?</h1>
+          <p className="support">From the RE/MAX Peaks office on Main Street in Logan.</p>
 
-        <div className="tools" id="tools">
-          {thanks ? (
-            <ThanksPanel thanks={thanks} market={market} onReset={() => setThanks(null)} />
-          ) : (
-            <>
-              <div className="chooser" role="tablist" aria-label="What do you want">
-                <TabButton selected={tool === "cma"} onClick={() => choose("cma")}>
-                  My home’s value
-                </TabButton>
-                <TabButton selected={tool === "affordability"} onClick={() => choose("affordability")}>
-                  What I can afford
-                </TabButton>
-                <TabButton selected={tool === "payment"} onClick={() => choose("payment")}>
-                  Monthly payment
-                </TabButton>
-              </div>
-              {tool === "cma" ? <CmaForm onDone={setThanks} /> : null}
-              {tool === "affordability" ? <AffordForm onDone={setThanks} /> : null}
-              {tool === "payment" ? <PaymentForm onDone={setThanks} /> : null}
-            </>
-          )}
+          <div className="choices" role="group" aria-label="Choose a starting point">
+            <button
+              className="choice"
+              type="button"
+              aria-pressed={path === "cma"}
+              onClick={() => choose("cma")}
+            >
+              <span className="kicker">Homeowner</span>
+              <strong>What’s my home worth?</strong>
+              <span>Free CMA from this office.</span>
+            </button>
+            <button
+              className="choice"
+              type="button"
+              aria-pressed={path === "afford"}
+              onClick={() => choose("afford")}
+            >
+              <span className="kicker">Buyer</span>
+              <strong>I’m looking to buy</strong>
+              <span>See what you can afford.</span>
+            </button>
+          </div>
+
+          {path === "cma" ? (
+            thanks ? (
+              <ThanksPanel address={thanks.address} onReset={() => setThanks(null)} />
+            ) : (
+              <CmaForm onDone={setThanks} />
+            )
+          ) : null}
+          {path === "afford" ? <AffordTool /> : null}
         </div>
       </section>
 
@@ -101,26 +99,7 @@ export function Landing({ market }: { market: MarketSnapshot }) {
   );
 }
 
-function TabButton({
-  selected,
-  onClick,
-  children,
-}: {
-  selected: boolean;
-  onClick: () => void;
-  children: string;
-}) {
-  return (
-    <button className="pill" type="button" role="tab" aria-selected={selected} onClick={onClick}>
-      {children}
-    </button>
-  );
-}
-
 function CmaForm({ onDone }: { onDone: (thanks: Thanks) => void }) {
-  const [kind, setKind] = useState<PropertyKind>("singleFamily");
-  const [city, setCity] = useState("Logan");
-  const [textConsent, setTextConsent] = useState(false);
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
@@ -131,18 +110,10 @@ function CmaForm({ onDone }: { onDone: (thanks: Thanks) => void }) {
     const name = String(data.get("name") ?? "");
     const phone = String(data.get("phone") ?? "");
     const email = String(data.get("email") ?? "");
-    const beds = String(data.get("beds") ?? "").trim();
-    const baths = String(data.get("baths") ?? "").trim();
-    const sqft = String(data.get("sqft") ?? "").trim();
     if (!address) {
-      setError("Add the street address.");
+      setError("Add the property address.");
       return;
     }
-    const label = kind === "singleFamily" ? "Single-family" : "Townhome";
-    const extras = [beds && `${beds} bed`, baths && `${baths} bath`, sqft && `${sqft} sqft`]
-      .filter(Boolean)
-      .join(", ");
-    const details = `Free CMA request for ${address}, ${city}. ${label}.${extras ? ` ${extras}.` : ""}`;
     setPending(true);
     setError("");
     const result = await postLead({
@@ -150,8 +121,8 @@ function CmaForm({ onDone }: { onDone: (thanks: Thanks) => void }) {
       name,
       phone,
       email,
-      textConsent,
-      details,
+      textConsent: false,
+      details: `Free CMA request for ${address}.`,
       company: String(data.get("company") ?? ""),
     });
     setPending(false);
@@ -159,48 +130,22 @@ function CmaForm({ onDone }: { onDone: (thanks: Thanks) => void }) {
       setError(result.error);
       return;
     }
-    onDone({
-      tool: "cma",
-      city,
-      kind,
-      summary: `A Peaks agent will prepare the CMA for ${address}, ${city}, and follow up.`,
-    });
+    onDone({ address });
   }
 
   return (
-    <form className="card stack" onSubmit={onSubmit}>
-      <Field label="Street address" name="address" autoComplete="street-address" required />
-      <div className="pair">
-        <label>
-          City
-          <select name="city" value={city} onChange={(event) => setCity(event.target.value)}>
-            {CACHE_VALLEY_CITIES.map((name) => (
-              <option key={name}>{name}</option>
-            ))}
-          </select>
-        </label>
-        <div>
-          <span className="field-label">Property type</span>
-          <div className="chips">
-            <TypeChip kind="singleFamily" current={kind} onChange={setKind} label="Single-family" />
-            <TypeChip kind="townhome" current={kind} onChange={setKind} label="Townhome" />
-          </div>
-        </div>
+    <form className="card stack" id="next" onSubmit={onSubmit}>
+      <div>
+        <h2>What’s my home worth?</h2>
+        <p className="panel-copy">Name, address, phone, and email. That’s all we need.</p>
       </div>
-      <div className="triple">
-        <Field label="Beds (optional)" name="beds" inputMode="decimal" />
-        <Field label="Baths (optional)" name="baths" inputMode="decimal" />
-        <Field label="Approx. sqft (optional)" name="sqft" inputMode="numeric" />
-      </div>
-      <div className="triple">
-        <Field label="Name" name="name" autoComplete="name" required />
-        <Field label="Mobile" name="phone" type="tel" autoComplete="tel" required />
-        <Field label="Email" name="email" type="email" autoComplete="email" required />
-      </div>
-      <Consent checked={textConsent} onChange={setTextConsent} label="Text me about this CMA. Optional." />
+      <Field label="Name" name="name" autoComplete="name" required />
+      <Field label="Address" name="address" autoComplete="street-address" required />
+      <Field label="Phone" name="phone" type="tel" autoComplete="tel" required />
+      <Field label="Email" name="email" type="email" autoComplete="email" required />
       <Honeypot />
-      <button className="button" type="submit" disabled={pending} style={{ marginTop: 0 }}>
-        {pending ? "Sending…" : "Send my free CMA"}
+      <button className="button" type="submit" disabled={pending}>
+        {pending ? "Sending…" : "Get my free CMA"}
       </button>
       {error ? <p className="error">{error}</p> : null}
       <p className="fine">{CMA_DISCLAIMER}</p>
@@ -208,242 +153,79 @@ function CmaForm({ onDone }: { onDone: (thanks: Thanks) => void }) {
   );
 }
 
-function AffordForm({ onDone }: { onDone: (thanks: Thanks) => void }) {
-  const [income, setIncome] = useState("");
-  const [debts, setDebts] = useState("");
-  const [down, setDown] = useState("");
-  const [assumptions, setAssumptions] = useState<Assumptions>({ ...DEFAULT_ASSUMPTIONS });
-  const [textConsent, setTextConsent] = useState(false);
-  const [error, setError] = useState("");
-  const [pending, setPending] = useState(false);
-
-  const estimate = useMemo(
-    () => affordabilityEstimate(numberValue(income), numberValue(debts), numberValue(down), assumptions),
-    [income, debts, down, assumptions],
-  );
-
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!estimate || estimate.maxPrice <= 0) {
-      setError("Add monthly income. If the range stays at $0, the debts are above this illustration.");
-      return;
-    }
-    const data = new FormData(event.currentTarget);
-    const details = [
-      "Affordability illustration.",
-      `Monthly income ${formatMoney(numberValue(income))}.`,
-      `Monthly debts ${formatMoney(numberValue(debts))}.`,
-      `Down payment ${formatMoney(numberValue(down))}.`,
-      `Range ${formatMoney(estimate.comfortablePrice)} to ${formatMoney(estimate.maxPrice)}.`,
-      `Limited by ${estimate.limitingRule}.`,
-      assumptionSentence(assumptions),
-    ].join(" ");
-    setPending(true);
-    setError("");
-    const result = await postLead({
-      tool: "affordability",
-      name: String(data.get("name") ?? ""),
-      phone: String(data.get("phone") ?? ""),
-      email: String(data.get("email") ?? ""),
-      textConsent,
-      details,
-      company: String(data.get("company") ?? ""),
-    });
-    setPending(false);
-    if (!result.ok) {
-      setError(result.error);
-      return;
-    }
-    onDone({
-      tool: "affordability",
-      summary: `A Peaks agent will follow up on the ${formatMoney(estimate.comfortablePrice)} to ${formatMoney(estimate.maxPrice)} range.`,
-    });
-  }
-
-  return (
-    <form className="card stack" onSubmit={onSubmit}>
-      <Field label="Monthly income, before taxes" name="income" inputMode="decimal" value={income} onChange={setIncome} required />
-      <div className="pair">
-        <Field label="Monthly debts" name="debts" inputMode="decimal" value={debts} onChange={setDebts} />
-        <Field label="Down payment" name="down" inputMode="decimal" value={down} onChange={setDown} />
-      </div>
-      <AssumptionsEditor assumptions={assumptions} onChange={setAssumptions} />
-      {estimate ? (
-        <div className="result">
-          <p className="fine">A comfortable to maximum purchase price</p>
-          <strong>
-            {formatMoney(estimate.comfortablePrice)} – {formatMoney(estimate.maxPrice)}
-          </strong>
-          <p>
-            Housing payment about {formatMoney(estimate.comfortableHousingPayment)} to{" "}
-            {formatMoney(estimate.maxHousingPayment)} a month. The top of the range uses{" "}
-            {estimate.limitingRule}.
-          </p>
-          <p className="fine">{LOAN_DISCLAIMER}</p>
-        </div>
-      ) : null}
-      <div className="triple">
-        <Field label="Name" name="name" autoComplete="name" required />
-        <Field label="Mobile" name="phone" type="tel" autoComplete="tel" required />
-        <Field label="Email" name="email" type="email" autoComplete="email" required />
-      </div>
-      <Consent checked={textConsent} onChange={setTextConsent} label="Text me this range. Optional." />
-      <Honeypot />
-      <button className="button" type="submit" disabled={pending} style={{ marginTop: 0 }}>
-        {pending ? "Sending…" : "Send this to a Peaks agent"}
-      </button>
-      {error ? <p className="error">{error}</p> : null}
-    </form>
-  );
-}
-
-function PaymentForm({ onDone }: { onDone: (thanks: Thanks) => void }) {
+function AffordTool() {
   const [price, setPrice] = useState("");
   const [down, setDown] = useState("");
-  const [assumptions, setAssumptions] = useState<Assumptions>({ ...DEFAULT_ASSUMPTIONS });
-  const [textConsent, setTextConsent] = useState(false);
-  const [error, setError] = useState("");
-  const [pending, setPending] = useState(false);
+  const [rate, setRate] = useState(String(DEFAULT_ASSUMPTIONS.annualRatePercent));
 
+  const assumptions = useMemo<Assumptions>(
+    () => ({ ...DEFAULT_ASSUMPTIONS, annualRatePercent: numberValue(rate) }),
+    [rate],
+  );
   const estimate = useMemo(
     () => paymentEstimate(numberValue(price), numberValue(down), assumptions),
     [price, down, assumptions],
   );
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!estimate) {
-      setError("Add a purchase price.");
-      return;
-    }
-    const data = new FormData(event.currentTarget);
-    const details = [
-      "Monthly payment illustration.",
-      `Price ${formatMoney(numberValue(price))}.`,
-      `Down payment ${formatMoney(numberValue(down))}.`,
-      `Principal and interest ${formatMoney(estimate.principalAndInterest)}.`,
-      `Taxes ${formatMoney(estimate.taxes)}, insurance ${formatMoney(estimate.insurance)}, HOA ${formatMoney(estimate.hoa)}.`,
-      `Total about ${formatMoney(estimate.total)} a month.`,
-      assumptionSentence(assumptions),
-    ].join(" ");
-    setPending(true);
-    setError("");
-    const result = await postLead({
-      tool: "payment",
-      name: String(data.get("name") ?? ""),
-      phone: String(data.get("phone") ?? ""),
-      email: String(data.get("email") ?? ""),
-      textConsent,
-      details,
-      company: String(data.get("company") ?? ""),
-    });
-    setPending(false);
-    if (!result.ok) {
-      setError(result.error);
-      return;
-    }
-    onDone({
-      tool: "payment",
-      summary: `A Peaks agent will follow up. The illustration was about ${formatMoney(estimate.total)} a month.`,
-    });
-  }
-
   return (
-    <form className="card stack" onSubmit={onSubmit}>
-      <div className="pair">
-        <Field label="Purchase price" name="price" inputMode="decimal" value={price} onChange={setPrice} required />
-        <Field label="Down payment" name="down" inputMode="decimal" value={down} onChange={setDown} />
+    <div className="card stack" id="next">
+      <div>
+        <h2>What can I afford?</h2>
+        <p className="panel-copy">Enter a price. The monthly payment updates here.</p>
       </div>
-      <AssumptionsEditor assumptions={assumptions} onChange={setAssumptions} />
-      {estimate ? (
-        <div className="result">
-          <p className="fine">Estimated monthly payment</p>
-          <strong>{formatMoney(estimate.total)}</strong>
+      <Field
+        label="Home price"
+        name="price"
+        inputMode="decimal"
+        value={price}
+        onChange={setPrice}
+      />
+      <Field
+        label="Down payment"
+        name="down"
+        inputMode="decimal"
+        value={down}
+        onChange={setDown}
+      />
+      <div className="result" aria-live="polite">
+        <p className="fine">Monthly payment</p>
+        <strong>{estimate ? formatMoney(estimate.total) : "—"}</strong>
+        {estimate ? (
           <p>
-            Principal and interest {formatMoney(estimate.principalAndInterest)}. Taxes{" "}
-            {formatMoney(estimate.taxes)}. Insurance {formatMoney(estimate.insurance)}. HOA{" "}
-            {formatMoney(estimate.hoa)}.
+            {formatMoney(estimate.principalAndInterest)} principal and interest
+            {" · "}
+            {formatMoney(estimate.taxes)} taxes
+            {" · "}
+            {formatMoney(estimate.insurance)} insurance
           </p>
-          <p className="fine">{LOAN_DISCLAIMER}</p>
-        </div>
-      ) : null}
-      <div className="triple">
-        <Field label="Name" name="name" autoComplete="name" required />
-        <Field label="Mobile" name="phone" type="tel" autoComplete="tel" required />
-        <Field label="Email" name="email" type="email" autoComplete="email" required />
+        ) : (
+          <p>Add a home price to see the payment.</p>
+        )}
       </div>
-      <Consent checked={textConsent} onChange={setTextConsent} label="Text me this estimate. Optional." />
-      <Honeypot />
-      <button className="button" type="submit" disabled={pending} style={{ marginTop: 0 }}>
-        {pending ? "Sending…" : "Send this to a Peaks agent"}
-      </button>
-      {error ? <p className="error">{error}</p> : null}
-    </form>
-  );
-}
-
-function AssumptionsEditor({
-  assumptions,
-  onChange,
-}: {
-  assumptions: Assumptions;
-  onChange: (next: Assumptions) => void;
-}) {
-  function set(key: keyof Assumptions, value: string) {
-    onChange({ ...assumptions, [key]: numberValue(value) });
-  }
-  return (
-    <details>
-      <summary>Assumptions you can change</summary>
-      <div className="assumption-grid">
-        <Field label="Interest rate %" value={String(assumptions.annualRatePercent)} onChange={(value) => set("annualRatePercent", value)} />
-        <Field label="Term, years" value={String(assumptions.termYears)} onChange={(value) => set("termYears", value)} />
-        <Field label="Property tax, % of price per year" value={String(assumptions.annualTaxPercent)} onChange={(value) => set("annualTaxPercent", value)} />
-        <Field label="Home insurance, $ per year" value={String(assumptions.annualInsurance)} onChange={(value) => set("annualInsurance", value)} />
-        <Field label="HOA, $ per month" value={String(assumptions.monthlyHoa)} onChange={(value) => set("monthlyHoa", value)} />
-      </div>
-      <p className="fine" style={{ marginTop: 8 }}>
-        These are starting assumptions, not a quote. {LOAN_DISCLAIMER}
+      <Field
+        label="Interest rate %"
+        name="rate"
+        inputMode="decimal"
+        value={rate}
+        onChange={setRate}
+      />
+      <p className="fine">
+        {DEFAULT_ASSUMPTIONS.termYears}-year term, {DEFAULT_ASSUMPTIONS.annualTaxPercent}% yearly
+        property tax, and {formatMoney(DEFAULT_ASSUMPTIONS.annualInsurance)} a year for insurance.{" "}
+        {LOAN_DISCLAIMER}
       </p>
-    </details>
+    </div>
   );
 }
 
-function ThanksPanel({
-  thanks,
-  market,
-  onReset,
-}: {
-  thanks: Thanks;
-  market: MarketSnapshot;
-  onReset: () => void;
-}) {
-  const segment = thanks.city && thanks.kind ? segmentFor(market, thanks.city, thanks.kind) : null;
-  const label = thanks.kind === "townhome" ? "townhomes" : "single-family homes";
+function ThanksPanel({ address, onReset }: { address: string; onReset: () => void }) {
   return (
-    <div className="card thanks">
+    <div className="card thanks" id="next">
       <p className="eyebrow">YOU’RE SET</p>
       <h2>We’ll take it from here.</h2>
-      <p>{thanks.summary}</p>
-      {thanks.tool === "cma" ? <p className="fine">{CMA_DISCLAIMER}</p> : <p className="fine">{LOAN_DISCLAIMER}</p>}
-      {segment && thanks.city ? (
-        <div className="result" style={{ marginTop: 16 }}>
-          <p className="fine">
-            {label[0].toUpperCase()}
-            {label.slice(1)} for sale in {thanks.city}
-          </p>
-          <strong>{formatMoney(segment.medianListPrice)}</strong>
-          <p>
-            Median asking price. {segment.count} listed. Average ask {formatMoney(segment.averageListPrice)}.
-            This is the market around that address, not your home’s value.
-          </p>
-        </div>
-      ) : thanks.tool === "cma" ? (
-        <p className="fine" style={{ marginTop: 12 }}>
-          Cache Valley asking prices will show here once the daily MLS update is connected.
-        </p>
-      ) : null}
-      <p style={{ marginTop: 16 }}>
+      <p>A Peaks agent will prepare the CMA for {address} and follow up.</p>
+      <p className="fine">{CMA_DISCLAIMER}</p>
+      <p>
         <a href={PHONE_HREF}>Call or text {OFFICE_PHONE}</a>
       </p>
       <button className="text-link" type="button" onClick={onReset}>
@@ -486,7 +268,11 @@ function MarketStrip({ market }: { market: MarketSnapshot }) {
           either way.
         </div>
       )}
-      {updated ? <p className="fine" style={{ marginTop: 12 }}>Updated {updated}.</p> : null}
+      {updated ? (
+        <p className="fine" style={{ marginTop: 12 }}>
+          Updated {updated}.
+        </p>
+      ) : null}
     </section>
   );
 }
@@ -564,41 +350,6 @@ function Field({
   );
 }
 
-function TypeChip({
-  kind,
-  current,
-  onChange,
-  label,
-}: {
-  kind: PropertyKind;
-  current: PropertyKind;
-  onChange: (kind: PropertyKind) => void;
-  label: string;
-}) {
-  return (
-    <button className="chip" type="button" aria-pressed={current === kind} onClick={() => onChange(kind)}>
-      {label}
-    </button>
-  );
-}
-
-function Consent({
-  checked,
-  onChange,
-  label,
-}: {
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-  label: string;
-}) {
-  return (
-    <label className="consent">
-      <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} />
-      <span>{label}</span>
-    </label>
-  );
-}
-
 function Honeypot() {
   return (
     <div className="honeypot" aria-hidden="true">
@@ -610,17 +361,9 @@ function Honeypot() {
   );
 }
 
-function segmentFor(market: MarketSnapshot, city: string, kind: PropertyKind): PriceSegment | null {
-  return market.cities[city]?.[kind] ?? (kind === "singleFamily" ? market.singleFamily : market.townhome);
-}
-
 function numberValue(value: string): number {
   const parsed = Number(String(value).replace(/[$,]/g, ""));
   return Number.isFinite(parsed) ? parsed : 0;
-}
-
-function assumptionSentence(assumptions: Assumptions): string {
-  return `Assumptions: ${assumptions.annualRatePercent}% rate, ${assumptions.termYears}-year term, ${assumptions.annualTaxPercent}% annual tax, $${assumptions.annualInsurance} annual insurance, $${assumptions.monthlyHoa} monthly HOA.`;
 }
 
 async function postLead(body: Record<string, unknown>): Promise<{ ok: true } | { ok: false; error: string }> {

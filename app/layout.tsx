@@ -11,7 +11,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Free Cache Valley home value | RE/MAX Peaks",
   description:
-    "Get a free CMA from the RE/MAX Peaks office on Main Street in Logan, see what you can afford, or estimate a monthly payment.",
+    "Get a free CMA from the RE/MAX Peaks office on Main Street in Logan, or see what monthly payment a home would take.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

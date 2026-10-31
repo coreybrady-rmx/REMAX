@@ -242,8 +242,8 @@ p {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  /* Gray studio hero is a 3/4 body shot — keep face in the upper frame */
-  object-position: center 18%;
+  /* Gray studio hero is a 3/4 body shot — anchor near top so full head/hair stays in frame */
+  object-position: center top;
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
 }
 

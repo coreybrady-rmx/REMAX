@@ -20,7 +20,13 @@ function money(n: number | null) {
   return `$${n.toLocaleString("en-US")}`;
 }
 
-export function FeaturedListings({ city = "Logan" }: { city?: string }) {
+export function FeaturedListings({
+  city = "Logan",
+  query,
+}: {
+  city?: string;
+  query?: string;
+}) {
   const [items, setItems] = useState<Listing[]>([]);
   const [error, setError] = useState("");
 
@@ -29,7 +35,7 @@ export function FeaturedListings({ city = "Logan" }: { city?: string }) {
     async function load() {
       try {
         const res = await fetch(
-          `/api/search-listings?city=${encodeURIComponent(city)}&category=residential&limit=6`,
+          `/api/search-listings?city=${encodeURIComponent(query || city)}&category=residential&limit=6`,
         );
         if (!res.ok) throw new Error("Failed to load listings");
         const data = await res.json();
@@ -44,7 +50,7 @@ export function FeaturedListings({ city = "Logan" }: { city?: string }) {
     return () => {
       cancelled = true;
     };
-  }, [city]);
+  }, [city, query]);
 
   return (
     <section className="section featured-listings">

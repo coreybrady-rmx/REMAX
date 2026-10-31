@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
 import { coreyBrady } from "@/data/agents/corey-brady";
+import { listingSearchLabel, listingSearchQuery } from "@/lib/listing-search";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -29,12 +30,8 @@ export default async function NeighborhoodPage({ params }: Props) {
   const hood = agent.neighborhoods.find((n) => n.slug === slug);
   if (!hood) notFound();
 
-  const city =
-    hood.slug === "bear-lake"
-      ? "Garden City"
-      : hood.slug === "north-logan"
-        ? "North Logan"
-        : hood.name;
+  const city = listingSearchLabel(hood.slug, hood.name);
+  const searchQuery = listingSearchQuery(hood.slug, hood.name);
 
   return (
     <div className="agent-page">
@@ -58,7 +55,7 @@ export default async function NeighborhoodPage({ params }: Props) {
         </div>
       </section>
       <div id="listings">
-        <FeaturedListings city={city} />
+        <FeaturedListings city={city} query={searchQuery} />
       </div>
       <section className="section">
         <div className="path-card">

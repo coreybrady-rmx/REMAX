@@ -1,4 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  buildUpstreamListingSearch,
+  homesOnly,
+  requestedResidential,
+} from "@/lib/search-listings";
 
 /**
  * Proxy the live RE/MAX Peaks MLS search API so agent microsites can
@@ -6,12 +11,8 @@ import { NextRequest, NextResponse } from "next/server";
  */
 export async function GET(req: NextRequest) {
   const incoming = req.nextUrl.searchParams;
-  const upstream = new URL("https://www.remaxpeaks.com/api/search-listings");
-  incoming.forEach((value, key) => upstream.searchParams.set(key, value));
-
-  if (!upstream.searchParams.has("limit")) {
-    upstream.searchParams.set("limit", "6");
-  }
+  const upstream = buildUpstreamListingSearch(incoming);
+  const residential = requestedResidential(incoming);
 
   try {
     const res = await fetch(upstream.toString(), {
@@ -19,6 +20,9 @@ export async function GET(req: NextRequest) {
       next: { revalidate: 120 },
     });
     const data = await res.json();
+    if (residential && Array.isArray(data?.items)) {
+      data.items = homesOnly(data.items);
+    }
     return NextResponse.json(data, { status: res.status });
   } catch (err) {
     console.error("search-listings proxy failed", err);

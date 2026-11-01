@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { featuredHomes, featuredHomesQuery } from "@/lib/search-listings";
 
 type Listing = {
   mlsNumber: string;
@@ -29,12 +30,12 @@ export function FeaturedListings({ city = "Logan" }: { city?: string }) {
     async function load() {
       try {
         const res = await fetch(
-          `/api/search-listings?city=${encodeURIComponent(city)}&category=residential&limit=6`,
+          `/api/search-listings?${featuredHomesQuery(city)}`,
         );
         if (!res.ok) throw new Error("Failed to load listings");
         const data = await res.json();
         if (!cancelled) {
-          setItems((data.items || []).slice(0, 6));
+          setItems(featuredHomes(data.items || []));
         }
       } catch {
         if (!cancelled) setError("Listings temporarily unavailable.");

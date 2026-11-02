@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { selectCityListings } from "@/lib/listing-match";
 
 type Listing = {
   mlsNumber: string;
@@ -27,15 +28,29 @@ export function FeaturedListings({ city = "Logan" }: { city?: string }) {
   useEffect(() => {
     let cancelled = false;
     async function load() {
+      const pages: Listing[][] = [];
       try {
-        const res = await fetch(
-          `/api/search-listings?city=${encodeURIComponent(city)}&category=residential&limit=6`,
-        );
-        if (!res.ok) throw new Error("Failed to load listings");
-        const data = await res.json();
-        if (!cancelled) {
-          setItems((data.items || []).slice(0, 6));
+        // Radius results are not city-sorted. Page until six listings
+        // actually sit in the requested city.
+        for (let page = 0; page < 8 && !cancelled; page++) {
+          const params = new URLSearchParams({
+            city,
+            category: "residential",
+            limit: "24",
+            page: String(page),
+          });
+          const res = await fetch(`/api/search-listings?${params}`);
+          if (!res.ok) {
+            if (pages.length === 0) throw new Error("Failed to load listings");
+            break;
+          }
+          const data = await res.json();
+          const batch: Listing[] = Array.isArray(data.items) ? data.items : [];
+          pages.push(batch);
+          if (selectCityListings(pages, city).length >= 6) break;
+          if (!data.hasMore || batch.length === 0) break;
         }
+        if (!cancelled) setItems(selectCityListings(pages, city));
       } catch {
         if (!cancelled) setError("Listings temporarily unavailable.");
       }

@@ -1,14 +1,14 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { brandName } from "@/lib/brand";
-import { listPlans, publicProjects, completedPublicProjects } from "@/lib/db";
+import { CompletedRubySection } from "@/components/RubyProjects";
+import { listPlans, publicProjects } from "@/lib/db";
 import { formatBaths, formatSqft } from "@/lib/format";
 import { renderingFor } from "@/lib/renderings";
 
 export default function HomePage() {
   const plans = listPlans();
   const opportunities = publicProjects().filter((project) => project.status !== "completed");
-  const completed = completedPublicProjects();
   return (
     <>
       <section className="bg-ink text-white">
@@ -72,13 +72,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section title="Two spec homes completed in 2025" href="/completed" tone="paper">
-        <p>
-          Each completed home will be presented here with its address, plan, and sale record once those details are
-          confirmed. Request an overview to learn more about the projects behind them.
-        </p>
-        {completed.length === 0 ? null : <ProjectList projects={completed} />}
-      </Section>
+      <CompletedRubySection />
 
       <Section title="The next project is published here first" href="/opportunities">
         {opportunities.length === 0 ? (

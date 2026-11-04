@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { listPlans, publicProjects, completedPublicProjects } from "@/lib/db";
 import { formatBaths, formatSqft } from "@/lib/format";
+import { renderingFor } from "@/lib/renderings";
 
 export default function HomePage() {
   const plans = listPlans();
@@ -29,11 +30,15 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="border border-white/15 p-6 text-sm leading-6 text-white/75">
-            <p className="font-bold tracking-[0.16em] text-white uppercase">Rendering pending</p>
-            <p className="mt-3">
-              No exterior rendering has been approved for the public portal. This frame stays empty rather than using an
-              unrelated photograph.
+          <div>
+            <img
+              src="/plans/alpine/rendering.jpg"
+              alt="Alpine exterior rendering from Acadia Homes"
+              className="aspect-[16/10] w-full object-cover"
+            />
+            <p className="mt-3 text-sm leading-6 text-white/75">
+              Acadia Homes exterior rendering of the Alpine plan. Landscaping in the image is not a construction
+              specification, and the image is not a completed Peaks project.
             </p>
           </div>
         </div>
@@ -82,18 +87,26 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {plans.map((plan) => (
-              <Link key={plan.slug} href={`/plans/${plan.slug}`} className="border border-ink/10 bg-white p-5 hover:border-ink">
-                <p className="text-xs font-bold tracking-[0.16em] text-brand uppercase">
-                  {plan.stories === 1 ? "Rambler" : "Two story"}
-                </p>
-                <h3 className="mt-2 text-3xl">{plan.name}</h3>
-                <p className="mt-3 text-sm leading-6 text-ink/70">
-                  {formatSqft(plan.living_sqft)} · {plan.beds} bed · {formatBaths(plan.baths)} bath · garage{" "}
-                  {formatSqft(plan.garage_sqft)}
-                </p>
-              </Link>
-            ))}
+            {plans.map((plan) => {
+              const rendering = renderingFor(plan.slug);
+              return (
+                <Link key={plan.slug} href={`/plans/${plan.slug}`} className="border border-ink/10 bg-white hover:border-ink">
+                  {rendering ? (
+                    <img src={rendering.src} alt={rendering.title} className="aspect-[16/10] w-full object-cover" />
+                  ) : null}
+                  <div className="p-5">
+                    <p className="text-xs font-bold tracking-[0.16em] text-brand uppercase">
+                      {plan.stories === 1 ? "Rambler" : "Two story"}
+                    </p>
+                    <h3 className="mt-2 text-3xl">{plan.name}</h3>
+                    <p className="mt-3 text-sm leading-6 text-ink/70">
+                      {formatSqft(plan.living_sqft)} · {plan.beds} bed · {formatBaths(plan.baths)} bath · garage{" "}
+                      {formatSqft(plan.garage_sqft)}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

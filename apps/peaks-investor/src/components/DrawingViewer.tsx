@@ -12,7 +12,7 @@ export function DrawingViewer({
   if (images.length === 0) {
     return (
       <p className="border border-dashed border-ink/20 p-8 text-sm leading-6 text-ink/70">
-        Architectural drawings and exterior renderings have not been approved for public display.
+        Architectural drawings for the remaining levels have not been added to this page.
       </p>
     );
   }

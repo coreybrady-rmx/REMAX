@@ -5,6 +5,7 @@ import { PriceBlock } from "@/components/Money";
 import { PageIntro } from "@/components/SiteChrome";
 import { getPlan, listPlans, publicEstimates, publicProjects, visibleMedia } from "@/lib/db";
 import { formatBaths, formatSqft } from "@/lib/format";
+import { planDiagrams, renderingFor } from "@/lib/renderings";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const plan = getPlan((await params).slug);
@@ -17,6 +18,12 @@ export default async function PlanDetailPage({ params }: { params: Promise<{ slu
   const estimates = publicEstimates(plan.slug);
   const projects = publicProjects().filter((project) => project.plan_slug === plan.slug);
   const media = visibleMedia("plan", plan.slug, false);
+  const rendering = renderingFor(plan.slug);
+  const diagrams = planDiagrams[plan.slug] ?? [];
+  const viewerImages = [
+    ...diagrams,
+    ...media.map((item) => ({ src: `/api/media/${item.id}`, title: item.kind })),
+  ];
   const strengths = JSON.parse(plan.strengths) as string[];
   const tradeoffs = JSON.parse(plan.tradeoffs) as string[];
   const areas = [
@@ -32,7 +39,18 @@ export default async function PlanDetailPage({ params }: { params: Promise<{ slu
       </PageIntro>
       <article className="mx-auto grid max-w-6xl gap-10 px-5 py-12 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
-          <DrawingViewer images={media.map((item) => ({ src: `/api/media/${item.id}`, title: item.kind }))} />
+          {rendering ? (
+            <figure>
+              <img src={rendering.src} alt={rendering.title} className="w-full object-cover" />
+              <figcaption className="mt-2 text-sm leading-6 text-ink/70">
+                Exterior rendering published by Acadia Homes. It shows a design idea, including landscaping that is not
+                part of a construction contract.
+              </figcaption>
+            </figure>
+          ) : null}
+          <div className="mt-8">
+            <DrawingViewer images={viewerImages} />
+          </div>
           <h2 className="mt-10 text-3xl">Level areas</h2>
           <table className="mt-4 w-full text-left text-sm">
             <tbody>

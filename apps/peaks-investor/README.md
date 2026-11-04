@@ -17,7 +17,7 @@ The Heritage Linden Lane prospectus is seeded as a private, unapproved working s
 
 ## Local draft storage
 
-`data/portal.db` is a SQLite file created by Node’s built-in `node:sqlite`. It is local draft storage. It will not persist on Vercel. Production still needs an approved hosted Postgres database and private file storage. The admin banner says this on every admin screen.
+`data/portal.db` is a SQLite file created by Node’s built-in `node:sqlite`. It is local draft storage. On Vercel the same file is created under `/tmp` so the pages can render, and it can reset. Production still needs an approved hosted Postgres database and private file storage. The admin banner says this on every admin screen.
 
 Uploaded files live in `data/uploads` and are served only after the visibility and approval checks.
 

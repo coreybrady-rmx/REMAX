@@ -10,10 +10,16 @@ type Sql = DatabaseSync;
 
 let database: Sql | null = null;
 
-function databasePath(): string {
-  const directory = path.join(process.cwd(), "data");
+function dataDirectory(): string {
+  const directory = process.env.VERCEL
+    ? path.join("/tmp", "peaks-investor")
+    : path.join(process.cwd(), "data");
   mkdirSync(directory, { recursive: true });
-  return path.join(directory, "portal.db");
+  return directory;
+}
+
+function databasePath(): string {
+  return path.join(dataDirectory(), "portal.db");
 }
 
 export function getDb(): Sql {
@@ -599,7 +605,7 @@ export function getDocument(documentId: string): DocumentRow | undefined {
 }
 
 export function storageRoot(): string {
-  const directory = path.join(process.cwd(), "data", "uploads");
+  const directory = path.join(dataDirectory(), "uploads");
   mkdirSync(directory, { recursive: true });
   return directory;
 }

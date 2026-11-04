@@ -11,17 +11,18 @@ export default function CompletedPage() {
     <>
       <PageIntro eyebrow="Portfolio" title="Completed projects">
         <p>
-          A project appears here only when its status is completed and the record is approved for public display. Actual
-          dollars require a source note from project accounting or a closing document.
+          Peaks Home Builders completed two spec homes in 2025. A home is listed below once its address, plan, and sale
+          record are confirmed for public display. A sale price or profit appears only with a source note from the
+          closing or the project accounting.
         </p>
       </PageIntro>
       <section className="mx-auto max-w-6xl px-5 py-12">
         {projects.length === 0 ? (
           <div className="border border-dashed border-ink/20 p-10">
-            <h2 className="text-3xl">No completed investments are on file</h2>
+            <h2 className="text-3xl">Two spec homes, records not listed yet</h2>
             <p className="mt-3 max-w-2xl leading-7 text-ink/75">
-              Architectural proposals, active listings, and houses still under construction are not counted as completed
-              investments. This portfolio will stay empty until those records are entered.
+              The two homes completed in 2025 are not listed by address until their MLS details are entered. This page
+              will not show a price before that record is confirmed.
             </p>
           </div>
         ) : (

@@ -13,20 +13,21 @@ export default function HomePage() {
       <section className="bg-ink text-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-[1.3fr_0.7fr] md:items-end">
           <div>
-            <p className="text-sm font-bold tracking-[0.18em] text-brand uppercase">Spec home investment</p>
+            <p className="text-sm font-bold tracking-[0.18em] text-brand uppercase">Spec home builders</p>
             <h1 className="mt-4 max-w-3xl text-5xl leading-none md:text-6xl">
-              Peaks Home Builders spec home investment opportunities.
+              We build the home the market is ready to buy.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80">
-              Review how Peaks Home Builders approaches residential development, compare the Acadia Homes floor plan
-              collection, and request information on a project. Published figures appear only after they are approved.
+              Peaks Home Builders is Corey and Travis. We have over 30 years of combined experience in real estate, and
+              we use it to choose the lot, the plan, and the features before construction starts. In 2025 we completed
+              two spec homes.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link className="rounded-full bg-brand px-5 py-3 text-sm font-bold tracking-wide uppercase" href="/opportunities">
-                Available projects
-              </Link>
-              <Link className="rounded-full border border-white px-5 py-3 text-sm font-bold tracking-wide uppercase" href="/plans">
+              <Link className="rounded-full bg-brand px-5 py-3 text-sm font-bold tracking-wide uppercase" href="/plans">
                 Floor plans
+              </Link>
+              <Link className="rounded-full border border-white px-5 py-3 text-sm font-bold tracking-wide uppercase" href="/contact">
+                Request information
               </Link>
             </div>
           </div>
@@ -44,16 +45,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Section title="Why invest with Peaks Home Builders" href="/process">
+      <Section title="Why invest with Peaks Home Builders" href="/process" wide>
         <p>
-          You invest with Peaks Home Builders because of the real estate experience behind the work, and because the
-          lot, the home, and its features are chosen for the market the home will enter.
+          You invest with Peaks Home Builders because the people selecting the home have spent their careers in real
+          estate, and because the home is built for the market it will enter.
         </p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
           <div className="border border-ink/10 p-4">
             <h3 className="text-xl">Real estate experience</h3>
             <p className="mt-2 text-sm leading-6 text-ink/70">
-              Corey and Travis have over 30 years of combined experience in real estate.
+              Corey and Travis have over 30 years of combined experience in real estate. That experience is how a lot
+              and a plan are judged before a foundation is poured.
             </p>
           </div>
           <div className="border border-ink/10 p-4">
@@ -63,20 +65,30 @@ export default function HomePage() {
               the home comes out.
             </p>
           </div>
+          <div className="border border-ink/10 p-4">
+            <h3 className="text-xl">Built and brought to market</h3>
+            <p className="mt-2 text-sm leading-6 text-ink/70">
+              We carry the selected plan through construction and into a sale. In 2025 that work produced two completed
+              spec homes.
+            </p>
+          </div>
         </div>
       </Section>
 
-      <Section title="Completed projects" href="/completed" tone="paper">
-        {completed.length === 0 ? (
-          <p>No completed investment has been entered from project accounting and closing documents.</p>
-        ) : (
-          <ProjectList projects={completed} />
-        )}
+      <Section title="Homes we have built" href="/completed" tone="paper">
+        <p>
+          Peaks Home Builders completed two spec homes in 2025. Each home will be listed here with its address, plan,
+          and sale record once those details are confirmed.
+        </p>
+        {completed.length === 0 ? null : <ProjectList projects={completed} />}
       </Section>
 
       <Section title="Current opportunities" href="/opportunities">
         {opportunities.length === 0 ? (
-          <p>No investment project is approved for public display.</p>
+          <p>
+            The next homes are chosen the same way: a lot, a plan, and features matched to the market at the time the
+            home will be for sale. None are published on this page yet.
+          </p>
         ) : (
           <ProjectList projects={opportunities} />
         )}
@@ -84,8 +96,14 @@ export default function HomePage() {
 
       <section className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-16">
-          <div className="flex items-end justify-between gap-4">
-            <h2 className="text-4xl">Explore our floor plans</h2>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="text-4xl">The plans we build</h2>
+              <p className="mt-3 max-w-2xl leading-7 text-ink/75">
+                These six Acadia Homes plans are the collection we build from. The picture is that plan’s exterior
+                rendering. The figures under it are the published living area, bedrooms, bathrooms, and garage.
+              </p>
+            </div>
             <Link className="text-sm font-bold text-link" href="/plans">
               All plans
             </Link>
@@ -115,58 +133,65 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Section title="Understanding potential returns" href="/returns">
+      <Section title="How a return is read" href="/returns">
         <p>
-          Project profit is the selling price minus the project costs that have actually been entered. Investor cash
-          return is calculated only after contributed capital and a participation rule are defined. A projection is not
-          an actual result.
+          Each home is underwritten on its own costs and its own expected sale. Profit is that sale price minus the
+          costs entered for the project. An investor return is calculated when that investor’s capital and
+          participation are defined. The closed sale is recorded on its own, apart from the projection.
         </p>
       </Section>
 
-      <Section title="Our investment process" href="/process" tone="paper">
-        <ol className="grid gap-3 md:grid-cols-4">
-          {["Acquisition", "Financial review", "Funding", "Construction", "Marketing", "Sale", "Final accounting"].map(
-            (step, index) => (
-              <li key={step} className="border border-ink/10 bg-white p-4">
-                <span className="text-sm font-bold text-brand">0{index + 1}</span>
-                <p className="mt-2 text-lg">{step}</p>
-              </li>
-            ),
-          )}
+      <Section title="How we build" href="/process" tone="paper" wide>
+        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            "Select the lot",
+            "Match the plan and features",
+            "Price the work",
+            "Build the home",
+            "Bring it to market",
+            "Close and record the result",
+          ].map((step, index) => (
+            <li key={step} className="border border-ink/10 bg-white p-4">
+              <span className="text-sm font-bold text-brand">0{index + 1}</span>
+              <p className="mt-2 text-lg">{step}</p>
+            </li>
+          ))}
         </ol>
       </Section>
 
-      <Section title="Construction financing" href="/financing">
+      <Section title="How a home is funded" href="/financing">
         <p>
-          Investor equity, investor lending, construction financing, and project ownership are different roles. The
-          structure for each project is entered separately. Construction draws are not the same thing as investor
-          repayment.
+          Every home has its own funding. That may be builder capital, a construction loan, investor equity, or a
+          combination written for that project. Draws pay for construction and are kept separate from any distribution
+          after the sale.
         </p>
       </Section>
 
-      <Section title="Construction operations" href="/operations" tone="paper">
+      <Section title="How the build is run" href="/operations" tone="paper">
         <p>
-          Oversight covers budgets, milestones, inspections, reporting, and change orders. The procedures on this site
-          are explanatory until a written policy is approved.
+          A Peaks home is run from a budget, a schedule, inspections, and written changes. An investor assigned to a
+          project can review the records for that home.
         </p>
       </Section>
 
-      <Section title="After construction" href="/operations">
+      <Section title="From finished house to closed sale" href="/operations">
         <p>
-          Completion still leaves inspections, sale preparation, marketing, carrying costs, closing, loan payoff, final
-          accounting, and distributions. Finishing the house does not by itself repay an investor.
+          Completing construction opens the sale. We prepare the home, list it, and carry it through closing, then
+          record the sale against the cost of the project.
         </p>
       </Section>
 
-      <Section title="Investment risks" href="/faq" tone="paper">
+      <Section title="What we account for" href="/faq" tone="paper">
         <p>
-          Cost overruns, delays, financing costs, and a change in market value can reduce or eliminate a projected
-          profit. Those risks are project-specific and are not removed by a favorable worksheet.
+          Cost, time, and the market can move between the day we start and the day the home sells. Those figures stay
+          on the project record so the result of each home can be read on its own.
         </p>
       </Section>
 
       <Section title="Frequently asked questions" href="/faq">
-        <p>Short answers to how estimates, returns, documents, and repayment are handled on this portal.</p>
+        <p>
+          How a resale estimate is labeled, how a return is calculated, and what an assigned investor can see.
+        </p>
       </Section>
 
       <section>
@@ -174,8 +199,8 @@ export default function HomePage() {
           <div>
             <h2 className="text-4xl">Request information</h2>
             <p className="mt-4 leading-7 text-ink/80">
-              Send a note to ask for an investment overview. The request is stored for review. This form does not collect
-              funds or provide wiring instructions.
+              Ask for an overview of a Peaks Home Builders project. We store the request and follow up from it. This
+              form does not collect funds.
             </p>
           </div>
           <Link className="self-end rounded-full bg-brand px-5 py-3 text-center text-sm font-bold tracking-wide text-white uppercase" href="/contact">
@@ -192,17 +217,19 @@ function Section({
   href,
   children,
   tone = "white",
+  wide = false,
 }: {
   title: string;
   href: string;
   children: ReactNode;
   tone?: "white" | "paper";
+  wide?: boolean;
 }) {
   return (
     <section className={tone === "paper" ? "bg-paper" : "bg-white"}>
       <div className="mx-auto max-w-6xl px-5 py-16">
         <h2 className="text-4xl">{title}</h2>
-        <div className="mt-4 max-w-3xl leading-7 text-ink/80">{children}</div>
+        <div className={`mt-4 leading-7 text-ink/80 ${wide ? "" : "max-w-3xl"}`}>{children}</div>
         <Link className="mt-5 inline-block text-sm font-bold text-link" href={href}>
           Read more
         </Link>

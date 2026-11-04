@@ -1,3 +1,4 @@
+import { brandName } from "@/lib/brand";
 import { allProjects, listInquiries, listPlans } from "@/lib/db";
 
 export const metadata = { title: "Admin" };
@@ -5,7 +6,7 @@ export const metadata = { title: "Admin" };
 export default function AdminHome() {
   return (
     <section>
-      <h1 className="text-4xl">Peaks Home Builders records</h1>
+      <h1 className="text-4xl">{brandName} records</h1>
       <p className="mt-3 max-w-2xl leading-7">
         Public pages show a plan price only after an estimate is marked public and approved. Projects, drawings, and
         documents stay private until the same two switches are set. Actual results also need a source note.

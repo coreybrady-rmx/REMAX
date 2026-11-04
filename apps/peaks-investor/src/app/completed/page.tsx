@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageIntro } from "@/components/SiteChrome";
+import { brandName } from "@/lib/brand";
 import { completedPublicProjects, publicActual } from "@/lib/db";
 import { formatCents } from "@/lib/format";
 
@@ -11,7 +12,7 @@ export default function CompletedPage() {
     <>
       <PageIntro eyebrow="Portfolio" title="Completed projects">
         <p>
-          Peaks Home Builders completed two spec homes in 2025. A home is listed below once its address, plan, and sale
+          {brandName} completed two spec homes in 2025. A home is listed below once its address, plan, and sale
           record are confirmed for public display. A sale price or profit appears only with a source note from the
           closing or the project accounting.
         </p>

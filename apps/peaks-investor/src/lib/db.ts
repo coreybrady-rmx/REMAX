@@ -2,6 +2,7 @@ import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { mkdirSync } from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { brandName } from "./brand";
 import { PLANS } from "./catalog";
 import { COST_CATEGORIES, categoryLabel, type CostCategory } from "./categories";
 import type { CommissionInput, CostLine, InvestorRule, ModelInput } from "./finance";
@@ -227,7 +228,7 @@ function seed(db: Sql) {
     db.prepare("INSERT INTO users (id, email, name, password_hash, role) VALUES (?, ?, ?, ?, ?)").run(
       id(),
       adminEmail,
-      "Peaks Home Builders",
+      brandName,
       hashPassword(process.env.ADMIN_PASSWORD),
       "admin",
     );

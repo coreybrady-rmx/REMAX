@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
+import { brandName } from "@/lib/brand";
 import { currentSession } from "@/lib/current";
 import "@fontsource/cabin/latin-400.css";
 import "@fontsource/cabin/latin-500.css";
@@ -14,11 +15,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Peaks Home Builders Investor Portal",
-    template: "%s · Peaks Home Builders",
+    default: `${brandName} Investor Portal`,
+    template: `%s · ${brandName}`,
   },
-  description:
-    "Draft investor portal for Peaks Home Builders spec home projects and the Acadia Homes floor plan collection.",
+  description: `Draft investor portal for ${brandName} spec home projects and the Acadia Homes floor plan collection.`,
   robots: { index: false, follow: false },
 };
 

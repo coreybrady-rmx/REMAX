@@ -14,7 +14,7 @@ export default function HomePage() {
       <section className="bg-ink text-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-[1.3fr_0.7fr] md:items-end">
           <div>
-            <p className="text-sm font-bold tracking-[0.18em] text-brand uppercase">{brandName}</p>
+            <p className="text-sm font-bold tracking-[0.18em] text-brand">{brandName}</p>
             <h1 className="mt-4 max-w-3xl text-5xl leading-none md:text-6xl">
               Build with a team that knows the market before we break ground.
             </h1>
@@ -93,6 +93,12 @@ export default function HomePage() {
         ) : (
           <ProjectList projects={opportunities} />
         )}
+        <Link
+          className="mt-5 inline-block rounded-full bg-brand px-5 py-3 text-sm font-bold tracking-wide text-white uppercase"
+          href="/contact"
+        >
+          Request a project overview
+        </Link>
       </Section>
 
       <section className="bg-paper">
@@ -194,6 +200,12 @@ export default function HomePage() {
           Clear explanations of how a resale estimate is labeled, how returns are calculated, and what an assigned
           investor can review.
         </p>
+        <Link
+          className="mt-5 inline-block rounded-full bg-brand px-5 py-3 text-sm font-bold tracking-wide text-white uppercase"
+          href="/faq"
+        >
+          Read the questions
+        </Link>
       </Section>
 
       <section>

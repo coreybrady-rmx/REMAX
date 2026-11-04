@@ -66,9 +66,6 @@ function RubyCard({ view }: { view: RubyView }) {
 function ReturnLines({ view }: { view: RubyView }) {
   if (!view.returnLine) return null;
   return (
-    <div className="mt-4 text-sm leading-6">
-      <p>{view.returnLine}</p>
-      <p>{view.basisLine}</p>
-    </div>
+    <p className="mt-4 text-sm leading-6">{view.returnLine}</p>
   );
 }

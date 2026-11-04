@@ -1,7 +1,5 @@
 import { PUBLISH_FULL_ADDRESS, SHOW_RETURNS } from "./flags";
 
-export const RETURN_BASIS = "[BASIS_PENDING]";
-
 export type RubyProject = {
   slug: string;
   heading: string;
@@ -52,7 +50,6 @@ export type RubyView = {
   alt: string;
   address: string | null;
   returnLine: string | null;
-  basisLine: string | null;
 };
 
 export function viewModel(
@@ -70,6 +67,5 @@ export function viewModel(
     alt: project.alt,
     address: fullAddress ? project.fullAddress : null,
     returnLine: showReturns ? `Return: ${project.returnPercent}` : null,
-    basisLine: showReturns ? `Return basis: ${RETURN_BASIS}` : null,
   };
 }

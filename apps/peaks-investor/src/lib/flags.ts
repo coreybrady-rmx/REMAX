@@ -1,4 +1,4 @@
-/** Review switches. Leave these false until Corey turns them on. */
-export const PROJECTS_PUBLISHED = false;
-export const SHOW_RETURNS = false;
-export const PUBLISH_FULL_ADDRESS = false;
+/** Review switches. On so the completed Ruby homes are visible. */
+export const PROJECTS_PUBLISHED = true;
+export const SHOW_RETURNS = true;
+export const PUBLISH_FULL_ADDRESS = true;

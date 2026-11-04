@@ -54,6 +54,7 @@ function RubyCard({ view }: { view: RubyView }) {
         <div className="p-5">
           <h3 className="text-3xl">{view.heading}</h3>
           <p className="mt-2 text-sm font-bold">{view.status}</p>
+          {view.address ? <p className="mt-2 text-sm leading-6">{view.address}</p> : null}
           <p className="mt-3 text-sm leading-6 text-ink/80">{view.body}</p>
           <ReturnLines view={view} />
         </div>

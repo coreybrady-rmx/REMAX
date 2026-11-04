@@ -38,10 +38,6 @@ export default function HomePage() {
               alt="Alpine exterior rendering from Acadia Homes"
               className="aspect-[16/10] w-full object-cover"
             />
-            <p className="mt-3 text-sm leading-6 text-white/75">
-              Acadia Homes exterior rendering of the Alpine plan. Landscaping in the image is not a construction
-              specification, and the image is not a completed Peaks project.
-            </p>
           </div>
         </div>
       </section>

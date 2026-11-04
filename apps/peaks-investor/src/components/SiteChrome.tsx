@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { signOut } from "@/app/actions";
+import { brandName } from "@/lib/brand";
 import type { SessionPayload } from "@/lib/session";
 
 const links = [
@@ -19,7 +20,7 @@ export function SiteHeader({ session }: { session: SessionPayload | null }) {
         <Link href="/" className="shrink-0">
           <img
             src="/brand/logo-light.png"
-            alt="Peaks Home Builders, powered by Acadia Homes"
+            alt={`${brandName}, powered by Acadia Homes`}
             className="h-24 w-auto"
           />
         </Link>
@@ -89,12 +90,12 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 md:grid-cols-[auto_1fr]">
         <img
           src="/brand/logo-light.png"
-          alt="Peaks Home Builders, powered by Acadia Homes"
+          alt={`${brandName}, powered by Acadia Homes`}
           className="h-20 w-auto"
         />
         <div className="max-w-2xl text-sm leading-6 text-white/75">
           <p>
-            Peaks Home Builders Investor Portal is a draft review site. It is not an offer to sell securities, a
+            {brandName} Investor Portal is a draft review site. It is not an offer to sell securities, a
             solicitation, or a commitment to any return. Estimated resale prices are developer estimates, not
             appraisals or guaranteed sale prices.
           </p>

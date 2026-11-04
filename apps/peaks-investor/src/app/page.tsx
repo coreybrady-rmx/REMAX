@@ -46,19 +46,23 @@ export default function HomePage() {
 
       <Section title="Why invest with Peaks Home Builders" href="/process">
         <p>
-          Peaks Home Builders is the public brand. Acadia Homes is the floor-plan collection named on the Peaks logo.
-          The approach is to match a plan to the lot, the buyer, the neighborhood, and the budget before treating size
-          as the reason to build.
+          You invest with Peaks Home Builders because of the real estate experience behind the work, and because the
+          lot, the home, and its features are chosen for the market the home will enter.
         </p>
-        <div className="mt-6 grid gap-4 md:grid-cols-4">
-          {["Property selection", "Market demand", "Construction efficiency", "Financial oversight"].map((item) => (
-            <div key={item} className="border border-ink/10 p-4">
-              <h3 className="text-xl">{item}</h3>
-              <p className="mt-2 text-sm leading-6 text-ink/70">
-                Each project keeps its own assumptions. A catalog plan is not a guaranteed specification or a promised return.
-              </p>
-            </div>
-          ))}
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="border border-ink/10 p-4">
+            <h3 className="text-xl">Real estate experience</h3>
+            <p className="mt-2 text-sm leading-6 text-ink/70">
+              Corey and Travis have over 30 years of combined experience in real estate.
+            </p>
+          </div>
+          <div className="border border-ink/10 p-4">
+            <h3 className="text-xl">Matched to the market</h3>
+            <p className="mt-2 text-sm leading-6 text-ink/70">
+              Our process uses AI to find the lot, the home, and the features and benefits that match the market when
+              the home comes out.
+            </p>
+          </div>
         </div>
       </Section>
 

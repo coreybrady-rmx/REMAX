@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { brandName } from "@/lib/brand";
+import { CompletedRubySection } from "@/components/RubyProjects";
 import { listPlans, publicProjects, completedPublicProjects } from "@/lib/db";
+import { PROJECTS_PUBLISHED } from "@/lib/flags";
 import { formatBaths, formatSqft } from "@/lib/format";
 import { renderingFor } from "@/lib/renderings";
 
@@ -73,12 +75,22 @@ export default function HomePage() {
       </Section>
 
       <Section title="Two spec homes completed in 2025" href="/completed" tone="paper">
-        <p>
-          Each completed home will be presented here with its address, plan, and sale record once those details are
-          confirmed. Request an overview to learn more about the projects behind them.
-        </p>
+        {PROJECTS_PUBLISHED ? (
+          <p>
+            <Link className="font-bold text-link" href="#completed-projects">
+              Completed projects
+            </Link>
+          </p>
+        ) : (
+          <p>
+            Each completed home will be presented here with its address, plan, and sale record once those details are
+            confirmed. Request an overview to learn more about the projects behind them.
+          </p>
+        )}
         {completed.length === 0 ? null : <ProjectList projects={completed} />}
       </Section>
+
+      <CompletedRubySection />
 
       <Section title="The next project is published here first" href="/opportunities">
         {opportunities.length === 0 ? (

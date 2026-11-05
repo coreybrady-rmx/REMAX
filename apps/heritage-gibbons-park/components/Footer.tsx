@@ -1,7 +1,4 @@
-import {
-  preliminaryIllustrationDisclosure,
-  securitiesDisclosure,
-} from "@/lib/disclosures";
+import { LegalDisclosures } from "./LegalDisclosures";
 
 export function Footer() {
   return (
@@ -14,13 +11,8 @@ export function Footer() {
         <p className="mt-2 text-sm text-ivory/70">
           Lot 1, Logan, Utah. Private illustration. Not indexed.
         </p>
-        <div className="mt-10 grid gap-8 lg:grid-cols-2">
-          <p className="text-sm leading-relaxed text-ivory/80">
-            {preliminaryIllustrationDisclosure}
-          </p>
-          <p className="text-sm leading-relaxed text-ivory/80">
-            {securitiesDisclosure}
-          </p>
+        <div className="mt-10">
+          <LegalDisclosures tone="dark" />
         </div>
         <p className="mt-10 text-sm text-ivory/60">
           <a href="#inquiry" className="underline decoration-gold/70 underline-offset-4">

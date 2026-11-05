@@ -1,37 +1,16 @@
 /**
- * Required disclosures. Edit this file to update the language everywhere
- * it appears (risk section and footer).
- *
- * The brief requires both of these disclosures: a preliminary illustration,
- * and a statement that this is not an offer to sell securities. It also
- * requires the projections sentence below. Replace the paragraphs if
- * counsel provides approved text. Keep both disclosures on the page.
+ * Required disclosures. The two paragraphs below must stay verbatim.
+ * They render beside the financial model and again in the risk section.
+ * The hero uses the short projections note only.
  */
 export const projectionsSentence =
-  "Projections are based on stated assumptions and are not guaranteed.";
+  "Financial returns are projections based on stated assumptions and are not guaranteed.";
 
-export const preliminaryIllustrationDisclosure = [
-  "Preliminary illustration.",
-  "This page is a preliminary illustration prepared from the assumptions stated here.",
-  "The target sale price, lot allowance, construction budget, interest, schedule, profit, and cash-on-cash return are projections.",
-  "They are not an appraisal, a guarantee, or a promise of profit or return.",
-  projectionsSentence,
-  "Actual results will differ.",
-  "Modeled profit is after the costs listed in the project budget, including modeled construction interest, and it excludes costs that are not listed.",
-  "It is not after-tax net profit.",
-  "The optional basement is not included as finished area.",
-  "The lot figure is an underwriting allowance, not a confirmed acquisition price.",
-  "Lot feasibility — plat, size, dimensions, building envelope, orientation, and an approved site plan — is not verified on this page.",
-].join(" ");
+export const preliminaryIllustrationDisclosure =
+  "Preliminary investment illustration only. The financial model uses a target $1.4 million sale price and assumes a $225,000 lot investment, an $850,000 financed construction budget, staged draws at 10% annual simple interest, $5,000 in closing costs, and a 50/50 division of modeled project profit. The illustration excludes certain costs including additional site expenses, engineering and design fees, contingencies, commissions, taxes, insurance and other carrying or administrative expenses. Actual project and investor returns may differ materially. No return is guaranteed.";
 
-export const securitiesDisclosure = [
-  "Not an offer to sell securities.",
-  "This page is not an offer to sell securities, a solicitation of an offer to buy securities, or investment, legal, tax, or accounting advice.",
-  "Nothing here commits anyone to return capital, to share profits, or to share losses.",
-  "Any participation would be governed only by a separate written agreement.",
-  "Capital return, profit allocations, and the treatment of losses depend on that agreement.",
-  "Where this model shows a loss, the loss is not split 50/50.",
-].join(" ");
+export const securitiesDisclosure =
+  "This website is informational and does not constitute an offer to sell securities or a commitment to invest. Final investment terms are subject to executed agreements and applicable legal review.";
 
 export const lossTreatmentNote =
   "Treatment of a loss depends on the final agreement. This illustration does not split a loss 50/50.";

@@ -1,8 +1,5 @@
 import { RISKS } from "@/lib/content";
-import {
-  preliminaryIllustrationDisclosure,
-  securitiesDisclosure,
-} from "@/lib/disclosures";
+import { LegalDisclosures } from "./LegalDisclosures";
 import { SectionHeading } from "./SectionHeading";
 
 export function RiskDisclosure() {
@@ -21,19 +18,8 @@ export function RiskDisclosure() {
             </li>
           ))}
         </ul>
-        <div id="disclosures" className="mt-14 grid gap-6 lg:grid-cols-2">
-          <article className="bg-ivory px-6 py-6">
-            <h3 className="font-serif text-2xl">Preliminary illustration</h3>
-            <p className="mt-4 text-sm leading-relaxed text-charcoal/85">
-              {preliminaryIllustrationDisclosure}
-            </p>
-          </article>
-          <article className="bg-ivory px-6 py-6">
-            <h3 className="font-serif text-2xl">Not an offer to sell securities</h3>
-            <p className="mt-4 text-sm leading-relaxed text-charcoal/85">
-              {securitiesDisclosure}
-            </p>
-          </article>
+        <div id="disclosures" className="mt-14">
+          <LegalDisclosures />
         </div>
       </div>
     </section>

@@ -87,9 +87,4 @@ Copy `.env.example` to `.env.local` for local development. Never commit a real e
 
 ## How to update disclosures
 
-Both required disclosures live in `lib/disclosures.ts`:
-
-- Preliminary illustration
-- Not an offer to sell securities
-
-`RiskDisclosure` and `Footer` render those strings. The hero uses `projectionsSentence` from the same file. Replace the text there when counsel provides approved language, and keep both disclosures on the page.
+Both required disclosures live as verbatim strings in `lib/disclosures.ts`. `ProjectBudget` places them beside the financial model. `RiskDisclosure` and `Footer` render the same strings. Do not paraphrase them. The hero uses only `projectionsSentence` from that file.

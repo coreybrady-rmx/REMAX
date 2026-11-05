@@ -1,6 +1,7 @@
 import { ASSUMPTIONS } from "@/lib/assumptions";
 import { baseCase } from "@/lib/calculate";
 import { formatDollars, formatPercent } from "@/lib/format";
+import { LegalDisclosures } from "./LegalDisclosures";
 import { SectionHeading } from "./SectionHeading";
 
 export function ProjectBudget() {
@@ -108,6 +109,9 @@ export function ProjectBudget() {
               {formatDollars(baseCase.investorCents ?? 0)} / {formatDollars(ASSUMPTIONS.lotEquity * 100)}.
             </p>
           </div>
+        </div>
+        <div className="mt-12">
+          <LegalDisclosures />
         </div>
       </div>
     </section>

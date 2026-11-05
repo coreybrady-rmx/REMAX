@@ -1,5 +1,6 @@
 import { ASSUMPTIONS, SENSITIVITY_SALE_PRICES } from "./assumptions";
 import {
+  breakEvenSaleCents,
   cashOnCash,
   commissionCents,
   equalDrawPrincipalCents,
@@ -90,13 +91,15 @@ export function calculate(input: ModelInput): ModelResult {
   });
   const profitCents = projectProfitCents(saleCents, totalCostCents);
   const isLoss = profitCents < 0;
+  const fixedCostCents = lotCents + constructionCents + interestCents + closingCents;
+  const breakEvenCents = breakEvenSaleCents(fixedCostCents, ASSUMPTIONS.commissionBps);
   const shared = {
     interestCents,
     commissionCents: saleCommissionCents,
     constructionCents,
     totalCostCents,
     profitCents,
-    breakEvenCents: totalCostCents,
+    breakEvenCents,
     draws,
   };
 
@@ -141,7 +144,7 @@ export function calculate(input: ModelInput): ModelResult {
     capitalReturnCents: lotCents,
     proceedsCents: lotCents + split.investorCents,
     cashOnCash: cashOnCash(split.investorCents, lotCents),
-    breakEvenCents: totalCostCents,
+    breakEvenCents,
     draws,
   };
 }

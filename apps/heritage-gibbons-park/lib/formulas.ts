@@ -14,6 +14,9 @@
  *
  * Commission = sale × 5%.
  * Profit = sale − lot − construction − interest − commission − closing.
+ * Break-even sale = (lot + construction + interest + closing) / 0.95,
+ * rounded to the nearest dollar. Commission in that solve is 5% of the
+ * break-even sale, not 5% of the selected sale price.
  * If profit > 0, each party receives profit × 50%.
  * Cash-on-cash = investor profit / lot. It is not an annualized IRR.
  * If profit < 0, the loss is not split.
@@ -81,6 +84,23 @@ export function projectCostCents(parts: {
 
 export function projectProfitCents(saleCents: number, costCents: number): number {
   return saleCents - costCents;
+}
+
+/**
+ * Sale price that covers fixed costs after a commission equal to
+ * commissionBps of that sale. Rounded to the nearest dollar.
+ */
+export function breakEvenSaleCents(
+  fixedCostCents: number,
+  commissionBps: number,
+): number {
+  if (fixedCostCents <= 0) return 0;
+  if (commissionBps <= 0) return Math.round(fixedCostCents / 100) * 100;
+  if (commissionBps >= 10_000) {
+    throw new Error("Commission rate must be below 100%.");
+  }
+  const exactCents = Math.round((fixedCostCents * 10_000) / (10_000 - commissionBps));
+  return Math.round(exactCents / 100) * 100;
 }
 
 export function splitProfitCents(

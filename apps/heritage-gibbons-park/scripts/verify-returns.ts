@@ -14,7 +14,16 @@ assert.equal(formatDollars(base.peaksCents ?? 0), "$103,750");
 assert.equal(formatDollars(base.proceedsCents ?? 0), "$328,750");
 assert.equal(formatDollars(base.capitalReturnCents ?? 0), "$225,000");
 assert.equal(formatPercent(base.cashOnCash ?? 0), "46.1%");
-assert.equal(formatDollars(base.breakEvenCents), "$1,192,500");
+assert.equal(formatDollars(base.breakEvenCents), "$1,181,579");
+assert.notEqual(base.breakEvenCents, base.totalCostCents);
+
+const otherSale = calculate({
+  salePrice: 1_200_000,
+  durationMonths: ASSUMPTIONS.durationMonths,
+  annualRateBps: ASSUMPTIONS.annualRateBps,
+});
+assert.equal(otherSale.breakEvenCents, base.breakEvenCents);
+assert.equal(formatDollars(otherSale.commissionCents), "$60,000");
 assert.equal(base.isLoss, false);
 assert.deepEqual(
   base.draws.map((draw) => draw.outstandingMonths),
@@ -87,6 +96,7 @@ const longer = calculate({
   annualRateBps: 1_000,
 });
 assert.ok(longer.interestCents > base.interestCents);
+assert.ok(longer.breakEvenCents > base.breakEvenCents);
 const longerRow = sensitivityCases({
   durationMonths: 9,
   annualRateBps: 1_000,

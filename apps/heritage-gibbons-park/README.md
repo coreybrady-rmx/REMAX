@@ -45,6 +45,8 @@ A draw is funded only when the duration reaches that draw’s month. Otherwise i
 
 Profit = sale − lot − construction − interest − commission − closing. Commission is 5% of the sale price. At the $1,400,000 target it is $70,000.
 
+Break-even sale price = (lot + construction + interest + closing) / 0.95, rounded to the nearest dollar. At the base case the fixed costs are $1,122,500 and the break-even sale is $1,181,579. Do not put 5% of the selected sale price into those fixed costs.
+
 If profit is positive, Peaks and the lot investor each receive half. Cash-on-cash is investor profit divided by lot capital. It is not an annualized IRR. If profit is negative, the loss is not split 50/50. Capital return and proceeds are not modeled on a loss.
 
 After any figure change, run `npm run verify` and update the expectations in `scripts/verify-returns.ts` if the base case itself changed.

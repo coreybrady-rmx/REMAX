@@ -173,7 +173,9 @@ export function ReturnCalculator() {
           </button>
           <p className="mt-6 text-sm leading-relaxed text-charcoal/70">
             Profit = sale − lot − construction − interest − commission − closing.
-            If profit
+            Commission is 5% of the selected sale price. Break-even sale price
+            = (lot + construction + interest + closing) / 0.95, so the
+            commission in that solve is 5% of the break-even sale. If profit
             is positive, investor profit = profit × 50%, and cash-on-cash =
             investor profit / lot. That return is projected. It is not an
             annualized IRR. {lossTreatmentNote}

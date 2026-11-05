@@ -5,7 +5,8 @@ import { PriceBlock } from "@/components/Money";
 import { PageIntro } from "@/components/SiteChrome";
 import { getPlan, listPlans, publicEstimates, publicProjects, visibleMedia } from "@/lib/db";
 import { formatBaths, formatSqft } from "@/lib/format";
-import { planDiagrams, renderingFor } from "@/lib/renderings";
+import { publicPath } from "@/lib/public-path";
+import { diagramsFor, renderingFor } from "@/lib/renderings";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const plan = getPlan((await params).slug);
@@ -19,10 +20,10 @@ export default async function PlanDetailPage({ params }: { params: Promise<{ slu
   const projects = publicProjects().filter((project) => project.plan_slug === plan.slug);
   const media = visibleMedia("plan", plan.slug, false);
   const rendering = renderingFor(plan.slug);
-  const diagrams = planDiagrams[plan.slug] ?? [];
+  const diagrams = diagramsFor(plan.slug);
   const viewerImages = [
     ...diagrams,
-    ...media.map((item) => ({ src: `/api/media/${item.id}`, title: item.kind })),
+    ...media.map((item) => ({ src: publicPath(`/api/media/${item.id}`), title: item.kind })),
   ];
   const strengths = JSON.parse(plan.strengths) as string[];
   const tradeoffs = JSON.parse(plan.tradeoffs) as string[];

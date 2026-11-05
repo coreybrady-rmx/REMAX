@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { signOut } from "@/app/actions";
 import { brandName } from "@/lib/brand";
+import { publicPath } from "@/lib/public-path";
 import type { SessionPayload } from "@/lib/session";
 
 const links = [
@@ -19,7 +20,7 @@ export function SiteHeader({ session }: { session: SessionPayload | null }) {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4">
         <Link href="/" className="shrink-0">
           <img
-            src="/brand/logo-light.png"
+            src={publicPath("/brand/logo-light.png")}
             alt={`${brandName}, powered by Acadia Homes`}
             className="h-24 w-auto"
           />
@@ -89,7 +90,7 @@ export function SiteFooter() {
     <footer className="bg-ink text-white">
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 md:grid-cols-[auto_1fr]">
         <img
-          src="/brand/logo-light.png"
+          src={publicPath("/brand/logo-light.png")}
           alt={`${brandName}, powered by Acadia Homes`}
           className="h-20 w-auto"
         />

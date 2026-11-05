@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, type ReactNode } from "react";
+import { publicPath } from "@/lib/public-path";
 
 type Result = { error?: string; ok?: string; href?: string } | void;
 
@@ -16,7 +17,7 @@ export function BoundForm({
   const [message, formAction] = useActionState(async (_previous: Result, formData: FormData) => {
     const result = (await action(formData)) ?? {};
     if (result.href) {
-      window.location.assign(result.href);
+      window.location.assign(result.href.startsWith("/") ? publicPath(result.href) : result.href);
     }
     return result;
   }, undefined as Result);

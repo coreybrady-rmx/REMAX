@@ -4,6 +4,7 @@ import { brandName } from "@/lib/brand";
 import { CompletedRubySection } from "@/components/RubyProjects";
 import { listPlans, publicProjects } from "@/lib/db";
 import { formatBaths, formatSqft } from "@/lib/format";
+import { publicPath } from "@/lib/public-path";
 import { renderingFor } from "@/lib/renderings";
 
 export default function HomePage() {
@@ -34,7 +35,7 @@ export default function HomePage() {
           </div>
           <div>
             <img
-              src="/plans/alpine/rendering.jpg"
+              src={publicPath("/plans/alpine/rendering.jpg")}
               alt="Alpine exterior rendering from Acadia Homes"
               className="aspect-[16/10] w-full object-cover"
             />

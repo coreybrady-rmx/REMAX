@@ -1,4 +1,5 @@
 import { PUBLISH_FULL_ADDRESS, SHOW_RETURNS } from "./flags";
+import { publicPath } from "./public-path";
 
 export type RubyProject = {
   slug: string;
@@ -63,7 +64,7 @@ export function viewModel(
     heading: project.heading,
     status: project.status,
     body: project.body,
-    image: project.image,
+    image: publicPath(project.image),
     alt: project.alt,
     address: fullAddress ? project.fullAddress : null,
     returnLine: showReturns ? `Return: ${project.returnPercent}` : null,

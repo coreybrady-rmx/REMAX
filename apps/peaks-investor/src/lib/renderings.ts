@@ -1,3 +1,5 @@
+import { publicPath } from "./public-path";
+
 export type PlanImage = {
   src: string;
   title: string;
@@ -32,5 +34,10 @@ export const planDiagrams: Record<string, PlanImage[]> = {
 };
 
 export function renderingFor(slug: string): PlanImage | undefined {
-  return planRenderings[slug];
+  const image = planRenderings[slug];
+  return image ? { ...image, src: publicPath(image.src) } : undefined;
+}
+
+export function diagramsFor(slug: string): PlanImage[] {
+  return (planDiagrams[slug] ?? []).map((image) => ({ ...image, src: publicPath(image.src) }));
 }

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { signOut } from "@/app/actions";
 import { brandName } from "@/lib/brand";
+import { publicPath } from "@/lib/public-path";
 import type { SessionPayload } from "@/lib/session";
 
 const links = [
@@ -19,7 +20,7 @@ export function SiteHeader({ session }: { session: SessionPayload | null }) {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4">
         <Link href="/" className="shrink-0">
           <img
-            src="/brand/logo-light.png"
+            src={publicPath("/brand/logo-light.png")}
             alt={`${brandName}, powered by Acadia Homes`}
             className="h-24 w-auto"
           />
@@ -89,15 +90,14 @@ export function SiteFooter() {
     <footer className="bg-ink text-white">
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 md:grid-cols-[auto_1fr]">
         <img
-          src="/brand/logo-light.png"
+          src={publicPath("/brand/logo-light.png")}
           alt={`${brandName}, powered by Acadia Homes`}
           className="h-20 w-auto"
         />
         <div className="max-w-2xl text-sm leading-6 text-white/75">
           <p>
-            {brandName} Investor Portal is a draft review site. It is not an offer to sell securities, a
-            solicitation, or a commitment to any return. Estimated resale prices are developer estimates, not
-            appraisals or guaranteed sale prices.
+            {brandName} Investor Portal is not an offer to sell securities, a solicitation, or a commitment to any
+            return. Estimated resale prices are developer estimates, not appraisals or guaranteed sale prices.
           </p>
           <p className="mt-3">
             Office address printed on peakshomebuilders.com: 255 S Main St Suite 120, Logan, UT 84321. Acadia Homes
@@ -107,7 +107,6 @@ export function SiteFooter() {
             </a>
             .
           </p>
-          <p className="mt-3">Draft first. Send or publish only after I say yes.</p>
         </div>
       </div>
     </footer>

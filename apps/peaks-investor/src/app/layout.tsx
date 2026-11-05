@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     default: `${brandName} Investor Portal`,
     template: `%s · ${brandName}`,
   },
-  description: `Draft investor portal for ${brandName} spec home projects and the Acadia Homes floor plan collection.`,
+  description: `Investor portal for ${brandName} spec home projects and the Acadia Homes floor plan collection.`,
   robots: { index: false, follow: false },
 };
 

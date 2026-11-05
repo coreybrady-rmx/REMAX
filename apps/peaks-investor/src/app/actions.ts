@@ -42,7 +42,7 @@ export async function signIn(formData: FormData) {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    path: "/",
+    path: process.env.NEXT_PUBLIC_BASE_PATH?.replace(/\/$/, "") || "/",
     maxAge: 60 * 60 * 24 * 7,
   });
   const safeNext = nextPath.startsWith("/") && !nextPath.startsWith("//") ? nextPath : "";

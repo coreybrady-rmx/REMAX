@@ -1,5 +1,5 @@
 import { GIBBONS_PARK_LOT_URL } from "@/lib/assumptions";
-import { LOT_PLACEHOLDERS } from "@/lib/content";
+import { LOT_FACTS } from "@/lib/content";
 import { SectionHeading } from "./SectionHeading";
 
 export function LotOverview() {
@@ -12,9 +12,9 @@ export function LotOverview() {
           lede="This illustration is prepared for Lot 1 at Gibbons Park Estates. The $225,000 lot figure is an underwriting allowance, not a confirmed acquisition price."
         />
         <p className="mt-8 max-w-2xl leading-relaxed text-charcoal/80">
-          Site facts that are not in hand stay blank here. The public lot page
-          is linked for the homesite itself. This page does not restate plat,
-          size, dimensions, envelope, or orientation as if they were underwritten.
+          The facts below are printed on Lot 1 of the Gibbons Park Estates
+          final plat. The plat labels that lot 1415 Red Fox Court and 0.249
+          acres. Calls that belong to another lot are not repeated here.
         </p>
         <a
           href={GIBBONS_PARK_LOT_URL}
@@ -24,12 +24,29 @@ export function LotOverview() {
         >
           Explore Gibbons Park Lots
         </a>
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {LOT_PLACEHOLDERS.map((item) => (
-            <li key={item} className="border border-charcoal/10 bg-ivory px-5 py-5">
-              <p className="text-xs uppercase tracking-[0.16em] text-charcoal/60">{item}</p>
-              <p className="mt-3 font-serif text-xl">Not provided</p>
-              <p className="mt-2 text-sm text-charcoal/70">Placeholder. Do not treat as confirmed.</p>
+        <figure className="mt-12">
+          <object
+            data="/gibbons-park-plat.pdf"
+            type="application/pdf"
+            aria-label="Gibbons Park Estates final plat, sheet 1 of 1."
+            className="h-[70vh] min-h-[480px] w-full border border-charcoal/10 bg-ivory"
+          >
+            <a href="/gibbons-park-plat.pdf">Open the Gibbons Park Estates plat</a>
+          </object>
+          <figcaption className="mt-3 text-sm text-charcoal/70">
+            Gibbons Park Estates final plat, sheet 1 of 1, dated 02-09-2026.{" "}
+            <a href="/gibbons-park-plat.pdf" className="underline">
+              Open the plat
+            </a>
+            .
+          </figcaption>
+        </figure>
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2">
+          {LOT_FACTS.map((item) => (
+            <li key={item.label} className="border border-charcoal/10 bg-ivory px-5 py-5">
+              <p className="text-xs uppercase tracking-[0.16em] text-charcoal/60">{item.label}</p>
+              <p className="mt-3 font-serif text-xl">{item.value}</p>
+              <p className="mt-2 text-sm leading-relaxed text-charcoal/70">{item.detail}</p>
             </li>
           ))}
         </ul>

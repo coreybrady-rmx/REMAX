@@ -53,7 +53,15 @@ After any figure change, run `npm run verify` and update the expectations in `sc
 
 The hero and gallery use `public/heritage-exterior.webp`. Replace that file with the official rendering and keep the name, or change the `src` in `components/Hero.tsx` and `components/PhotoGallery.tsx` together. Do not swap in a different house.
 
-Floor plans are labeled placeholders in `lib/content.ts` (`FLOOR_PLANS`). Replace a placeholder only when a real plan file is available, and say so in the caption. Lot plat, size, dimensions, envelope, orientation, and site plan stay as “Not provided” until those documents are actually in hand. Do not copy marketing-site lot facts into those slots from memory.
+Floor plans in the gallery are the owner’s sheets in `public/`:
+
+- `heritage-plan-c.webp` is the main level
+- `heritage-plan-b.webp` is the upper level
+- `heritage-plan-a.webp` is the basement
+
+Show those files as drawn. Do not redraw them. The basement is finished, and the dollar model does not change because of that. The basement sheet still prints UNEXCAVATED and GARAGE OPTIONAL on hatched areas. Do not describe those hatched areas as finished living space.
+
+`public/gibbons-park-plat.pdf` is the Gibbons Park Estates final plat. Lot facts in `lib/content.ts` (`LOT_FACTS`) may repeat only what that plat prints on Lot 1. If a size, dimension, or orientation is not clearly Lot 1, leave it as not yet verified. Do not assign another lot’s data to Lot 1, and do not copy marketing-site lot facts from memory.
 
 ## How to configure the form
 

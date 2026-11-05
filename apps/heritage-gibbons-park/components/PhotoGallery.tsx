@@ -15,8 +15,8 @@ export function PhotoGallery() {
           Exterior and plans
         </h2>
         <p className="mt-4 max-w-2xl leading-relaxed text-charcoal/75">
-          The exterior is the official rendering for this illustration. Floor
-          plans below are placeholders until drawings are provided.
+          The exterior is the official rendering for this illustration. The
+          floor plans are the owner’s sheets, shown as drawn.
         </p>
         <figure className="mt-10">
           <div className="relative aspect-[1800/1087] overflow-hidden bg-[#d5e4ec]">
@@ -34,7 +34,7 @@ export function PhotoGallery() {
           </figcaption>
         </figure>
         <div className="mt-12">
-          <div role="tablist" aria-label="Floor plan placeholders" className="flex flex-wrap gap-2">
+          <div role="tablist" aria-label="Floor plans" className="flex flex-wrap gap-2">
             {FLOOR_PLANS.map((item) => {
               const selected = item.id === plan.id;
               return (
@@ -57,15 +57,22 @@ export function PhotoGallery() {
             role="tabpanel"
             id={`panel-${plan.id}`}
             aria-labelledby={`tab-${plan.id}`}
-            className="mt-4 border border-dashed border-charcoal/30 bg-stone px-6 py-16 text-center"
+            className="mt-4 bg-white"
           >
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/70">
-              Placeholder
-            </p>
-            <p className="mt-3 font-serif text-3xl">{plan.title}</p>
-            <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-charcoal/75">
-              {plan.note}
-            </p>
+            <figure>
+              <Image
+                src={plan.src}
+                alt={plan.alt}
+                width={plan.width}
+                height={plan.height}
+                sizes="(min-width: 1120px) 1120px, 100vw"
+                className="h-auto w-full"
+              />
+              <figcaption className="px-1 py-4">
+                <p className="font-serif text-2xl">{plan.title}</p>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-charcoal/75">{plan.note}</p>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>

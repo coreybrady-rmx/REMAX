@@ -10,8 +10,8 @@ const SPECS = [
   ["Main level", RESIDENCE.mainSf],
   ["Upper level", RESIDENCE.upperSf],
   ["Above-grade", RESIDENCE.aboveGradeSf],
-  ["Optional basement", RESIDENCE.optionalBasementSf],
-  ["Potential total", RESIDENCE.potentialTotalSf],
+  ["Basement", RESIDENCE.basementSf],
+  ["Total", RESIDENCE.totalSf],
   ["Garage", RESIDENCE.garageSf],
 ] as const;
 
@@ -23,12 +23,14 @@ export function HomeOverview() {
           <SectionHeading
             eyebrow="The Heritage residence"
             title="An Acadia Homes plan, stated as planned."
-            lede="Features are planned and subject to final selections. Unapproved upgrades are not included. The optional basement is not advertised as finished space."
+            lede="Features are planned and subject to final selections. Unapproved upgrades are not included. The basement is finished. Hatched areas on the basement sheet are not finished living space."
           />
           <p className="mt-8 max-w-xl leading-relaxed text-charcoal/80">
-            Above-grade area is {RESIDENCE.aboveGradeSf}. The optional basement
-            of {RESIDENCE.optionalBasementSf} is shown only as potential area.
-            A finished basement is not part of the modeled product.
+            Above-grade area is {RESIDENCE.aboveGradeSf}. The basement is{" "}
+            {RESIDENCE.basementSf} and is finished. The dollar figures in this
+            illustration are unchanged. The basement sheet still prints
+            UNEXCAVATED and GARAGE OPTIONAL on hatched areas. Those hatched
+            areas are not finished living space.
           </p>
           <h3 className="mt-10 font-serif text-2xl">Planned features</h3>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">

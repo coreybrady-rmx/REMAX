@@ -96,9 +96,8 @@ export function SiteFooter() {
         />
         <div className="max-w-2xl text-sm leading-6 text-white/75">
           <p>
-            {brandName} Investor Portal is a draft review site. It is not an offer to sell securities, a
-            solicitation, or a commitment to any return. Estimated resale prices are developer estimates, not
-            appraisals or guaranteed sale prices.
+            {brandName} Investor Portal is not an offer to sell securities, a solicitation, or a commitment to any
+            return. Estimated resale prices are developer estimates, not appraisals or guaranteed sale prices.
           </p>
           <p className="mt-3">
             Office address printed on peakshomebuilders.com: 255 S Main St Suite 120, Logan, UT 84321. Acadia Homes
@@ -108,7 +107,6 @@ export function SiteFooter() {
             </a>
             .
           </p>
-          <p className="mt-3">Draft first. Send or publish only after I say yes.</p>
         </div>
       </div>
     </footer>

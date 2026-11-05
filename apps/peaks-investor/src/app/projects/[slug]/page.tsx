@@ -19,6 +19,7 @@ import {
 } from "@/lib/db";
 import { FORMULA_NOTES } from "@/lib/finance";
 import { formatCents } from "@/lib/format";
+import { publicPath } from "@/lib/public-path";
 import { DrawingViewer } from "@/components/DrawingViewer";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -65,7 +66,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <dd className="text-lg font-semibold">{showAddress ? project.address_line : "Not published"}</dd>
           </div>
         </dl>
-        <DrawingViewer images={media.map((item) => ({ src: `/api/media/${item.id}`, title: item.kind }))} />
+        <DrawingViewer images={media.map((item) => ({ src: publicPath(`/api/media/${item.id}`), title: item.kind }))} />
         <section>
           <h2 className="text-3xl">Financial overview</h2>
           {scenarios.length === 0 ? <p className="mt-3">No scenario has been entered.</p> : null}
@@ -141,7 +142,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <ul className="mt-4 space-y-2">
               {documents.map((document) => (
                 <li key={document.id}>
-                  <a className="font-semibold text-link" href={`/api/documents/${document.id}`}>
+                  <a className="font-semibold text-link" href={publicPath(`/api/documents/${document.id}`)}>
                     {document.title}
                   </a>
                 </li>

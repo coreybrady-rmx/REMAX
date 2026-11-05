@@ -16,6 +16,7 @@ import {
   verifyPassword,
 } from "@/lib/db";
 import { parseCents } from "@/lib/format";
+import { sessionCookiePath } from "@/lib/public-path";
 import { createSessionToken, readSessionToken, SESSION_COOKIE } from "@/lib/session";
 
 async function requireAdmin() {
@@ -42,7 +43,7 @@ export async function signIn(formData: FormData) {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    path: process.env.NEXT_PUBLIC_BASE_PATH?.replace(/\/$/, "") || "/",
+    path: sessionCookiePath(),
     maxAge: 60 * 60 * 24 * 7,
   });
   const safeNext = nextPath.startsWith("/") && !nextPath.startsWith("//") ? nextPath : "";
@@ -50,7 +51,7 @@ export async function signIn(formData: FormData) {
 }
 
 export async function signOut() {
-  (await cookies()).delete(SESSION_COOKIE);
+  (await cookies()).delete({ name: SESSION_COOKIE, path: sessionCookiePath() });
   redirect("/");
 }
 

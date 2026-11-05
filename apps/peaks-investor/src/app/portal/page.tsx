@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { PageIntro } from "@/components/SiteChrome";
 import { currentSession } from "@/lib/current";
 import { assignedProjects, projectDocuments, projectMilestones } from "@/lib/db";
+import { publicPath } from "@/lib/public-path";
 
 export const metadata = { title: "Investor dashboard" };
 
@@ -43,7 +44,7 @@ export default async function PortalPage() {
               <ul className="mt-3 text-sm">
                 {projectDocuments(project.id, true).map((document) => (
                   <li key={document.id}>
-                    <a className="text-link" href={`/api/documents/${document.id}`}>
+                    <a className="text-link" href={publicPath(`/api/documents/${document.id}`)}>
                       {document.title}
                     </a>
                   </li>

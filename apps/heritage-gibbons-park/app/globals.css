@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-charcoal: #14232c;
+  --color-ivory: #f6f3ec;
+  --color-gold: #b49a6b;
+  --color-sage: #7b897c;
+  --color-stone: #eae6de;
+  --color-white: #ffffff;
+  --font-sans: var(--font-outfit), "Avenir Next", "Segoe UI", sans-serif;
+  --font-serif: var(--font-newsreader), "Iowan Old Style", Palatino, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: #f6f3ec;
+  color: #14232c;
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #b49a6b;
+  color: #14232c;
+}
+
+:focus-visible {
+  outline: 2px solid #b49a6b;
+  outline-offset: 3px;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.ledger > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-bottom: 1px solid color-mix(in srgb, #14232c 12%, transparent);
+  padding: 0.85rem 0;
+}
+
+.ledger dt {
+  max-width: 34rem;
+}
+
+.ledger dd {
+  text-align: right;
+}

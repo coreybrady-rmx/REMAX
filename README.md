@@ -40,3 +40,7 @@ Leads include `assignedTo` / `ghlAssignee` set to the agent (Corey Brady on the 
 Office stats on the pilot are labeled as brokerage production and should be replaced with current transaction-ledger figures before public marketing claims.
 
 See [docs/phase-2-agent-rollout.md](docs/phase-2-agent-rollout.md) for the template used to scale to ~30 agents.
+
+## The Heritage investor microsite
+
+A separate Next.js app lives in `apps/heritage-gibbons-park`. It has its own install, build, and Vercel project. Do not point the agent-microsite Vercel project at that directory. Setup, figures, images, the inquiry form, deployment, and disclosures are documented in [apps/heritage-gibbons-park/README.md](apps/heritage-gibbons-park/README.md).

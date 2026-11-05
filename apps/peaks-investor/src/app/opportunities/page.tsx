@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageIntro } from "@/components/SiteChrome";
 import { publicProjects } from "@/lib/db";
+import { gibbonsLotsUrl } from "@/lib/gibbons";
 
 export const metadata = { title: "Current investment opportunities" };
 
@@ -17,7 +18,12 @@ export default function OpportunitiesPage() {
             <h2 className="text-3xl">No public opportunities yet</h2>
             <p className="mt-3 max-w-2xl leading-7 text-ink/75">
               A proposal, an active listing, or a house under construction is not shown here until the record is approved.
-              Nothing on this page is filled in to make the list look active.
+              Nothing on this page is filled in to make the list look active. The Heritage is planned for Lot 1 at
+              Gibbons Park Estates in Logan.{" "}
+              <a className="font-bold text-link" href={gibbonsLotsUrl}>
+                Explore Gibbons Park Lots
+              </a>
+              .
             </p>
           </div>
         ) : (

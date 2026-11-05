@@ -4,6 +4,7 @@ import { brandName } from "@/lib/brand";
 import { CompletedRubySection } from "@/components/RubyProjects";
 import { listPlans, publicProjects } from "@/lib/db";
 import { formatBaths, formatSqft } from "@/lib/format";
+import { gibbonsLotsUrl } from "@/lib/gibbons";
 import { publicPath } from "@/lib/public-path";
 import { renderingFor } from "@/lib/renderings";
 
@@ -79,7 +80,12 @@ export default function HomePage() {
         {opportunities.length === 0 ? (
           <p>
             No offering is open on this page yet. When the next home is selected, we will publish its lot, plan,
-            budget, and projected sale here, with the same detail we provide to every investor.
+            budget, and projected sale here, with the same detail we provide to every investor. The Heritage is
+            planned for Lot 1 at Gibbons Park Estates in Logan.{" "}
+            <a className="font-bold text-link" href={gibbonsLotsUrl}>
+              Explore Gibbons Park Lots
+            </a>
+            .
           </p>
         ) : (
           <ProjectList projects={opportunities} />

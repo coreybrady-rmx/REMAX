@@ -5,6 +5,7 @@ import { PriceBlock } from "@/components/Money";
 import { PageIntro } from "@/components/SiteChrome";
 import { getPlan, listPlans, publicEstimates, publicProjects, visibleMedia } from "@/lib/db";
 import { formatBaths, formatSqft } from "@/lib/format";
+import { gibbonsLotsUrl } from "@/lib/gibbons";
 import { publicPath } from "@/lib/public-path";
 import { diagramsFor, renderingFor } from "@/lib/renderings";
 
@@ -98,7 +99,19 @@ export default async function PlanDetailPage({ params }: { params: Promise<{ slu
           <div className="border border-ink/10 p-5">
             <h2 className="text-2xl">Projects using this plan</h2>
             {projects.length === 0 ? (
-              <p className="mt-3 text-sm leading-6">No public project is assigned to this plan.</p>
+              <p className="mt-3 text-sm leading-6">
+                No public project is assigned to this plan.
+                {plan.slug === "heritage" ? (
+                  <>
+                    {" "}
+                    This plan is the home planned for Lot 1 at Gibbons Park Estates.{" "}
+                    <a className="font-bold text-link" href={gibbonsLotsUrl}>
+                      Explore Gibbons Park Lots
+                    </a>
+                    .
+                  </>
+                ) : null}
+              </p>
             ) : (
               <ul className="mt-3 space-y-2">
                 {projects.map((project) => (

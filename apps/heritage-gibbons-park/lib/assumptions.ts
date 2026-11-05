@@ -7,6 +7,8 @@ export const ASSUMPTIONS = {
   lotEquity: 225_000,
   constructionBudget: 850_000,
   closingCosts: 5_000,
+  /** Commission is 5% of the sale price. */
+  commissionBps: 500,
   drawCount: 5,
   profitShare: 0.5,
   annualRateBps: 1_000,

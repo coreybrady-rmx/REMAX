@@ -64,8 +64,9 @@ export function InvestmentSummary() {
               </div>
             </dl>
             <p className="mt-4 text-sm leading-relaxed text-charcoal/70">
-              Total base capital excludes modeled interest and closing costs.
-              Those are in the project budget below.
+              Total base capital excludes modeled interest, the commission, and
+              closing costs. The commission is 5% of the sale price. Those
+              amounts are in the project budget below.
             </p>
           </div>
         </div>

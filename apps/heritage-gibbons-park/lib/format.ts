@@ -8,7 +8,7 @@ export function formatDollars(cents: number): string {
   return negative ? `-${text}` : text;
 }
 
-/** One decimal place. 138750 / 225000 → 61.7%. */
+/** One decimal place. 103750 / 225000 → 46.1%. */
 export function formatPercent(ratio: number): string {
   const rounded = Math.round(ratio * 1000) / 10;
   return `${rounded.toFixed(1)}%`;

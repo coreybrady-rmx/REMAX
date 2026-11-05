@@ -6,14 +6,15 @@ import { formatDollars, formatPercent } from "../lib/format";
 const base = baseCase;
 
 assert.equal(formatDollars(base.interestCents), "$42,500");
-assert.equal(formatDollars(base.totalCostCents), "$1,122,500");
-assert.equal(formatDollars(base.profitCents), "$277,500");
-assert.equal(formatDollars(base.investorCents ?? 0), "$138,750");
-assert.equal(formatDollars(base.peaksCents ?? 0), "$138,750");
-assert.equal(formatDollars(base.proceedsCents ?? 0), "$363,750");
+assert.equal(formatDollars(base.commissionCents), "$70,000");
+assert.equal(formatDollars(base.totalCostCents), "$1,192,500");
+assert.equal(formatDollars(base.profitCents), "$207,500");
+assert.equal(formatDollars(base.investorCents ?? 0), "$103,750");
+assert.equal(formatDollars(base.peaksCents ?? 0), "$103,750");
+assert.equal(formatDollars(base.proceedsCents ?? 0), "$328,750");
 assert.equal(formatDollars(base.capitalReturnCents ?? 0), "$225,000");
-assert.equal(formatPercent(base.cashOnCash ?? 0), "61.7%");
-assert.equal(formatDollars(base.breakEvenCents), "$1,122,500");
+assert.equal(formatPercent(base.cashOnCash ?? 0), "46.1%");
+assert.equal(formatDollars(base.breakEvenCents), "$1,192,500");
 assert.equal(base.isLoss, false);
 assert.deepEqual(
   base.draws.map((draw) => draw.outstandingMonths),
@@ -24,11 +25,11 @@ assert.equal(
   true,
 );
 
-const expectedSensitivity: Array<[number, string, string, string]> = [
-  [1_200_000, "$77,500", "$38,750", "17.2%"],
-  [1_300_000, "$177,500", "$88,750", "39.4%"],
-  [1_400_000, "$277,500", "$138,750", "61.7%"],
-  [1_450_000, "$327,500", "$163,750", "72.8%"],
+const expectedSensitivity: Array<[number, string, string, string, string]> = [
+  [1_200_000, "$60,000", "$17,500", "$8,750", "3.9%"],
+  [1_300_000, "$65,000", "$112,500", "$56,250", "25.0%"],
+  [1_400_000, "$70,000", "$207,500", "$103,750", "46.1%"],
+  [1_450_000, "$72,500", "$255,000", "$127,500", "56.7%"],
 ];
 
 assert.deepEqual([...SENSITIVITY_SALE_PRICES], expectedSensitivity.map(([price]) => price));
@@ -39,7 +40,8 @@ const rows = sensitivityCases({
 });
 
 rows.forEach((row, index) => {
-  const [, profit, investor, coc] = expectedSensitivity[index];
+  const [, commission, profit, investor, coc] = expectedSensitivity[index];
+  assert.equal(formatDollars(row.result.commissionCents), commission);
   assert.equal(formatDollars(row.result.profitCents), profit);
   assert.equal(formatDollars(row.result.investorCents ?? 0), investor);
   assert.equal(formatPercent(row.result.cashOnCash ?? 0), coc);
@@ -71,7 +73,8 @@ const loss = calculate({
   annualRateBps: 1_000,
 });
 assert.equal(loss.isLoss, true);
-assert.equal(formatDollars(loss.profitCents), "-$22,500");
+assert.equal(formatDollars(loss.commissionCents), "$55,000");
+assert.equal(formatDollars(loss.profitCents), "-$77,500");
 assert.equal(loss.investorCents, null);
 assert.equal(loss.peaksCents, null);
 assert.equal(loss.capitalReturnCents, null);

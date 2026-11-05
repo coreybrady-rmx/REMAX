@@ -62,6 +62,11 @@ export function ReturnCalculator() {
 
   const rows: Array<{ label: string; value: string; test: string }> = [
     { label: "Interest", value: formatDollars(result.interestCents), test: "interest" },
+    {
+      label: "Commission (5% of sale price)",
+      value: formatDollars(result.commissionCents),
+      test: "commission",
+    },
     { label: "Total cost", value: formatDollars(result.totalCostCents), test: "cost" },
     {
       label: result.isLoss ? "Project loss" : "Projected project profit",
@@ -117,9 +122,9 @@ export function ReturnCalculator() {
           <h2 className="font-serif text-4xl md:text-5xl">Investor returns</h2>
           <p className="mt-4 leading-relaxed text-charcoal/75">
             Lot capital, the construction budget, closing costs, and the 50/50
-            profit share stay fixed. Sale price, duration, and the interest
-            rate move together through the draw schedule, the results, and the
-            charts.
+            profit share stay fixed. The commission is 5% of the sale price.
+            Sale price, duration, and the interest rate move together through
+            the draw schedule, the results, and the charts.
           </p>
           <div className="mt-8 space-y-6">
             <Slider
@@ -167,7 +172,8 @@ export function ReturnCalculator() {
             Reset to Base Case
           </button>
           <p className="mt-6 text-sm leading-relaxed text-charcoal/70">
-            Profit = sale − lot − construction − interest − closing. If profit
+            Profit = sale − lot − construction − interest − commission − closing.
+            If profit
             is positive, investor profit = profit × 50%, and cash-on-cash =
             investor profit / lot. That return is projected. It is not an
             annualized IRR. {lossTreatmentNote}

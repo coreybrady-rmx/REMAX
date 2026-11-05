@@ -12,7 +12,8 @@
  * is not funded. Interest is charged only on draws the timeline reaches.
  * A shorter hold is not modeled as a cheaper house.
  *
- * Profit = sale − lot − construction − interest − closing.
+ * Commission = sale × 5%.
+ * Profit = sale − lot − construction − interest − commission − closing.
  * If profit > 0, each party receives profit × 50%.
  * Cash-on-cash = investor profit / lot. It is not an annualized IRR.
  * If profit < 0, the loss is not split.
@@ -45,6 +46,12 @@ export function equalDrawPrincipalCents(
   return constructionBudgetCents / drawCount;
 }
 
+/** sale × commission rate, rounded to the nearest cent. */
+export function commissionCents(saleCents: number, commissionBps: number): number {
+  if (saleCents <= 0 || commissionBps <= 0) return 0;
+  return Math.round((saleCents * commissionBps) / 10_000);
+}
+
 /** principal × rate × months / 12, rounded to the nearest cent. */
 export function simpleInterestCents(
   principalCents: number,
@@ -60,12 +67,14 @@ export function projectCostCents(parts: {
   lotCents: number;
   constructionCents: number;
   interestCents: number;
+  commissionCents: number;
   closingCents: number;
 }): number {
   return (
     parts.lotCents +
     parts.constructionCents +
     parts.interestCents +
+    parts.commissionCents +
     parts.closingCents
   );
 }

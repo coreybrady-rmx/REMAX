@@ -1,6 +1,7 @@
 import { ASSUMPTIONS, SENSITIVITY_SALE_PRICES } from "./assumptions";
 import {
   cashOnCash,
+  commissionCents,
   equalDrawPrincipalCents,
   isDrawFunded,
   outstandingMonths,
@@ -27,6 +28,7 @@ export type DrawLine = {
 
 export type ModelResult = {
   interestCents: number;
+  commissionCents: number;
   constructionCents: number;
   totalCostCents: number;
   profitCents: number;
@@ -51,6 +53,7 @@ export function calculate(input: ModelInput): ModelResult {
   const constructionCents = dollarsToCents(ASSUMPTIONS.constructionBudget);
   const closingCents = dollarsToCents(ASSUMPTIONS.closingCosts);
   const saleCents = dollarsToCents(input.salePrice);
+  const saleCommissionCents = commissionCents(saleCents, ASSUMPTIONS.commissionBps);
   const drawPrincipal = equalDrawPrincipalCents(
     constructionCents,
     ASSUMPTIONS.drawCount,
@@ -82,12 +85,14 @@ export function calculate(input: ModelInput): ModelResult {
     lotCents,
     constructionCents,
     interestCents,
+    commissionCents: saleCommissionCents,
     closingCents,
   });
   const profitCents = projectProfitCents(saleCents, totalCostCents);
   const isLoss = profitCents < 0;
   const shared = {
     interestCents,
+    commissionCents: saleCommissionCents,
     constructionCents,
     totalCostCents,
     profitCents,
@@ -126,6 +131,7 @@ export function calculate(input: ModelInput): ModelResult {
 
   return {
     interestCents,
+    commissionCents: saleCommissionCents,
     constructionCents,
     totalCostCents,
     profitCents,

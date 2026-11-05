@@ -21,6 +21,11 @@ export function ProjectBudget() {
       note: "Simple interest on drawn funds for the 8-month base case.",
     },
     {
+      label: "Commission",
+      value: formatDollars(baseCase.commissionCents),
+      note: "5% of the sale price.",
+    },
+    {
       label: "Closing costs",
       value: formatDollars(ASSUMPTIONS.closingCosts * 100),
     },
@@ -38,7 +43,7 @@ export function ProjectBudget() {
       label: "Modeled project profit",
       value: formatDollars(baseCase.profitCents),
       strong: true,
-      note: "After the listed costs, including modeled interest. Excludes other costs in the disclosures. Not after-tax net profit.",
+      note: "Sale price minus lot, construction, interest, commission, and closing costs. Excludes other costs in the disclosures. Not after-tax net profit.",
     },
   ];
 

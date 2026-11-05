@@ -26,7 +26,7 @@ Node.js 20.9 or newer. This app uses Next.js 16, React 19, and Tailwind CSS 4.
 
 Underwriting inputs live in `lib/assumptions.ts`:
 
-- lot equity, construction budget, closing costs
+- lot equity, construction budget, closing costs, commission rate (5% of the sale price)
 - draw count and profit share
 - default sale price, duration, and annual rate
 - slider ranges
@@ -43,7 +43,7 @@ outstanding months = duration − draw index (0–4)
 
 A draw is funded only when the duration reaches that draw’s month. Otherwise its principal for interest is zero. Project cost still includes the full construction budget, so a shorter hold is not treated as a cheaper house. The calculator’s shortest duration is 5 months, which funds all five draws. `npm run verify` also checks a 4-month case.
 
-Profit = sale − lot − construction − interest − closing.
+Profit = sale − lot − construction − interest − commission − closing. Commission is 5% of the sale price. At the $1,400,000 target it is $70,000.
 
 If profit is positive, Peaks and the lot investor each receive half. Cash-on-cash is investor profit divided by lot capital. It is not an annualized IRR. If profit is negative, the loss is not split 50/50. Capital return and proceeds are not modeled on a loss.
 

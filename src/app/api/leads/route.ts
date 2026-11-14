@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { leadDeliveryMode } from "@/lib/lead-delivery";
 
 type LeadPayload = {
   intent?: string;
@@ -34,7 +35,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const webhook = process.env.GHL_WEBHOOK_URL || process.env.LEAD_WEBHOOK_URL;
+  const webhook = (
+    process.env.GHL_WEBHOOK_URL || process.env.LEAD_WEBHOOK_URL
+  )?.trim();
   const payload = {
     ...body,
     full_name: fullName,
@@ -44,31 +47,53 @@ export async function POST(req: NextRequest) {
     assignedTo: body.ghlAssignee || body.agentName || "Corey Brady",
   };
 
-  if (webhook) {
-    try {
-      const upstream = await fetch(webhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!upstream.ok) {
-        const text = await upstream.text();
-        console.error("Lead webhook failed", upstream.status, text);
-        return NextResponse.json(
-          { error: "Upstream webhook failed" },
-          { status: 502 },
-        );
-      }
-    } catch (err) {
-      console.error("Lead webhook error", err);
+  const mode = leadDeliveryMode({
+    webhook,
+    nodeEnv: process.env.NODE_ENV,
+    vercelEnv: process.env.VERCEL_ENV,
+  });
+
+  if (mode === "unconfigured") {
+    console.error("Lead webhook is not configured");
+    return NextResponse.json(
+      { error: "Lead delivery is unavailable" },
+      { status: 503 },
+    );
+  }
+
+  if (mode === "dev-log") {
+    // Local/dev only, so the UI flow can be tested before GHL is wired.
+    console.info("[leads:dev]", JSON.stringify(payload));
+    return NextResponse.json({ ok: true });
+  }
+
+  if (!webhook) {
+    return NextResponse.json(
+      { error: "Lead delivery is unavailable" },
+      { status: 503 },
+    );
+  }
+
+  try {
+    const upstream = await fetch(webhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!upstream.ok) {
+      const text = await upstream.text();
+      console.error("Lead webhook failed", upstream.status, text);
       return NextResponse.json(
-        { error: "Unable to reach lead webhook" },
+        { error: "Upstream webhook failed" },
         { status: 502 },
       );
     }
-  } else {
-    // Soft-success in local/dev so the UI flow can be tested before GHL is wired.
-    console.info("[leads:dev]", JSON.stringify(payload));
+  } catch (err) {
+    console.error("Lead webhook error", err);
+    return NextResponse.json(
+      { error: "Unable to reach lead webhook" },
+      { status: 502 },
+    );
   }
 
   return NextResponse.json({ ok: true });

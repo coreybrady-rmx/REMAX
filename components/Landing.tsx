@@ -257,7 +257,8 @@ function MarketStrip({ market }: { market: MarketSnapshot }) {
       <h2 id="market-title">Cache Valley current inventory</h2>
       <p>
         Active single-family homes and townhomes in Cache County. These are asking prices, not sold
-        prices, and not a value for your home. Refreshed every morning at 6:00 AM Mountain time.
+        prices, and not a value for your home. Refreshed every morning at 6:00 AM Mountain
+        Standard Time (7:00 AM during daylight saving time).
       </p>
       {ready ? (
         <div className="stats">

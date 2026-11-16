@@ -1,6 +1,6 @@
 # RE/MAX Peaks — Cache Valley QR page
 
-Mobile-first landing page for the RE/MAX Peaks Logan office QR code at [www.remaxpeaks.com/your-next-move](https://www.remaxpeaks.com/your-next-move). Each new scan gets the next headline, in order, and that visitor keeps it. Visitors then choose a free CMA or a buyer payment tool, and can search active Cache Valley homes. The inventory snapshot refreshes from the UtahRealEstate API every morning at 6:00 AM Mountain Daylight Time (12:00 UTC). After November 1, 2026, that same UTC schedule is 5:00 AM Mountain Standard Time.
+Mobile-first landing page for the RE/MAX Peaks Logan office QR code at [www.remaxpeaks.com/your-next-move](https://www.remaxpeaks.com/your-next-move). Each new scan gets the next headline, in order, and that visitor keeps it. Visitors then choose a free CMA or a buyer payment tool, and can search active Cache Valley homes. The inventory snapshot refreshes from the UtahRealEstate API every morning at 6:00 AM Mountain Standard Time (13:00 UTC). During daylight saving time that same UTC schedule is 7:00 AM Mountain Daylight Time. The refresh writes the single-family and townhome counts the live page reads.
 
 Design: [Figma file](https://www.figma.com/design/oSYnpLYpXNMqbIMmsutnzX)
 

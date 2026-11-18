@@ -1,5 +1,13 @@
-const CACHE = "vegas-gp-v1";
-const PRECACHE = ["/", "/offline.html", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/icon-512.png", "/icons/apple-touch-icon.png"];
+const CACHE = "vegas-gp-v2";
+const PRECACHE = [
+  "/",
+  "/offline.html",
+  "/manifest.webmanifest",
+  "/icons/favicon-32.png",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+  "/icons/apple-touch-icon.png",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

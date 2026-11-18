@@ -1,6 +1,12 @@
-const CACHE = "vegas-gp-v2";
+const CACHE = "vegas-gp-v3";
 const PRECACHE = [
   "/",
+  "/laps",
+  "/flights",
+  "/hotel",
+  "/events",
+  "/contacts",
+  "/checklist",
   "/offline.html",
   "/manifest.webmanifest",
   "/icons/favicon-32.png",

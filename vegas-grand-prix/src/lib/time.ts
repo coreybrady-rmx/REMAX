@@ -88,6 +88,15 @@ export function vegasNowLabel(now: number): { time: string; date: string } {
   return { time: `${time} PT`, date };
 }
 
+export function vegasDateKey(now: number): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: VEGAS,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date(now));
+}
+
 export function countdown(ms: number): string {
   const total = Math.max(0, Math.floor(ms / 1000));
   const hours = Math.floor(total / 3600);

@@ -1,5 +1,10 @@
-import { TripApp } from "@/components/TripApp";
+import { Shell } from "@/components/Shell";
+import { NowSection } from "@/components/sections";
 
 export default function Page() {
-  return <TripApp />;
+  return (
+    <Shell>
+      <NowSection />
+    </Shell>
+  );
 }

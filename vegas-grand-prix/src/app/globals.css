@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-barlow), "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: var(--font-titillium), "Titillium Web", "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
+  --color-remax: #dc1c2e;
+  --color-remax-blue: #003da5;
+  --color-ink: #0b0f1a;
+  --color-card: #f2f4f7;
+  --color-flag-green: #0e7a32;
+  --color-flag-yellow: #f5c518;
+  --color-flag-gray: #e6e8ee;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+}
+
+.checker {
+  height: 16px;
+  background-image: repeating-linear-gradient(90deg, #0b0f1a 0 16px, #ffffff 16px 32px);
+  background-size: 32px 16px;
+  animation: checker-slide 1.4s linear infinite;
+}
+
+.now-card {
+  animation: rise 0.35s ease-out;
+}
+
+.light {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes checker-slide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 32px 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .checker,
+  .now-card {
+    animation: none;
+  }
+  .light {
+    transition: none;
+  }
+}

@@ -1,0 +1,559 @@
+{
+  "trip": {
+    "name": "Las Vegas, Nov 19-21, 2026",
+    "purpose": "Jets and Capital Las Vegas, Formula 1 weekend, traveling with Travis Allred",
+    "timeZoneVegas": "America/Los_Angeles",
+    "timeZoneHome": "America/Denver",
+    "startDate": "2026-11-19",
+    "endDate": "2026-11-21",
+    "compiledAt": "2026-11-18T15:30:00-07:00",
+    "compiledNote": "Facts compiled from the trip emails and the family weekend PDF. Home calendar events are not included. Do not invent missing details. Show unknowns and conflicts in the UI."
+  },
+  "travelers": [
+    {
+      "name": "Corey Brady",
+      "role": "traveler"
+    },
+    {
+      "name": "Travis Allred",
+      "role": "traveler",
+      "email": "travisallred@remaxpeaks.com"
+    }
+  ],
+  "flights": {
+    "airline": "Frontier",
+    "confirmationCode": "HE23RS",
+    "retrieveUrl": "https://booking.flyfrontier.com/Booking/Retrieve?ln=Brady&rl=HE23RS",
+    "manageTripUrl": "https://www.flyfrontier.com/travel/my-trips/manage-trip/",
+    "appStoreUrl": "https://apps.apple.com/us/app/frontier-airlines/id1041410548",
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=com.flyfrontier.android",
+    "passengers": [
+      "Corey Brady",
+      "Travis Allred"
+    ],
+    "frontierMilesNumber": "90113865683",
+    "totalPaidUsd": 635.92,
+    "paymentType": "Mastercard",
+    "seats": "unknown",
+    "bags": {
+      "status": "unknown",
+      "conflict": "The first confirmation and Corey's forward to Travis said only a personal item is included. A later confirmation said the trip includes bags. Bag count and type are unknown.",
+      "personalItemIncluded": "One personal item is included with the fare: 18 x 14 x 8 in, up to 35 lb.",
+      "carryOnAndCheckedNote": "Carry-on and checked bags start at $75 per bag, per direction, unless already added."
+    },
+    "checkIn": {
+      "method": "Frontier app, starting 24 hours before scheduled departure",
+      "outboundCheckInOpenedAt": "2026-11-18T09:28:00-07:00",
+      "status": "unknown",
+      "reminderSent": "A check-in reminder email was sent Wed Nov 18 at 9:44 AM Mountain Time. No boarding-pass email was found.",
+      "arriveEarly": "Arrive 2-3 hours before departure.",
+      "bagDropCutoff": "Check-in and bag drop end 60 minutes before departure.",
+      "gateCutoff": "Confirmation says be at the gate no later than 45 minutes before departure. Check-in reminder says boarding ends 20 minutes before departure."
+    },
+    "segments": [
+      {
+        "id": "outbound",
+        "direction": "outbound",
+        "flightNumber": "F9 4695",
+        "date": "2026-11-19",
+        "from": {
+          "code": "SLC",
+          "name": "Salt Lake City International Airport",
+          "city": "Salt Lake City"
+        },
+        "to": {
+          "code": "LAS",
+          "name": "Harry Reid International Airport",
+          "city": "Las Vegas"
+        },
+        "departLocal": "2026-11-19T09:28:00-07:00",
+        "departTimeZone": "America/Denver",
+        "arriveLocal": "2026-11-19T10:06:00-08:00",
+        "arriveTimeZone": "America/Los_Angeles",
+        "stops": "nonstop (none shown on the confirmation)",
+        "terminal": "unknown",
+        "gate": "unknown"
+      },
+      {
+        "id": "return",
+        "direction": "return",
+        "flightNumber": "F9 1508",
+        "date": "2026-11-21",
+        "from": {
+          "code": "LAS",
+          "name": "Harry Reid International Airport",
+          "city": "Las Vegas"
+        },
+        "to": {
+          "code": "SLC",
+          "name": "Salt Lake City International Airport",
+          "city": "Salt Lake City"
+        },
+        "departLocal": "2026-11-21T18:43:00-08:00",
+        "departTimeZone": "America/Los_Angeles",
+        "arriveLocal": "2026-11-21T21:11:00-07:00",
+        "arriveTimeZone": "America/Denver",
+        "stops": "nonstop (none shown on the confirmation)",
+        "terminal": "unknown",
+        "gate": "unknown"
+      }
+    ]
+  },
+  "hotel": {
+    "name": "Palace Station Hotel and Casino",
+    "address": "2411 W Sahara Ave, Las Vegas",
+    "addressNote": "The confirmation does not print a state or ZIP.",
+    "mapUrl": "https://maps.google.com/?q=2411+W+Sahara+Ave,+Las+Vegas",
+    "bookedThrough": "Axel",
+    "confirmationCode": "AXL-9SYQ1Y5E",
+    "itineraryUrl": "https://helloaxel.com/trips/34e5f99e-c39c-4c56-96a3-e5aebc85eeae",
+    "supportEmail": "help@helloaxel.com",
+    "room": "Premier room, 2 queen beds, private bathroom",
+    "guests": [
+      "Corey Brady",
+      "Travis Allred"
+    ],
+    "checkInDate": "2026-11-19",
+    "checkInTime": "unknown",
+    "checkOutDate": "2026-11-21",
+    "nights": 2,
+    "totalPaidUsd": 198.95,
+    "receiptNumber": "1805-9325",
+    "paidAt": "November 10, 2026 at 4:41:45 PM PST",
+    "payAtHotelNote": "The confirmation also listed Pay at hotel $181.36. Whether anything is still due at the hotel is unknown.",
+    "cancellation": "Free cancellation ended Nov 15, 2026 at 10:00 AM. The booking is now non-refundable.",
+    "notTheEventHotel": "Jets and Capital listed Caesars Palace as the hotel partner. No Caesars booking was found.",
+    "notTheAirbnb": "The family weekend PDF lists an Airbnb at 4201 East Hacienda Avenue. That is the group meetup house, not this booked stay."
+  },
+  "jetsAndCapital": {
+    "officialName": "Jets & Capital Las Vegas, Formula 1",
+    "registrationOrder": "#76112, placed October 13, 2026 at 5:51 PM EDT",
+    "instagram": "@JetsAndCapital",
+    "contact": {
+      "name": "Jordan Hutchinson",
+      "email": "jordan@jetsandcapital.com"
+    },
+    "whatsAppGroup": "A WhatsApp group link was in the Oct 13 Event Details email. Join status is unknown. The emailed link was a tracking URL.",
+    "sessions": [
+      {
+        "id": "main-event",
+        "title": "Jets & Capital main event",
+        "date": "2026-11-19",
+        "officialStart": "15:00",
+        "officialEnd": "21:30",
+        "timeZone": "America/Los_Angeles",
+        "timeSource": "Event Details email Oct 13 (3:00-9:30 PM Las Vegas time)",
+        "pdfConflict": "Family weekend PDF lists this as 3-10 PM, optional.",
+        "venue": "Cirrus Aviation",
+        "addressEmailAndCalendar": "5050 Koval Lane, Las Vegas, NV 89169",
+        "addressFamilyPdf": "275 E Tropicana Ave, Las Vegas, NV 89169",
+        "addressConflict": "Two addresses appear in the sources. Public listings for Cirrus Aviation Services currently show 275 East Tropicana Avenue. Confirm before going.",
+        "mapUrlPreferredUnknown": "https://maps.google.com/?q=275+E+Tropicana+Ave,+Las+Vegas,+NV+89169",
+        "mapUrlEmail": "https://maps.google.com/?q=5050+Koval+Lane,+Las+Vegas,+NV+89169"
+      },
+      {
+        "id": "charity",
+        "title": "Susan G. Komen charity event",
+        "date": "2026-11-20",
+        "officialStart": "10:30",
+        "officialEnd": "14:00",
+        "timeZone": "America/Los_Angeles",
+        "timeSource": "Event Details email Oct 13 (10:30 AM-2:00 PM Las Vegas time)",
+        "pdfConflict": "Family weekend PDF lists a charity luncheon, ages 18+ only, at 11:30 AM-3:00 PM at the same venue.",
+        "venue": "Caesars Palace",
+        "address": "3570 S Las Vegas Blvd, Las Vegas, NV 89109",
+        "mapUrl": "https://maps.google.com/?q=3570+S+Las+Vegas+Blvd,+Las+Vegas,+NV+89109"
+      }
+    ]
+  },
+  "familyRaceWeekend": {
+    "title": "Las Vegas / Family Race Weekend",
+    "source": "Las-Vegas-Family-Weekend.pdf, Google Drive file 1_5hef3mU-SkO4vQ69SOjYVTjdi6i4ETG",
+    "allTimesAre": "America/Los_Angeles",
+    "everythingOptional": true,
+    "uberNote": "Budget for Ubers. Plan to use Uber for Strip trips and build extra travel time into the day. Room assignments are posted on the Airbnb doors.",
+    "suiteNote": "Your family will know which nights you are invited to the Cosmopolitan suite. On other nights, make your own plans or ask Alec about other options. Which nights Corey and Travis are invited is unknown.",
+    "f1TimesNote": "F1 times were checked against the official 2026 timetable and are subject to change.",
+    "addresses": {
+      "airbnb": "4201 East Hacienda Avenue, Las Vegas, NV 89120",
+      "cirrusAviationPdf": "275 E Tropicana Ave, Las Vegas, NV 89169",
+      "cosmopolitanSuite": "3708 S Las Vegas Blvd, Las Vegas, NV 89109",
+      "caesarsPalace": "3570 S Las Vegas Blvd, Las Vegas, NV 89109",
+      "dreamExotics": "4301 S Valley View Blvd, Ste 16, Las Vegas, NV 89103",
+      "privateMansion": "3624 Edmond St, Las Vegas, NV 89103"
+    },
+    "days": [
+      {
+        "date": "2026-11-19",
+        "label": "Thursday, Arrive and settle in",
+        "items": [
+          {
+            "start": "13:00",
+            "end": "19:00",
+            "title": "Arrivals to Airbnb",
+            "place": "4201 East Hacienda Avenue, Las Vegas, NV 89120",
+            "optional": true,
+            "note": "Corey and Travis land at LAS at 10:06 AM and are booked at Palace Station, not this Airbnb."
+          },
+          {
+            "start": "15:00",
+            "end": "22:00",
+            "title": "Jets & Capital (family PDF window)",
+            "place": "Cirrus Aviation, 275 E Tropicana Ave",
+            "optional": true,
+            "note": "Official event email ends at 9:30 PM and uses 5050 Koval Lane."
+          },
+          {
+            "start": null,
+            "end": null,
+            "title": "Dinner, chicken teriyaki bowls",
+            "place": "Airbnb",
+            "optional": true,
+            "note": "Dinner time to be confirmed."
+          },
+          {
+            "start": "16:30",
+            "end": "17:30",
+            "title": "F1 Practice Session 1",
+            "place": "Cosmopolitan suite",
+            "optional": true,
+            "note": "Uber from the Airbnb or Cirrus Aviation."
+          },
+          {
+            "start": "20:00",
+            "end": "21:00",
+            "title": "F1 Practice Session 2",
+            "place": "Cosmopolitan suite",
+            "optional": true,
+            "note": "Snacks available tonight."
+          }
+        ]
+      },
+      {
+        "date": "2026-11-20",
+        "label": "Friday, Explore and qualify",
+        "items": [
+          {
+            "start": "08:30",
+            "end": "09:30",
+            "title": "Breakfast, French toast",
+            "place": "Airbnb",
+            "optional": true
+          },
+          {
+            "start": "09:30",
+            "end": "12:00",
+            "title": "Speed Vegas",
+            "place": "Speed Vegas",
+            "optional": true,
+            "note": "Overlaps the charity luncheon."
+          },
+          {
+            "start": "11:30",
+            "end": "15:00",
+            "title": "Charity luncheon (family PDF window)",
+            "place": "Caesars Palace, 3570 S Las Vegas Blvd",
+            "optional": false,
+            "note": "Ages 18+ only. Official event email lists 10:30 AM-2:00 PM. Uber there."
+          },
+          {
+            "start": null,
+            "end": null,
+            "title": "Free time, Airbnb or the Strip",
+            "place": "Airbnb or the Strip",
+            "optional": true,
+            "note": "For anyone not attending the luncheon."
+          },
+          {
+            "start": "16:30",
+            "end": "17:30",
+            "title": "F1 Practice Session 3",
+            "place": "Cosmopolitan suite",
+            "optional": true
+          },
+          {
+            "start": "18:30",
+            "end": null,
+            "title": "Dinner, brisket and mac & cheese",
+            "place": "Airbnb and Cosmopolitan suite",
+            "optional": true
+          },
+          {
+            "start": "20:00",
+            "end": "21:00",
+            "title": "F1 Qualifying",
+            "place": "Cosmopolitan suite",
+            "optional": true,
+            "note": "Snacks available tonight."
+          }
+        ]
+      },
+      {
+        "date": "2026-11-21",
+        "label": "Saturday, Supercars and Grand Prix",
+        "items": [
+          {
+            "start": "07:00",
+            "end": "08:00",
+            "title": "Breakfast, Mountain Man Hash",
+            "place": "Airbnb",
+            "optional": true
+          },
+          {
+            "start": "08:45",
+            "end": "09:00",
+            "title": "Sign for cars at Dream Exotics",
+            "place": "4301 S Valley View Blvd, Ste 16, Las Vegas, NV 89103",
+            "optional": true
+          },
+          {
+            "start": "09:00",
+            "end": "16:00",
+            "title": "ONYX SuperCar Rally",
+            "place": "Starts at Dream Exotics",
+            "optional": true,
+            "note": "Confirm the stop sequence with the rally organizer."
+          },
+          {
+            "start": "12:00",
+            "end": null,
+            "title": "Arrive at the private mansion",
+            "place": "3624 Edmond St, Las Vegas, NV 89103",
+            "optional": true
+          },
+          {
+            "start": "13:00",
+            "end": "14:00",
+            "title": "Drive to the next destination",
+            "place": null,
+            "optional": true
+          },
+          {
+            "start": "14:00",
+            "end": null,
+            "title": "F1 / Indy driver fireside chat + lunch",
+            "place": "Listed at the mansion",
+            "optional": true
+          },
+          {
+            "start": "16:00",
+            "end": null,
+            "title": "Drive back toward the Strip",
+            "place": null,
+            "optional": true
+          },
+          {
+            "start": "18:00",
+            "end": "18:30",
+            "title": "Drivers' parade",
+            "place": "Cosmopolitan suite",
+            "optional": true,
+            "note": "Conflicts with the 6:43 PM PT return flight unless plans change."
+          },
+          {
+            "start": "19:44",
+            "end": null,
+            "title": "National anthem",
+            "place": "Cosmopolitan suite",
+            "optional": true,
+            "note": "After the booked return departure."
+          },
+          {
+            "start": "20:00",
+            "end": "22:00",
+            "title": "Lights out, Las Vegas Grand Prix",
+            "place": "Cosmopolitan suite",
+            "optional": true,
+            "note": "Official race window 8-10 PM, 50 laps or 120 minutes. Corey's return flight leaves LAS at 6:43 PM, so this is after wheels up unless the flight changes."
+          },
+          {
+            "start": null,
+            "end": null,
+            "title": "Checkered flag and podium",
+            "place": "Cosmopolitan suite",
+            "optional": true,
+            "note": "Finish time varies."
+          }
+        ]
+      },
+      {
+        "date": "2026-11-22",
+        "label": "Sunday, family schedule only",
+        "note": "Corey and Travis are booked to fly home Saturday evening. These Sunday items are on the family PDF only.",
+        "items": [
+          {
+            "start": "08:00",
+            "end": "09:00",
+            "title": "Breakfast, crepes",
+            "place": "Airbnb",
+            "optional": true
+          },
+          {
+            "start": "10:00",
+            "end": null,
+            "title": "Airbnb checkout",
+            "place": "Airbnb",
+            "optional": true
+          },
+          {
+            "start": "11:00",
+            "end": null,
+            "title": "The Wizard of Oz at Sphere",
+            "place": "Sphere, Las Vegas",
+            "optional": true,
+            "note": "Purchase your own ticket separately. No ticket was found in email."
+          }
+        ]
+      }
+    ],
+    "packing": {
+      "essentials": [
+        "Driver's license / photo ID",
+        "Swimsuit",
+        "One nice business-casual outfit (suit or dress)",
+        "Beach towel for the pool",
+        "Winter jacket and warm layers",
+        "Rain jacket and umbrella"
+      ],
+      "optional": [
+        "Shampoo and conditioner",
+        "Pool toys",
+        "Games",
+        "Sunglasses for the car rally",
+        "Extra bedding"
+      ],
+      "other": [
+        "Download the official Formula 1 app before the weekend",
+        "Charged phone",
+        "Check current road closures before leaving for Strip trips"
+      ]
+    },
+    "circuitFacts": {
+      "lengthMiles": 3.8,
+      "lengthKm": 6.201,
+      "corners": 17,
+      "raceLaps": 50,
+      "speedNote": "210+ mph speeds on the Strip"
+    }
+  },
+  "travisStirlingClubEvents": {
+    "note": "Travis Allred accepted these three Luma events. Corey is not on the attendee list. Show them as Travis's events, not as Corey's confirmed plans. Dress code: Black Tie Business, formal, elegant, refined. Hosted by Wealth Global Partners, Alec Atkinson, and Minister Gligor Tashkovich. Venue: The Stirling Club, 2827 Paradise Rd, Las Vegas, NV 89109.",
+    "venueMapUrl": "https://maps.google.com/?q=The+Stirling+Club,+2827+Paradise+Rd,+Las+Vegas,+NV+89109",
+    "events": [
+      {
+        "date": "2026-11-19",
+        "start": "09:00",
+        "end": "23:00",
+        "timeZone": "America/Los_Angeles",
+        "title": "Capital on Track, Heineken Las Vegas Grand Prix F1 Edition, Day 1",
+        "lumaUrl": "https://luma.com/1v82xlvt",
+        "overlaps": "Starts while they are still flying or just landing. Overlaps the Jets and Capital main event."
+      },
+      {
+        "date": "2026-11-20",
+        "start": "10:00",
+        "end": "23:00",
+        "timeZone": "America/Los_Angeles",
+        "title": "Drive to Legacy, Heineken Las Vegas Grand Prix F1 Edition, Day 2",
+        "lumaUrl": "https://luma.com/xyl1hupz",
+        "overlaps": "Overlaps the Susan G. Komen charity event."
+      },
+      {
+        "date": "2026-11-21",
+        "start": "10:00",
+        "end": "21:00",
+        "timeZone": "America/Los_Angeles",
+        "title": "Race for Impact, Heineken Las Vegas Grand Prix F1 Edition, Day 3",
+        "lumaUrl": "https://luma.com/r37g34pa",
+        "overlaps": "Overlaps the family rally, Saturday race night, and the 6:43 PM PT return flight."
+      }
+    ]
+  },
+  "contacts": [
+    {
+      "name": "Travis Allred",
+      "role": "Travel companion",
+      "email": "travisallred@remaxpeaks.com",
+      "phone": null
+    },
+    {
+      "name": "Alec Atkinson",
+      "role": "Family weekend contact (PDF: text Alec or Maylin). Also co-host of the Stirling Club events.",
+      "phone": "(208) 570-4430",
+      "phoneNote": "In Contacts as Alec Atkinson",
+      "email": "alec@harvestreact.com"
+    },
+    {
+      "name": "Maylin",
+      "role": "Family weekend contact",
+      "phone": "801-577-4433",
+      "phoneNote": "not in Contacts",
+      "email": null
+    },
+    {
+      "name": "Jordan Hutchinson",
+      "role": "Jets and Capital",
+      "email": "jordan@jetsandcapital.com",
+      "phone": null
+    },
+    {
+      "name": "Axel support",
+      "role": "Hotel booking support",
+      "email": "help@helloaxel.com",
+      "phone": null
+    },
+    {
+      "name": "Frontier Airlines",
+      "role": "Customer support for Elite members or travel within 24 hours",
+      "phone": "801-401-9000",
+      "url": "https://www.flyfrontier.com/customer-service/"
+    }
+  ],
+  "gaps": [
+    "No ride is booked from LAS after the 10:06 AM PT arrival on Thursday, and none is booked back to LAS for the Saturday evening flight.",
+    "No SLC airport parking reservation was found for Nov 19-21.",
+    "Thursday leave time for the airport is unset.",
+    "Frontier check-in status and seat numbers are unknown.",
+    "Whether bags are already on the Frontier reservation is unknown.",
+    "Hotel check-in time is unknown. Whether any amount is still due at the hotel is unknown.",
+    "Cirrus Aviation has two addresses in the sources. Confirm before going.",
+    "The charity event has two published time windows. Confirm before going.",
+    "Cosmopolitan suite invitation nights are unknown.",
+    "Saturday rally stop order is unconfirmed.",
+    "The Saturday 6:43 PM PT return flight means they miss the 8:00 PM Grand Prix viewing and the Sunday family items, and it cuts off Travis's accepted Stirling Club event that runs to 9:00 PM PT.",
+    "Travis accepted three Stirling Club events. Corey is not listed. How those fit the weekend is unknown.",
+    "No Caesars Palace room-block booking and no Sphere ticket were found."
+  ],
+  "todos": [
+    {
+      "task": "Check in for F9 4695 in the Frontier app and add seats or bags if needed",
+      "due": "Before Thu Nov 19 8:28 AM Mountain Time (60 minutes before departure; check-in already open as of Wed 9:28 AM MT)",
+      "status": "open"
+    },
+    {
+      "task": "Set Thursday leave time for SLC and decide parking",
+      "due": "Wed night / Thu morning",
+      "status": "open"
+    },
+    {
+      "task": "Book a ride from LAS to Palace Station (and later back to LAS)",
+      "due": "Before landing Thu 10:06 AM PT",
+      "status": "open"
+    },
+    {
+      "task": "Confirm the Cirrus Aviation address and the charity event start time",
+      "due": "Before those events",
+      "status": "open"
+    },
+    {
+      "task": "Decide which optional family weekend items to join, including suite nights and the Saturday rally vs the 6:43 PM return flight",
+      "due": "During the trip",
+      "status": "open"
+    },
+    {
+      "task": "Download the official Formula 1 app",
+      "due": "Before the weekend",
+      "status": "open"
+    }
+  ]
+}

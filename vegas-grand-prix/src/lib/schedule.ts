@@ -209,31 +209,6 @@ function buildItems(): ScheduleItem[] {
     );
   });
 
-  trip.calendarConflictsAndLeftovers.forEach((event, index) => {
-    const zone = "timeZone" in event && event.timeZone ? event.timeZone : VEGAS;
-    const start = "start" in event ? event.start : null;
-    const end = "end" in event ? event.end : null;
-    const note =
-      event.title === "Programmatic Paid Media 101, DSP Workshop"
-        ? "Zoom workshop, 2:00 to 3:00 PM PT, just before the main event. Corey has not accepted."
-        : event.detail;
-    items.push(
-      timed(
-        `conflict-${index}`,
-        event.date,
-        event.title,
-        "Still on the calendar at home.",
-        note,
-        start ?? null,
-        end ?? null,
-        zone,
-        ["conflict"],
-        70,
-        "conflict",
-      ),
-    );
-  });
-
   return items.sort((a, b) => {
     if (a.day !== b.day) return a.day < b.day ? -1 : 1;
     if (a.start == null && b.start == null) return 0;
@@ -265,7 +240,6 @@ export type NowView = {
   current: ScheduleItem | null;
   alsoNow: ScheduleItem[];
   next: ScheduleItem | null;
-  morningConflicts: ScheduleItem[];
 };
 
 function isHappening(item: ScheduleItem, now: number): boolean {
@@ -285,13 +259,6 @@ export function viewAt(now: number): NowView {
       .filter((item) => item.start != null && item.start > now)
       .sort((a, b) => (a.start ?? 0) - (b.start ?? 0) || b.weight - a.weight)[0] ?? null;
 
-  const morningTitles = new Set([
-    "Thursday leave time for SLC is unset",
-    "Brett Coaching Call",
-    "Jill Massage",
-  ]);
-  const morningConflicts = items.filter((item) => morningTitles.has(item.title));
-
   if (inbound.end != null && now >= inbound.end) {
     return {
       phase: "complete",
@@ -305,7 +272,6 @@ export function viewAt(now: number): NowView {
       current,
       alsoNow,
       next: null,
-      morningConflicts,
     };
   }
 
@@ -326,7 +292,6 @@ export function viewAt(now: number): NowView {
       current,
       alsoNow,
       next: outbound,
-      morningConflicts,
     };
   }
 
@@ -345,7 +310,6 @@ export function viewAt(now: number): NowView {
       current,
       alsoNow,
       next: inbound,
-      morningConflicts,
     };
   }
 
@@ -367,7 +331,6 @@ export function viewAt(now: number): NowView {
     current,
     alsoNow,
     next,
-    morningConflicts,
   };
 }
 

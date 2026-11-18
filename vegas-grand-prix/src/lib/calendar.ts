@@ -52,7 +52,7 @@ export const calendarEvents: CalendarEvent[] = [
     start: zoned("2026-11-19", "15:00", VEGAS),
     end: zoned("2026-11-19", "21:30", VEGAS),
     description:
-      "Official time from the Oct 13 email and Corey calendar: 3:00 to 9:30 PM Las Vegas time. The family weekend PDF lists 3:00 to 10:00 PM and marks it optional. Address conflict: email says 5050 Koval Lane. The family PDF and public listings say 275 E Tropicana Ave. Confirm before going.",
+      "Official time from the Oct 13 event email: 3:00 to 9:30 PM Las Vegas time. The family weekend PDF lists 3:00 to 10:00 PM and marks it optional. Address conflict: email says 5050 Koval Lane. The family PDF and public listings say 275 E Tropicana Ave. Confirm before going.",
     location: "Cirrus Aviation, Las Vegas",
   },
   {

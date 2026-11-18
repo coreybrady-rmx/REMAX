@@ -1,5 +1,5 @@
 import { inbound, outbound, viewAt } from "../src/lib/schedule";
-import { HOME, VEGAS, zoned } from "../src/lib/time";
+import { VEGAS, zoned } from "../src/lib/time";
 
 function assert(cond: unknown, message: string) {
   if (!cond) throw new Error(message);
@@ -16,11 +16,11 @@ const pre = viewAt(wedNight);
 assert(pre.phase === "pre", `wed night should be pre, got ${pre.phase}`);
 assert(pre.next?.id === "flight-out", "pre next should be the outbound flight");
 assert(pre.heroBody.includes("Check-in is open"), "check-in should already be open");
-assert(pre.morningConflicts.length === 3, "three Thursday morning conflicts");
+assert(!JSON.stringify(pre).includes("Brett"), "home calendar events stay off the sheet");
 
 const preConflict = viewAt(thuMorning);
 assert(preConflict.phase === "pre", "before departure is still pre-trip");
-assert(preConflict.current?.title === "Brett Coaching Call", `expected Brett call, got ${preConflict.current?.title}`);
+assert(preConflict.current == null, `nothing from home should be current, got ${preConflict.current?.title}`);
 
 const air = viewAt(inAir);
 assert(air.phase === "live", `in air should be live, got ${air.phase}`);
@@ -45,7 +45,5 @@ assert(inbound.zoneNote?.includes("9:11 PM MT"), `return landing label: ${inboun
 
 const noon = zoned("2026-11-21", "12:00", VEGAS);
 assert(Math.abs(noon - Date.parse("2026-11-21T12:00:00-08:00")) < 1000, "Saturday noon PT");
-const brett = zoned("2026-11-19", "08:30", HOME);
-assert(Math.abs(brett - Date.parse("2026-11-19T08:30:00-07:00")) < 1000, "Brett call instant");
 
 console.log("schedule checks passed");

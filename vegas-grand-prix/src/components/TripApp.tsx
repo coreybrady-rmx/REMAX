@@ -149,12 +149,6 @@ export function TripApp() {
               )}
               {view.phase === "saturday" && <FlagChip kind="now" />}
               {view.phase === "pre" && (
-                <Banner
-                  title="Thursday morning conflict"
-                  body={view.morningConflicts.map((item) => `${item.title}. ${item.note}`).join(" ")}
-                />
-              )}
-              {view.phase === "pre" && (
                 <article className="rounded-2xl bg-card p-3">
                   <FlagChip kind="unknown" />
                   <h3 className="mt-2 font-display text-2xl italic">Open gaps before wheels up</h3>
@@ -281,7 +275,7 @@ export function TripApp() {
                 <p>{session.venue}. Source: {session.timeSource}</p>
                 <p>{session.pdfConflict}</p>
                 {"addressEmailAndCalendar" in session && (
-                  <p>Email and calendar: {session.addressEmailAndCalendar}. Family PDF: {session.addressFamilyPdf}.</p>
+                  <p>Event email: {session.addressEmailAndCalendar}. Family PDF: {session.addressFamilyPdf}.</p>
                 )}
                 {"address" in session && session.address && <p>{session.address}</p>}
                 <div className="mt-3 grid gap-2">

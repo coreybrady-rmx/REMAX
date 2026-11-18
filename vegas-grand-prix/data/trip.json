@@ -7,7 +7,7 @@
     "startDate": "2026-11-19",
     "endDate": "2026-11-21",
     "compiledAt": "2026-11-18T15:30:00-07:00",
-    "compiledNote": "Facts compiled from Corey's mail, calendar, and the family weekend PDF. Do not invent missing details. Show unknowns and conflicts in the UI."
+    "compiledNote": "Facts compiled from the trip emails and the family weekend PDF. Home calendar events are not included. Do not invent missing details. Show unknowns and conflicts in the UI."
   },
   "travelers": [
     {
@@ -142,7 +142,7 @@
         "officialStart": "15:00",
         "officialEnd": "21:30",
         "timeZone": "America/Los_Angeles",
-        "timeSource": "Event Details email Oct 13 and Corey calendar (3:00-9:30 PM Las Vegas time)",
+        "timeSource": "Event Details email Oct 13 (3:00-9:30 PM Las Vegas time)",
         "pdfConflict": "Family weekend PDF lists this as 3-10 PM, optional.",
         "venue": "Cirrus Aviation",
         "addressEmailAndCalendar": "5050 Koval Lane, Las Vegas, NV 89169",
@@ -158,7 +158,7 @@
         "officialStart": "10:30",
         "officialEnd": "14:00",
         "timeZone": "America/Los_Angeles",
-        "timeSource": "Event Details email Oct 13 and Corey calendar, converted from the stored offset (10:30 AM-2:00 PM Las Vegas time)",
+        "timeSource": "Event Details email Oct 13 (10:30 AM-2:00 PM Las Vegas time)",
         "pdfConflict": "Family weekend PDF lists a charity luncheon, ages 18+ only, at 11:30 AM-3:00 PM at the same venue.",
         "venue": "Caesars Palace",
         "address": "3570 S Las Vegas Blvd, Las Vegas, NV 89109",
@@ -437,7 +437,7 @@
     }
   },
   "travisStirlingClubEvents": {
-    "note": "Travis Allred accepted these three Luma events. Corey is not on the attendee list. Show them as Travis's events, not as Corey's confirmed plans. Each is marked free/transparent on his calendar. Dress code: Black Tie Business, formal, elegant, refined. Hosted by Wealth Global Partners, Alec Atkinson, and Minister Gligor Tashkovich. Venue: The Stirling Club, 2827 Paradise Rd, Las Vegas, NV 89109.",
+    "note": "Travis Allred accepted these three Luma events. Corey is not on the attendee list. Show them as Travis's events, not as Corey's confirmed plans. Dress code: Black Tie Business, formal, elegant, refined. Hosted by Wealth Global Partners, Alec Atkinson, and Minister Gligor Tashkovich. Venue: The Stirling Club, 2827 Paradise Rd, Las Vegas, NV 89109.",
     "venueMapUrl": "https://maps.google.com/?q=The+Stirling+Club,+2827+Paradise+Rd,+Las+Vegas,+NV+89109",
     "events": [
       {
@@ -469,58 +469,6 @@
       }
     ]
   },
-  "calendarConflictsAndLeftovers": [
-    {
-      "date": "2026-11-19",
-      "title": "Thursday leave time for SLC is unset",
-      "detail": "A 5:10-6:00 AM Mountain Time home-gym workout is still on the calendar. Drive time from home to SLC and parking are unknown."
-    },
-    {
-      "date": "2026-11-19",
-      "start": "08:30",
-      "end": "10:00",
-      "timeZone": "America/Denver",
-      "title": "Brett Coaching Call",
-      "detail": "Still accepted by Corey and Travis. Overlaps getting to the gate and the 9:28 AM Mountain Time departure."
-    },
-    {
-      "date": "2026-11-19",
-      "start": "10:00",
-      "end": "11:30",
-      "timeZone": "America/Denver",
-      "title": "Jill Massage",
-      "detail": "Recurring event still on the calendar. It falls during the outbound flight."
-    },
-    {
-      "date": "2026-11-19",
-      "start": "15:00",
-      "end": "16:00",
-      "timeZone": "America/Denver",
-      "title": "Programmatic Paid Media 101, DSP Workshop",
-      "detail": "Zoom workshop, 2:00-3:00 PM Las Vegas time, just before the main event. Corey has not accepted. The Zoom link is on the calendar and should not be hard-coded in public copy."
-    },
-    {
-      "date": "2026-11-20",
-      "start": "06:45",
-      "end": "07:15",
-      "timeZone": "America/Denver",
-      "title": "Take Ellie to Seminary",
-      "detail": "School-year recurring event still on Corey's calendar. Who is covering the Friday ride is unknown."
-    },
-    {
-      "date": "2026-11-20",
-      "start": "11:00",
-      "end": "12:00",
-      "timeZone": "America/Denver",
-      "title": "ORM Weekly Call",
-      "detail": "Zoom https://us06web.zoom.us/my/realoriginate, 10:00-11:00 AM Las Vegas time. Overlaps the official charity start at 10:30 AM PT. Corey has not accepted; Travis has."
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Weeks closing in Brigham City",
-      "detail": "All-day financing, appraisal, settlement, and closing deadlines for 990 S Medical Dr UL-4, Brigham City. Kiersti Baxter is covering Thursday's closing. Not a Vegas booking, but it is why Thursday back home is busy."
-    }
-  ],
   "contacts": [
     {
       "name": "Travis Allred",
@@ -565,9 +513,6 @@
     "No ride is booked from LAS after the 10:06 AM PT arrival on Thursday, and none is booked back to LAS for the Saturday evening flight.",
     "No SLC airport parking reservation was found for Nov 19-21.",
     "Thursday leave time for the airport is unset.",
-    "The 8:30 AM MT Brett Coaching Call and 10:00 AM MT Jill Massage are still on the calendar and conflict with the outbound flight.",
-    "Friday Take Ellie to Seminary (6:45 AM MT) is still on Corey's calendar. Coverage is unknown.",
-    "Friday ORM Weekly Call overlaps the charity event start.",
     "Frontier check-in status and seat numbers are unknown.",
     "Whether bags are already on the Frontier reservation is unknown.",
     "Hotel check-in time is unknown. Whether any amount is still due at the hotel is unknown.",
@@ -577,8 +522,7 @@
     "Saturday rally stop order is unconfirmed.",
     "The Saturday 6:43 PM PT return flight means they miss the 8:00 PM Grand Prix viewing and the Sunday family items, and it cuts off Travis's accepted Stirling Club event that runs to 9:00 PM PT.",
     "Travis accepted three Stirling Club events. Corey is not listed. How those fit the weekend is unknown.",
-    "No Caesars Palace room-block booking and no Sphere ticket were found.",
-    "Drew Sleezer asked for a Friday morning call. No calendar time was set, and both travelers are in Las Vegas Friday morning."
+    "No Caesars Palace room-block booking and no Sphere ticket were found."
   ],
   "todos": [
     {
@@ -592,18 +536,8 @@
       "status": "open"
     },
     {
-      "task": "Move or cancel the Brett Coaching Call and Jill Massage that conflict with the outbound flight",
-      "due": "Before Thursday morning",
-      "status": "open"
-    },
-    {
       "task": "Book a ride from LAS to Palace Station (and later back to LAS)",
       "due": "Before landing Thu 10:06 AM PT",
-      "status": "open"
-    },
-    {
-      "task": "Confirm who is taking Ellie to seminary Friday",
-      "due": "Before Friday 6:45 AM MT",
       "status": "open"
     },
     {
